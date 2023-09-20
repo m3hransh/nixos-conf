@@ -103,10 +103,6 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    open = false;
-#
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
