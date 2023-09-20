@@ -17,7 +17,7 @@
 
   # Activating nix-command and flake
   nix.settings.experimental-features = ["nix-command" "flakes"];
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "mehran-rog"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -47,10 +47,15 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  #services.xserver.displayManager.sddm.enable = true;
+  # services.xserver.desktopManager.plasma5.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+  };
 
   # Configure keymap in X11
   services.xserver = {
@@ -65,21 +70,44 @@
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
+  };
+
   hardware.bluetooth.enable = true;
-   security.rtkit.enable = true;
-   services.pipewire = {
-     enable = true;
-     alsa.enable = true;
-     alsa.support32Bit = true;
-     pulse.enable = true;
-     # If you want to use JACK applications, uncomment this
-     #jack.enable = true;
+  services.blueman.enable = true;
 
-     # use the example session manager (no others are packaged yet so this is enabled by default,
-     # no need to redefine it in your config for now)
-     #media-session.enable = true;
-   };
+  environment.sessionVariables = {
+    # if your cursor becomes invisible
+    WLR_NO_HARDWARE_CURSORS = "1";
+    # Hint electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
+  };
+  #NvidiaConfig
+  hardware.opengl = {
+    enable = true;
+  #  driSupport = true;
+  #  driSupport32Bit = true;
+  };
 
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false;
+#
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
+  };
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -89,7 +117,7 @@
   users.users.mehran = {
     isNormalUser = true;
     description = "mehran";
-    extraGroups = [ "networkmanager" "wheel" "docker" "audio"];
+    extraGroups = [ "networkmanager" "wheel" "docker" "video" "kvm" "audio"];
   };
 
   users.defaultUserShell = pkgs.fish;
@@ -103,6 +131,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    neofetch
     vim 
     wget
     kitty
@@ -129,7 +158,7 @@
     git
     gh
     glab
-    xsel
+    wl-clipboard
     ripgrep
     stylua
     discord
@@ -154,7 +183,7 @@
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
-    (nerdfonts.override { fonts = [ "FiraCode" "CascadiaCode" "Iosevka" "IosevkaTerm"];} )
+    (nerdfonts.override { fonts = [ "FiraCode" "CascadiaCode" "Iosevka" "IosevkaTerm" "JetBrainsMono"];} )
   ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

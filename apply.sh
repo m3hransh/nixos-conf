@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-pushd ~/dotfiles/nixos/
+pushd ~/.config/nixos/
 sudo nixos-rebuild switch --flake ./#mehran-rog
 popd

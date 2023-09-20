@@ -1,29 +1,38 @@
-{ config, pkgs, ... }:
+{ config, pkgs, hyprland, ... }:
 
 {
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
-  home.username = "mehran";
-  home.homeDirectory = "/home/mehran";
 
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
+  imports = [
+    hyprland.homeManagerModules.default
+    ./programs
+  ];
+
+  home = {
+  username = "mehran";
+  # paths it should manage.
+  homeDirectory = "/home/mehran";
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "23.05";
-
+  stateVersion = "23.05";
+  };
   home.packages = with pkgs; 
     [ 
+      vlc
+
+      # utils
+      wireguard-tools
+      wlr-randr
       atool 
       httpie 
       lazygit 
       lazydocker
-      wireguard-tools
-      vlc
+      dunst
+      xflux
+      pavucontrol
+
+      #misc
+      rofi
+
      ];
 
   programs.fish = {
@@ -36,6 +45,8 @@
       { name = "grc"; src = pkgs.fishPlugins.grc.src; }
     ];
   };
+  # programs.home-manager.enable = true;
+
   programs.starship = {
     enable = true;
   };
