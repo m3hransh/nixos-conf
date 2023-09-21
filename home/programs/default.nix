@@ -3,5 +3,6 @@
     ./dunst
     ./hypr
     ./waybar
+    ./wofi
   ];
 }
