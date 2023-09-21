@@ -12,7 +12,7 @@
 
 
 
-      "modules-left"= ["hyprland/workspaces"];
+      "modules-left"= ["hyprland/workspaces" "hyprland/window"];
 
 
       "hyprland/workspaces"= {
