@@ -1,0 +1,301 @@
+/* vim:foldmethod=marker 
+ */
+
+/* => Define Tokyo Night {{{*/
+@define-color Background rgba(30, 20, 39, 0.9);
+@define-color CurrentLine #6f7bb6;
+@define-color Selection #414868;
+@define-color Foreground #a9b1d6;
+@define-color Comment #565f89;
+@define-color Cyan #2ac3de;
+@define-color Green #9ece6a;
+@define-color Orange #ff9e64;
+@define-color Pink #f7768e;
+@define-color Purple #bb9af7;
+@define-color Red rgb (255, 85, 85);
+@define-color Yellow #e0af68;
+/* }}} */
+
+/* =>General Setting {{{  */
+
+/* => For all Element {{{  */
+* {
+    border: none;
+    font-family: "CaskaydiaCove Nerd Font";
+    font-size: 13px;
+    font-weight: bold;
+}
+
+window#waybar {
+    background: rgba(0, 0, 0, 0);
+}
+
+/* }}} */
+
+/* => set margin for all{{{  */
+#clock,
+#language,
+#custom-notification,
+#custom-github,
+#custom-scratchpad-indicator,
+#battery,
+#cpu,
+#memory,
+#custom-disk_root,
+#temperature,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#custom-menu,
+#custom-media,
+#custom-power,
+#backlight,
+#idle_inhibitor {
+    margin: 0 2px;
+    padding-left: 5px;
+    padding-right: 10px;
+}
+/* }}} */
+
+/* }}} */
+
+/* => Left Modules {{{  */
+
+.modules-left {
+    color: @Foreground;
+    margin: 2px 0 0 5px;
+    padding:2px 5px;
+}
+
+/* => Workspaces {{{  */
+#workspaces {
+  border-radius: 20px;
+  background-color: @Background;
+  padding: 0 15px;
+}
+#workspaces button {
+  color: @Foreground;
+  margin: 0px;
+  padding: 3px 9px 1px 3px;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+}
+#workspaces button:hover {
+  box-shadow: inherit;
+  background-color: @Background;
+  color: @Pink;
+  border-bottom: 2px solid @Foreground;
+}
+
+#workspaces button.focused {
+  background-color: @Selection;
+  color: @Cyan;
+  border-bottom: 2px solid @Cyan;
+}
+
+
+/* }}} */
+
+/* => Taskbar {{{  */
+
+#taskbar {
+  border-radius:0;
+}
+#taskbar button {
+  padding-bottom: 0px;
+  padding-top: 0px;
+  border-radius: 0;
+  border-bottom: 3px solid transparent;
+  background-color: transparent;
+}
+
+#taskbar button:hover {
+  background-color: @Red;
+}
+#taskbar button.active {
+  border-bottom: 3px solid @Pink;
+}
+
+
+/* }}} */
+
+/* => Media {{{  */
+
+#custom-media {
+  background-color: @Background; 
+  color: @Foreground;
+  font-size: 14px;
+  padding: 0px 15px;
+  border-radius:20px;
+}
+
+
+/* }}} */
+/* }}} */
+
+/* => Center Modules {{{  */
+
+.modules-center {
+    color: @Foreground;
+    background-color: @Background;
+    margin: 2px 0 0 0;
+    padding:2px 5px;
+    border-radius:20px;
+}
+
+/* => CPU {{{  */
+
+#cpu {
+  color: @Foreground;
+}
+
+/* }}} */
+
+/* => memory {{{  */
+
+#memory {
+  color: @Foreground;
+}
+
+/* }}} */
+
+/* => custom-disk_root {{{  */
+
+#custom-disk_root {
+  color: @Foreground;
+}
+
+/* }}} */
+
+/* => Clock {{{  */
+
+#clock {
+  color: @Foreground;
+}
+
+
+/* }}} */
+
+/* => Language {{{  */
+
+#language {
+  color: @Pink;
+}
+/* }}} */
+
+/* => custom-notification {{{  */
+
+#custom-notification.notification, #custom-notification.none {
+  color: @Yellow;
+}
+
+#custom-notification.dnd-none, #custom-notification.dnd-notification {
+  color: @Red;
+}
+/* }}} */
+
+/* => idle_inhibitor {{{  */
+
+#idle_inhibitor.activated{
+  color: @Orange;
+}
+#idle_inhibitor.deactivated{
+  color: @Red;
+}
+
+/* }}} */
+
+/* }}} */
+
+/* => Right Modules {{{  */
+
+.modules-right {
+    color: @Foreground;
+    background-color: @Background;
+    margin: 2px 10px 0 0;
+    padding:2px 5px;
+    border-radius:20px;
+}
+
+/* => Tray {{{  */
+
+#tray {
+  background-color: transparent;
+  color: @Orange;
+  border-bottom: 3px solid transparent;
+}
+#tray > .needs-attention {
+  color: @Orange;
+  border-top: 3px solid @Orange;
+}
+#tray > .active {
+}
+#tray menu{
+  color: @Foreground;
+  background-color: @Background;
+  border: 2px solid @Selection;
+}
+
+/* }}} */
+
+/* => Pulseaudio {{{  */
+#pulseaudio {
+  color: @Foreground;
+}
+#pulseaudio.muted {
+    color: @Red;
+}
+
+/* }}} */
+
+/* => Temperature {{{ */
+
+
+#temperature {
+  color: @Green;
+  padding-left: 0px;
+}
+#temperature.critical {
+    color: @Red;
+}
+
+/* }}} */
+
+/* => Battery {{{  */
+#battery{
+  color: @Cyan;
+}
+#battery.discharging.good {
+    color: @Green;
+}
+#battery.discharging.warning {
+	color: @Yellow;
+}
+#battery.discharging.critical {
+    color: @Red;
+}
+/* }}} */
+
+/* => Custom power {{{  */
+
+#custom-power {
+    color: @Green;
+    background-color: @Selection ;
+    border-radius: 50px;
+    margin: 4px 5px;
+    padding: 4px 11px 3px 7px;
+}
+/* }}} */
+
+/* => Backlight {{{  */
+
+#backlight {
+    color: @Yellow;
+}
+/* }}} */
+
+
+/* }}} */
+
