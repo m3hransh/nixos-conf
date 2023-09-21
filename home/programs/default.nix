@@ -4,5 +4,6 @@
     ./hypr
     ./waybar
     ./wofi
+    ./zathura
   ];
 }

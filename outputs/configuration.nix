@@ -179,6 +179,7 @@
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
+    inconsolata
     (nerdfonts.override { fonts = [ "FiraCode" "CascadiaCode" "Iosevka" "IosevkaTerm" "JetBrainsMono"];} )
   ];
   # Some programs need SUID wrappers, can be configured further or are
