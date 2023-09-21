@@ -12,12 +12,12 @@
 
 
 
-      "modules-left"= ["sway/workspaces" "custom/media"];
+      "modules-left"= ["hyprland/workspaces"];
 
 
-      "sway/workspaces"= {
-         "disable-scroll"= true;
-         "all-outputs"= false;
+      "hyprland/workspaces"= {
+         "on-scroll-up" = "hyprctl dispatch workspace e+1";
+         "on-scroll-down" = "hyprctl dispatch workspace e-1";
          "format"= "{icon}";
          "format-icons"= {
            "1"= "";
@@ -34,6 +34,9 @@
            "focused"= "";
            "default"= "";
          };
+       };
+       "hyprland/window" = {
+         format = "{title}";
        };
      
 
@@ -55,7 +58,7 @@
     };
 
 
-      "modules-center"= ["custom/github" "custom/scratchpad-indicator" "cpu" "custom/memory" "custom/disk_root" "temperature" "clock" "idle_inhibitor" "sway/language" "custom/notification"];
+      "modules-center"= ["custom/github"  "cpu" "custom/memory" "custom/disk_root" "temperature" "clock" "hyprland/language" "idle_inhibitor"  "custom/notification"];
 
     "custom/github"= {
         "format" = "{} ";
@@ -65,14 +68,14 @@
         "on-click" = "xdg-open https://github.com/notifications";
     };
 
-      "custom/scratchpad-indicator" = {
-        "interval" = 3;
-        "return-type" = "json";
-        "exec" = "swaymsg -t get_tree | jq --unbuffered --compact-output '(recurse(.nodes[]) | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | if ($scratch_nodes|length) > 0 then { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") } else empty end'";
-        "format" = "{} <span color='#2ac3de'></span> ";
-        "on-click" = "exec swaymsg 'scratchpad show'";
-        "on-click-right" = "exec swaymsg 'move scratchpad'";
-    };
+    #   "custom/scratchpad-indicator" = {
+    #     "interval" = 3;
+    #     "return-type" = "json";
+    #     "exec" = "swaymsg -t get_tree | jq --unbuffered --compact-output '(recurse(.nodes[]) | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | if ($scratch_nodes|length) > 0 then { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") } else empty end'";
+    #     "format" = "{} <span color='#2ac3de'></span> ";
+    #     "on-click" = "exec swaymsg 'scratchpad show'";
+    #     "on-click-right" = "exec swaymsg 'move scratchpad'";
+    # };
 
 
       "cpu" = {
@@ -132,7 +135,7 @@
         "escape" = true;
       };
 
-      "sway/language" = {
+      "hyprland/language" = {
           "format"= "{shortDescription}";
           };
 
@@ -146,7 +149,7 @@
           };
         };
 
-      "modules-right" = [ "tray" "network#wifi"   "pulseaudio" "backlight"  "battery"  "custom/power"];
+      "modules-right" = [ "tray" "network#wifi"  "pulseaudio" "backlight"  "battery"  "custom/power"];
         "tray" = {
             "icon-size" = 15;
             "spacing" = 10;
