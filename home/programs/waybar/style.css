@@ -89,12 +89,17 @@ window#waybar {
   border-bottom: 2px solid @Foreground;
 }
 
-#workspaces button.focused {
+#workspaces button.active {
   background-color: @Selection;
   color: @Cyan;
   border-bottom: 2px solid @Cyan;
 }
 
+#workspaces button.visible {
+  background-color: @Selection;
+  color: @Pink;
+  border-bottom: 2px solid @Cyan;
+}
 
 /* }}} */
 

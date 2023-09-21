@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
+    home.file.".config/waybar/custom_modules".source = ./custom_modules;
     programs.waybar = {
       enable = true;
       systemd = {
