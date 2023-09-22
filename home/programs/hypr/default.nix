@@ -7,7 +7,6 @@
 
   home.packages = with pkgs; [ 
     waybar
-    swww
     wofi
     wl-clipboard
   ];

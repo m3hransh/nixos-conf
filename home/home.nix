@@ -17,9 +17,18 @@
   };
   home.packages = with pkgs; 
     [ 
+      # app
+      brave
+      google-chrome
+      discord
       vlc
+      obsidian
+      telegram-desktop
+      mailspring
+      mattermost-desktop
 
       # utils
+      ranger
       wireguard-tools
       wlr-randr
       atool 
@@ -29,6 +38,29 @@
       dunst
       xflux
       pavucontrol
+
+      # dev
+      vscode
+      gh
+      glab
+      rustc
+      rust-analyzer
+      go
+      gcc
+      nodejs
+      nodePackages.npm
+      nodePackages.yarn
+      nodePackages.pnpm
+      nodePackages.typescript
+      nodePackages.typescript-language-server
+      lua-language-server
+      cargo
+      stylua
+      ripgrep
+      marksman
+      tree-sitter
+      python3Full 
+
 
       #misc
       rofi

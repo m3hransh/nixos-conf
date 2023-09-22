@@ -46,11 +46,11 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
+  #services.xserver.enable = true;
+  #services.xserver.videoDrivers = [ "nvidia" ];
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
+  #services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
   xdg.portal = {
     enable = true;
@@ -58,11 +58,11 @@
   };
 
   # Configure keymap in X11
-  services.xserver = {
-    layout = "us,de,ir";
-    xkbVariant = "";
-    xkbOptions = "grp:win_space_toggle";
-  };
+  # services.xserver = {
+  #   layout = "us,de,ir";
+  #   xkbVariant = "";
+  #   xkbOptions = "grp:win_space_toggle";
+  # };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -130,36 +130,11 @@
     neofetch
     vim 
     wget
-    kitty
-    neovim
-    vscode
-    cargo
-    rustc
-    rust-analyzer
     unzip
-    stylua
-    lua-language-server
-    marksman
-    go
-    google-chrome
-    gcc
-    nodejs
-    nodePackages.npm
-    nodePackages.yarn
-    nodePackages.pnpm
-    nodePackages.typescript
-    nodePackages.typescript-language-server
-    tree-sitter
-    python3Full 
     git
-    gh
-    glab
     wl-clipboard
-    ripgrep
-    stylua
-    discord
-    brave
-    chezmoi
+    # terminal
+    kitty
     starship
     fishPlugins.done
     fishPlugins.fzf-fish
@@ -167,12 +142,6 @@
     fzf
     fishPlugins.grc
     grc
-    libsForQt5.bismuth
-    obsidian
-    telegram-desktop
-    mailspring
-    ranger
-    mattermost-desktop
   ];
 
   fonts.packages = with pkgs; [
