@@ -26,6 +26,7 @@
       telegram-desktop
       mailspring
       mattermost-desktop
+      firefox-wayland
 
       # utils
       ranger
