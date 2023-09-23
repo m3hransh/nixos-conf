@@ -72,6 +72,7 @@
 
 
   programs.dconf.enable = true;
+  programs.droidcam.enable = true;
   # Configure keymap in X11
   # services.xserver = {
   #   layout = "us,de,ir";

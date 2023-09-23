@@ -5,5 +5,6 @@
     ./waybar
     ./wofi
     ./zathura
+    ./vscode
   ];
 }
