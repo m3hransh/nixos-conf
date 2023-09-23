@@ -47,7 +47,8 @@
 
   # Enable the X11 windowing system.
   #services.xserver.enable = true;
-  #services.xserver.videoDrivers = [ "nvidia" ];
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Enable the KDE Plasma Desktop Environment.
   #services.xserver.displayManager.sddm.enable = true;
@@ -57,6 +58,19 @@
     wlr.enable = true;
   };
 
+  #programs.regreet.enable = true;
+  services.greetd = {
+    enable = true;
+    settings = {
+      initial_session = {
+        user = "mehran";
+        command = "$SHELL -l";
+      };
+    };
+  };
+
+
+  programs.dconf.enable = true;
   # Configure keymap in X11
   # services.xserver = {
   #   layout = "us,de,ir";
@@ -119,8 +133,7 @@
   users.defaultUserShell = pkgs.fish;
 
   programs.fish.enable = true;
-
-
+  programs.light.enable = true;
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 

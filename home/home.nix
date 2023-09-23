@@ -67,6 +67,11 @@
 
      ];
 
+  programs.home-manager.enable = true;
+
+  programs.starship = {
+    enable = true;
+  };
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
@@ -76,10 +81,5 @@
       # Enable a plugin (here grc for colorized command output)
       { name = "grc"; src = pkgs.fishPlugins.grc.src; }
     ];
-  };
-  # programs.home-manager.enable = true;
-
-  programs.starship = {
-    enable = true;
   };
 }
