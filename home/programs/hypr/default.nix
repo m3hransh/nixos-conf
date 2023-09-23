@@ -5,7 +5,6 @@
     ./hyprland-environment.nix
   ];
 
-
   home.packages = with pkgs; [ 
     swaylock-effects
     pamixer

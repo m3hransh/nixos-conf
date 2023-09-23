@@ -53,20 +53,21 @@
   # Enable the KDE Plasma Desktop Environment.
   #services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
+
+  services.greetd = {
+      enable = true;
+      settings = rec {
+        initial_session = {
+          command = "${pkgs.hyprland}/bin/Hyprland";
+          user = "mehran";
+        };
+        default_session = initial_session;
+      };
+  };
+  security.pam.services.swaylock = { };
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-  };
-
-  #programs.regreet.enable = true;
-  services.greetd = {
-    enable = true;
-    settings = {
-      initial_session = {
-        user = "mehran";
-        command = "$SHELL -l";
-      };
-    };
   };
 
 
