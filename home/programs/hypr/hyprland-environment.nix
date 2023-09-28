@@ -4,7 +4,7 @@
   home = {
     sessionVariables = {
     EDITOR = "nvim";
-    BROWSER = "brave";
+    BROWSER = "firefox";
     TERMINAL = "kitty";
     #GBM_BACKEND= "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME= "nvidia";
