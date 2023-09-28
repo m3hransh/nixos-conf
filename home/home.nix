@@ -39,6 +39,7 @@
       dunst
       xflux
       pavucontrol
+      android-tools
 
       # dev
       vscode
