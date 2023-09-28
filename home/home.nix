@@ -20,7 +20,7 @@
       # app
       brave
       google-chrome
-      discord
+      webcord
       vlc
       obsidian
       telegram-desktop
