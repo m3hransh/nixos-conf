@@ -1,14 +1,11 @@
 { config, lib, pkgs, ... }:
 
 {
-    home.file.".config/waybar/custom_modules/memory.sh" ={
-      source = ./custom_modules/memory.sh;
-      executable = true;
-    };
-    home.file.".config/waybar/custom_modules/powermenu.sh" ={
-      source = ./custom_modules/powermenu.sh;
-      executable = true;
-    };
+    # home.file.".config/waybar/custom_modules" ={
+    #   source = ./custom_modules;
+    #   recursive = true;
+    #   executable = true;
+    # };
 
     programs = {
       bash = {
