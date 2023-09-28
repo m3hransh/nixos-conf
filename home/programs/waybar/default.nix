@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 
 {
-    # home.file.".config/waybar/custom_modules" ={
-    #   source = ./custom_modules;
-    #   recursive = true;
-    #   executable = true;
-    # };
+    home.file.".config/waybar/custom_modules" ={
+      source = ./custom_modules;
+      recursive = true;
+      executable = true;
+    };
 
     programs = {
       bash = {
