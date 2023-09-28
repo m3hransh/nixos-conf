@@ -5,6 +5,10 @@
       source = ./custom_modules/memory.sh;
       executable = true;
     };
+    home.file.".config/waybar/custom_modules/powermenu.sh" ={
+      source = ./custom_modules/powermenu.sh;
+      executable = true;
+    };
 
     programs = {
       bash = {
@@ -32,7 +36,7 @@
       settings = [{
 
 
-
+      "layer" = "top";
       "modules-left"= ["hyprland/workspaces" "hyprland/window"];
 
 
@@ -233,7 +237,7 @@
 
       "custom/power" = {
         "format" = "";
-        "on-click" = "swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Restart' 'shutdown -r now' -b 'Shutdown'  'shutdown -h now' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33";
+        "on-click" = "$HOME/.config/waybar/custom_modules/powermenu.sh";
       };
 
 
