@@ -2,9 +2,8 @@
 
 {
     home.file.".config/waybar/custom_modules" ={
-      source = ./custom_modules;
+      source =  ./custom_modules;
       recursive = true;
-      executable = true;
     };
 
     programs = {
