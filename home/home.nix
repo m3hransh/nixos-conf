@@ -27,6 +27,7 @@
       mailspring
       mattermost-desktop
       firefox-wayland
+      thunderbird
 
       # utils
       ranger
@@ -42,8 +43,6 @@
       android-tools
 
       # dev
-      vscode
-      gh
       glab
       rustc
       rust-analyzer
@@ -72,6 +71,9 @@
   #programs.home-manager.enable = true;
 
   programs.starship = {
+    enable = true;
+  };
+  programs.gh = {
     enable = true;
   };
   programs.fish = {
