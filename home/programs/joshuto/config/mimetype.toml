@@ -20,7 +20,7 @@ image_default = [
 ]
 
 video_default = [
-  { command = "mpv", args = [
+  { command = "vlc", args = [
     "--",
   ], fork = true, silent = true },
   { command = "mediainfo", confirm_exit = true },
@@ -32,7 +32,7 @@ video_default = [
 ]
 
 text_default = [
-  { command = "micro" },
+  { command = "nvim" },
   { command = "gedit", fork = true, silent = true },
   { command = "bat", args = [
     "--paging=always",
