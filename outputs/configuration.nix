@@ -64,6 +64,9 @@
         default_session = initial_session;
       };
   };
+  services.v2raya = {
+    enable = true;
+  };
   security.pam.services.swaylock = { };
   xdg.portal = {
     enable = true;
@@ -158,6 +161,8 @@
     fzf
     fishPlugins.grc
     grc
+    #
+    v2raya
   ];
 
   fonts.packages = with pkgs; [
