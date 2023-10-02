@@ -6,5 +6,6 @@
     ./wofi
     ./zathura
     ./vscode
+    ./joshuto
   ];
 }

@@ -30,7 +30,6 @@
       thunderbird
 
       # utils
-      ranger
       wireguard-tools
       wlr-randr
       atool 
