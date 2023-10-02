@@ -40,6 +40,8 @@
       xflux
       pavucontrol
       android-tools
+      xfce.thunar
+      jmtpfs
 
       # dev
       glab

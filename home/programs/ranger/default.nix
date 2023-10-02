@@ -2,9 +2,8 @@
 {
   home = {
     packages = with pkgs; [
-      file
-      joshuto
+      ranger
     ];
   };
-  home.file.".config/joshuto".source = ./config;
+  home.file.".config/ranger".source = ./config;
 }

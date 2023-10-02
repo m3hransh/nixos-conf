@@ -49,6 +49,7 @@
   #services.xserver.enable = true;
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = [ "nvidia" ];
+  services.gvfs.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   #services.xserver.displayManager.sddm.enable = true;
@@ -133,7 +134,7 @@
   users.users.mehran = {
     isNormalUser = true;
     description = "mehran";
-    extraGroups = [ "networkmanager" "wheel" "docker" "video" "kvm" "audio"];
+    extraGroups = [ "networkmanager" "wheel" "docker" "video" "kvm" "audio" "fuse"];
   };
 
   users.defaultUserShell = pkgs.fish;
