@@ -40,6 +40,7 @@
       xflux
       pavucontrol
       android-tools
+      v2raya
 
       # dev
       vscode
