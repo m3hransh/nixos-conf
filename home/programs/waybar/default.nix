@@ -233,7 +233,7 @@
 
       "custom/power" = {
         "format" = "";
-        "on-click" = "$HOME/.config/waybar/custom_modules/powermenu.sh";
+        "on-click" = "sleep 0.1 && $HOME/.config/waybar/custom_modules/powermenu.sh";
       };
 
 
