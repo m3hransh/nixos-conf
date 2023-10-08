@@ -75,7 +75,6 @@
     wlr.enable = true;
   };
 
-
   programs.dconf.enable = true;
   programs.droidcam.enable = true;
   # Configure keymap in X11
@@ -92,6 +91,7 @@
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -105,6 +105,23 @@
     #media-session.enable = true;
   };
 
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
+  security.polkit.enable = true;
+  services.gnome3.gnome-keyring.enable = true;
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
@@ -151,7 +168,6 @@
     vim 
     wget
     unzip
-    git
     wl-clipboard
     # terminal
     kitty
@@ -184,12 +200,15 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    
+  };
+  programs.git = {
+    enable = true;
+    package = pkgs.gitFull;
   };
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
