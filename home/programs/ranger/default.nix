@@ -5,5 +5,8 @@
       ranger
     ];
   };
-  home.file.".config/ranger".source = ./config;
+  home.file.".config/ranger" = {
+    source = ./config;
+    recursive = true;
+  };
 }

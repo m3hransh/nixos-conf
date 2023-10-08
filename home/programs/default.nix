@@ -6,6 +6,6 @@
     ./wofi
     ./zathura
     ./vscode
-    ./joshuto
+    ./ranger
   ];
 }
