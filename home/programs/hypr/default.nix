@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports = [ 
@@ -6,6 +6,8 @@
   ];
 
   home.packages = with pkgs; [ 
+    inputs.hypr-contrib.packages.${pkgs.system}.grimblast
+    inputs.hyprpicker.packages.${pkgs.system}.hyprpicker
     swaylock-effects
     pamixer
     waybar

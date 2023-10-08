@@ -12,10 +12,13 @@
     hyprland = {
       url = "github:hyprwm/Hyprland";
     };
+
+    hyprpicker.url = "github:hyprwm/hyprpicker";
+    hypr-contrib.url = "github:hyprwm/contrib";
  
   };
 
-  outputs = inputs @ { self, nixpkgs, hyprland, home-manager }: 
+  outputs = inputs @ { self, nixpkgs, hyprland, home-manager, hypr-contrib, hyprpicker }: 
     let
       system = "x86_64-linux";
       user = "mehran";
@@ -23,7 +26,7 @@
 
       nixosConfigurations.mehran-rog = nixpkgs.lib.nixosSystem rec{
         inherit system;
-        specialArgs = {inherit hyprland user; };
+        specialArgs = {inherit hyprland user inputs; };
         modules = [ 
           ./outputs/configuration.nix
           hyprland.nixosModules.default 
