@@ -7,5 +7,14 @@
     ./zathura
     ./vscode
     ./ranger
+    ./imageview
+    ./kooha 
+    ./mpv
+    ./music
+    ./obs-studio
+    ./resource_monitor
+    ./search
+    ./youtube-tui
+    ./yt-dlp
   ];
 }

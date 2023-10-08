@@ -1,8 +1,14 @@
 { config, pkgs, ... }:
+
 {
   home = {
     packages = with pkgs; [
-      imv
+      fd
+      bat
+      ripgrep
     ];
+  };
+  programs = {
+    fzf.enable = true;
   };
 }

@@ -2,7 +2,7 @@
 {
   home = {
     packages = with pkgs; [
-      imv
+      youtube-tui
     ];
   };
 }

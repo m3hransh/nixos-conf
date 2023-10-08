@@ -121,7 +121,7 @@
     };
   };
   security.polkit.enable = true;
-  services.gnome3.gnome-keyring.enable = true;
+  services.gnome.gnome-keyring.enable = true;
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
