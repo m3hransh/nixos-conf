@@ -47,7 +47,6 @@
       # dev
       glab
       rustc
-      rust-analyzer
       go
       gcc
       nodejs
@@ -55,13 +54,8 @@
       nodePackages.yarn
       nodePackages.pnpm
       nodePackages.typescript
-      nodePackages.typescript-language-server
-      lua-language-server
       cargo
-      stylua
       ripgrep
-      marksman
-      tree-sitter
       python3Full 
 
 

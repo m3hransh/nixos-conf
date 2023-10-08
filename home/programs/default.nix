@@ -16,5 +16,6 @@
     ./search
     ./youtube-tui
     ./yt-dlp
+    ./nvim
   ];
 }

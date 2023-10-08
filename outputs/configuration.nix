@@ -197,10 +197,6 @@
   #   enableSSHSupport = true;
   # };
   # Neovim Configuration
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
