@@ -21,12 +21,11 @@
       # app
       brave
       google-chrome
-      webcord
+      discord
       vlc
       obsidian
       telegram-desktop
-      mailspring
-      mattermost-desktop
+      #mattermost-desktop
       firefox-wayland
       thunderbird
 
@@ -43,10 +42,12 @@
       android-tools
       xfce.thunar
       jmtpfs
+      scrcpy
 
       # dev
       glab
       rustc
+      exercism
       go
       gcc
       nodejs
@@ -57,10 +58,7 @@
       cargo
       ripgrep
       python3Full 
-
-
-      #misc
-      rofi
+      jq
 
      ];
 
@@ -89,10 +87,11 @@
     GTK_THEME = "Nordic";
   };
   home.pointerCursor = {
-    package = pkgs.catppuccin-cursors;
-    name = "Catppuccin-Frappe-Dark";
-    size = 16;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Ice";
+    size = 22;
   };
+
   home.pointerCursor.gtk.enable = true;
   gtk = {
     enable = true;

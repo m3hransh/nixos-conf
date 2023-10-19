@@ -168,7 +168,6 @@
     vim 
     wget
     unzip
-    wl-clipboard
     # terminal
     kitty
     starship
