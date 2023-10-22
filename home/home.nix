@@ -43,6 +43,7 @@
       xfce.thunar
       jmtpfs
       scrcpy
+      emote
 
       # dev
       glab

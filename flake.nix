@@ -22,13 +22,14 @@
     let
       system = "x86_64-linux";
       user = "mehran";
+      hostName = "mehran-rog";
     in {
 
-      nixosConfigurations.mehran-rog = nixpkgs.lib.nixosSystem rec{
+      nixosConfigurations.${hostName} = nixpkgs.lib.nixosSystem rec{
         inherit system;
-        specialArgs = {inherit hyprland user inputs; };
+        specialArgs = {inherit hyprland user hostName inputs; };
         modules = [ 
-          ./outputs/configuration.nix
+          ./system/configuration.nix
           hyprland.nixosModules.default 
           home-manager.nixosModules.home-manager
           {
