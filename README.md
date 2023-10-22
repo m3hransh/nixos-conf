@@ -1,7 +1,7 @@
 # My NixOS Configuration
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![GitHub issues](https://img.shields.io/github/issues/username/repo.svg)](https://GitHub.com/username/repo/issues/)
-[![GitHub pull-requests](https://img.shields.io/github/issues-pr/username/repo.svg)](https://GitHub.com/username/repo/pull/)
+[![GitHub issues](https://img.shields.io/github/issues/m3hransh/nixos-conf)](https://GitHub.com/m3hransh/nixos-conf/issues/)
+[![GitHub pull-requests](https://img.shields.io/github/issues-pr/m3hransh/nixos-conf)](https://GitHub.com/m3hransh/nixos-conf/pull/)
 
 ![preview](image.png)
 This repository hosts my personal NixOS configuration managed using flakes to ensure a reproducible system setup.
