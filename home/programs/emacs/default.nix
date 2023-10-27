@@ -11,33 +11,27 @@
         agda2-mode
       ]) ++
       (with epkgs.elpaPackages; [
-        auctex
-        company
-        rec-mode
-        yasnippet
+        # auctex
+        # company
+        # rec-mode
+        # yasnippet
       ]) ++
       (with epkgs.melpaStablePackages; [
-        deadgrep
-        devil
-        direnv
-        elixir-mode
-        fuel
-        go-mode
-        haskell-mode
-        highlight-indentation
-        markdown-mode
-        nix-mode
-        puppet-mode
-        raku-mode
-        slime
+        # deadgrep
+        # direnv
+        # elixir-mode
+        # fuel
+        # go-mode
+        # haskell-mode
+        # highlight-indentation
+        # markdown-mode
+        # nix-mode
+        # slime
         smartparens
-        yaml-mode
-        zoxide
+        # yaml-mode
       ]) ++
       (with epkgs.melpaPackages; [
-        bqn-mode
-        toml-mode
-        zig-mode
+        # toml-mode
       ]);
   };
 }
