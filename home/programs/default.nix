@@ -17,5 +17,7 @@
     ./youtube-tui
     ./yt-dlp
     ./nvim
+    ./kitty
+    ./emacs
   ];
 }

@@ -3,8 +3,7 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-      { "j-hui/fidget.nvim", config = true },
+      { "folke/neoconf.nvim",      cmd = "Neoconf", config = true },
       { "smjonas/inc-rename.nvim", config = true },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -33,7 +32,7 @@ return {
       ensure_installed = {
         "shfmt",
       },
-      PATH= "append",
+      PATH = "append",
     },
     config = function(_, opts)
       require("mason").setup(opts)
@@ -67,7 +66,10 @@ return {
       }
     end,
   },
-  { "jay-babu/mason-null-ls.nvim", opts = { ensure_installed = nil, automatic_installation = true, automatic_setup = false } },
+  {
+    "jay-babu/mason-null-ls.nvim",
+    opts = { ensure_installed = nil, automatic_installation = true, automatic_setup = false }
+  },
   {
     "utilyre/barbecue.nvim",
     event = "VeryLazy",
@@ -84,7 +86,7 @@ return {
     cmd = { "TroubleToggle", "Trouble" },
     opts = { use_diagnostic_signs = true },
     keys = {
-      { "<leader>ld", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics" },
+      { "<leader>ld", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostics" },
       { "<leader>lD", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics" },
     },
   },

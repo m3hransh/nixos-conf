@@ -7,11 +7,6 @@ return {
   },
   { "nacro90/numb.nvim", event = "BufReadPre", config = true },
   {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
-    config = true,
-  },
-  {
     "stevearc/dressing.nvim",
     event = "VeryLazy",
     config = true,
@@ -60,12 +55,12 @@ return {
       require("Comment").setup(opts)
     end,
   },
-  {
-    "iamcco/markdown-preview.nvim",
-    ft = "markdown",
-    -- build = "cd app && npm install",
-    --build = ":call mkdp#util#install()",
-  },
+  -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   ft = "markdown",
+  --   -- build = "cd app && npm install",
+  --   --build = ":call mkdp#util#install()",
+  -- },
   --  {
   --    "monaqa/dial.nvim",
   --    event = "BufReadPre",

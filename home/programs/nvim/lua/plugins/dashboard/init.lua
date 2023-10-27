@@ -2,7 +2,7 @@ return {
   "goolord/alpha-nvim",
   lazy = false,
   keys = {
-  { "<leader>a", "<cmd>Alpha<cr>", desc = "Find Files" }},
+    { "<leader>a", "<cmd>Alpha<cr>", desc = "Find Files" } },
   config = function()
     local dashboard = require "alpha.themes.dashboard"
     local icons = require("config.icons")
@@ -23,7 +23,7 @@ return {
       dashboard.button("g", icons.ui.List .. " Find text", ":Telescope live_grep <CR>"),
       dashboard.button("c", icons.ui.Gear .. " Config", ":e $MYVIMRC <CR>"),
       dashboard.button("l", icons.ui.Sleep .. " Lazy", ":Lazy<CR>"),
-      dashboard.button("q", icons.ui.SignOut  .. " Quit", ":qa<CR>"),
+      dashboard.button("q", icons.ui.SignOut .. " Quit", ":qa<CR>"),
     }
     for _, button in ipairs(dashboard.section.buttons.val) do
       button.opts.hl = "AlphaButtons"
@@ -55,9 +55,9 @@ return {
         local fortune = require "alpha.fortune"
         local quote = table.concat(fortune(), "\n")
         local plugins = "⚡Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
-        local footer = "\t" .. version ..   "\t" .. plugins .. "\n" .. quote
-        dashboard.section.footer.val = footer
-        pcall(vim.cmd.AlphaRedraw)
+        local footer = "\t" .. version .. "\t" .. plugins .. "\n" .. quote
+        -- dashboard.section.footer.val = footer
+        -- pcall(vim.cmd.AlphaRedraw)
       end,
     })
   end,

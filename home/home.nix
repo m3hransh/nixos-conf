@@ -1,4 +1,4 @@
-{ config, pkgs, hyprland, ... }:
+{ config, pkgs, hyprland, user, ... }:
 
 {
 
@@ -9,9 +9,9 @@
   ];
 
   home = {
-  username = "mehran";
+  username = user;
   # paths it should manage.
-  homeDirectory = "/home/mehran";
+  homeDirectory = "/home/" + user;
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   stateVersion = "23.05";
@@ -60,10 +60,14 @@
       ripgrep
       python3Full 
       jq
+      ghc
+      stack
+      cabal-install
+      agda
 
      ];
 
-  #programs.home-manager.enable = true;
+  programs.home-manager.enable = true;
 
   programs.starship = {
     enable = true;
