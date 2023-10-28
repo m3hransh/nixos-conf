@@ -9,10 +9,10 @@
 (setq frame-title-format '("%b (%q) - Emacs " emacs-version))
 (size-indication-mode)
 (column-number-mode)
-;; (scroll-bar-mode -1)
-;; (horizontal-scroll-bar-mode -1)
-;; (menu-bar-mode -1)
-;; (tool-bar-mode -1)
+(scroll-bar-mode -1)
+(horizontal-scroll-bar-mode -1)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
 ;; (tooltip-mode -1)
 
 
@@ -47,11 +47,11 @@
 
 (use-package agda2-mode)
 
-
-
-
-
 (load-file (let ((coding-system-for-read 'utf-8))
                 (shell-command-to-string "agda-mode locate")))
 
+;; Theme
+(custom-set-variables
+ '(custom-enabled-themes '(misterioso)))
+(custom-set-faces)
 
