@@ -66,13 +66,16 @@ some main packages that contain extra configs (e.g. nvim) beside their config fi
 
 - NixOS
 - Flakes feature enabled
+```nix
+nix.settings.experimental-features = ["nix-command" "flakes"];
+```
 
 ## Usage
 1. Ensure your machine specifications are correctly reflected in [hardware-configuration.nix](./system/hardware-configuration.nix).
 2. Open [flake.nix](./flake.nix) and update the **user** and **hostName** variables to match your preferences.
 3. To apply the configuration to your system, run the following command:
 ```bash
-nixos-rebuild switch --flake '.#yourhostname'
+sudo nixos-rebuild switch --flake '.#yourhostname'
 ```
 
 ## Inspirations
