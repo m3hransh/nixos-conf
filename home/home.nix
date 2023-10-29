@@ -44,6 +44,7 @@
       jmtpfs
       scrcpy
       emote
+      presenterm
 
       # dev
       glab
