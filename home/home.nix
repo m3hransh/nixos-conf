@@ -80,6 +80,7 @@
     enable = true;
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
+      direnv hook fish | source
     '';
     plugins = [
       # Enable a plugin (here grc for colorized command output)
@@ -92,6 +93,7 @@
   home.sessionVariables = {
     GTK_THEME = "Nordic";
   };
+
   home.pointerCursor = {
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Ice";
@@ -99,6 +101,7 @@
   };
 
   home.pointerCursor.gtk.enable = true;
+
   gtk = {
     enable = true;
     theme = {

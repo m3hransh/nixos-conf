@@ -19,5 +19,6 @@
     ./nvim
     ./kitty
     ./emacs
+    ./nix-direnv
   ];
 }
