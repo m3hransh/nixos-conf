@@ -13,7 +13,11 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Configure lazy.nvim
-require("lazy").setup("plugins", {
+require("lazy").setup {
+  spec = {
+    { import = "plugins" },
+    { import = "pde" },
+  },
   defaults = { lazy = true, version = nil },
   install = { missing = true, colorscheme = { "tokyonight", "gruvbox" } },
   -- Enable automatic update
@@ -32,5 +36,5 @@ require("lazy").setup("plugins", {
       },
     },
   },
-})
+}
 vim.keymap.set("n", "<leader>z", "<cmd>:Lazy<cr>", { desc = "Plugin Manager" })
