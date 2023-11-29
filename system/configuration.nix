@@ -51,6 +51,7 @@
   hardware.nvidia = {
     modesetting.enable = true;
   };
+  nix.settings.trusted-users = [ "root" user ];
 
   # Enable docker
   virtualisation.docker.enable = true;
