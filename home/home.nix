@@ -65,7 +65,7 @@
       stack
       cabal-install
       agda
-
+      qemu
      ];
 
   programs.home-manager.enable = true;

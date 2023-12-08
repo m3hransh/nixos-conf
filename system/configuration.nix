@@ -55,6 +55,9 @@
 
   # Enable docker
   virtualisation.docker.enable = true;
+
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ user ];
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${user} = {
     isNormalUser = true;
