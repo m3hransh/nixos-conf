@@ -1,81 +1,138 @@
-{ config, pkgs, hyprland, user, ... }:
+{ config, pkgs, userSettings, ... }:
 
 {
 
   imports = [
-    hyprland.homeManagerModules.default
-    ./programs
-    ./scripts
+    # hyprland.homeManagerModules.default
+    #  ./scripts
+    ./programs/zathura
+    ./programs/vscode
+    ./programs/ranger
+    ./programs/imageview
+    #    ./kooha 
+    #    ./mpv
+    ./programs/music
+    ./programs/obs-studio
+    #    ./resource_monitor
+    #    ./search
+    #    ./youtube-tui
+    #    ./yt-dlp
+    ./programs/nvim
+    ./programs/kitty
+    #    ./emacs
+    ./programs/nix-direnv
+    (./. + "/wm" + ("/" + userSettings.wm)) # My window manager
   ];
 
   home = {
-  username = user;
-  # paths it should manage.
-  homeDirectory = "/home/" + user;
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  stateVersion = "23.11";
+    username = userSettings.user;
+    # paths it should manage.
+    homeDirectory = "/home/" + userSettings.user;
+    # You can update Home Manager without changing this value. See
+    # the Home Manager release notes for a list of state version
+    stateVersion = "23.11";
   };
-  home.packages = with pkgs; 
-    [ 
-      # app
-      brave
-      google-chrome
-      discord
-      vlc
-      obsidian
-      telegram-desktop
-      #mattermost-desktop
-      firefox-wayland
-      thunderbird
 
-      # utils
-      wireguard-tools
-      wlr-randr
-      atool 
-      httpie 
-      lazygit 
-      lazydocker
-      dunst
-      xflux
-      pavucontrol
-      android-tools
-      xfce.thunar
-      jmtpfs
-      scrcpy
-      emote
-      presenterm
 
-      # dev
-      glab
-      rustc
-      exercism
-      go
-      gcc
-      nodejs
-      nodePackages.npm
-      nodePackages.yarn
-      nodePackages.pnpm
-      nodePackages.typescript
-      cargo
-      ripgrep
-      python3Full 
-      jq
-      ghc
-      stack
-      cabal-install
-      agda
-      qemu
-     ];
+  # The home.packages option allows you to install Nix packages into your
+  # environment.
+  home.packages = with pkgs; [
+    brave
+    google-chrome
+    vlc
+    obsidian
+    telegram-desktop
+    scrcpy
+    discord
+    thunderbird
+    signal-desktop
 
-  programs.home-manager.enable = true;
+    lazygit
+    lazydocker
+    android-tools
 
+    glab
+    rustc
+    cargo
+    exercism
+    go
+    gcc
+    nodejs
+    nodePackages.npm
+    nodePackages.yarn
+    nodePackages.pnpm
+    nodePackages.typescript
+    jq
+
+    # Local cert
+    mkcert
+    nssTools
+
+    wireguard-tools
+    # wlr-randr
+    atool
+    httpie
+    lazygit
+    lazydocker
+    #xflux
+    android-tools
+    jmtpfs
+    scrcpy
+    emote
+    presenterm
+    # # It is sometimes useful to fine-tune packages, for example, by applying
+    # # overrides. You can do that directly here, just don't forget the
+    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+    # # fonts?
+    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+
+    # # You can also create simple shell scripts directly inside your
+    # # configuration. For example, this adds a command 'my-hello' to your
+    # # environment:
+    # (pkgs.writeShellScriptBin "my-hello" ''
+    #   echo "Hello, ${config.home.username}!"
+    # '')
+  ] ++ [ userSettings.fontPkg ];
+
+  # Home Manager is pretty good at managing dotfiles. The primary way to manage
+  # plain files is through 'home.file'.
+  home.file = {
+    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
+    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
+    # # symlink to the Nix store copy.
+    # ".screenrc".source = dotfiles/screenrc;
+
+    # # You can also set the file content immediately.
+    # ".gradle/gradle.properties".text = ''
+    #   org.gradle.console=verbose
+    #   org.gradle.daemon.idletimeout=3600000
+    # '';
+  };
+
+  # Home Manager can also manage your environment variables through
+  # 'home.sessionVariables'. These will be explicitly sourced when using a
+  # shell provided by Home Manager. If you don't want to manage your shell
+  # through Home Manager then you have to manually source 'hm-session-vars.sh'
+  # located at either
+  #
+  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
+  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
+  #
+  # or
+  #
+  #  /etc/profiles/per-user/mehran/etc/profile.d/hm-session-vars.sh
+  #
   programs.starship = {
     enable = true;
   };
+
   programs.gh = {
     enable = true;
   };
+
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
@@ -86,6 +143,17 @@
       # Enable a plugin (here grc for colorized command output)
       { name = "grc"; src = pkgs.fishPlugins.grc.src; }
     ];
+  };
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
+
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = (_: true);
+    };
   };
 
   # GTK
@@ -117,7 +185,7 @@
     };
 
     font = {
-      name = "JetBrainsMono Nerd Font";
+      name = userSettings.font;
       size = 12;
     };
     gtk3.extraConfig = {
@@ -133,4 +201,6 @@
       gtk-xft-rgba="rgb"
     '';
   };
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
 }

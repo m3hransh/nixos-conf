@@ -5,7 +5,8 @@
     programs.vscode = {
       enable = true;
       package = pkgs.vscode.fhs;
-      userSettings = builtins.fromJSON (builtins.readFile ./settings.json );
+      # the setting is not mutable
+      # userSettings = builtins.fromJSON (builtins.readFile ./settings.json );
       keybindings = [
             {
               key= "ctrl+k e";

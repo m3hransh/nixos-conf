@@ -36,6 +36,7 @@
       rust-analyzer
       clang-tools
       haskell-language-server
+      ripgrep
       #-- tree-sitter --#
       tree-sitter
       #-- format --#

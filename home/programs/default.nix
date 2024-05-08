@@ -1,24 +1,24 @@
 {
   imports = [
-    ./dunst
-    ./hypr
-    ./waybar
-    ./wofi
+#    ./dunst
+#    ./hypr
+#    ./waybar
+#    ./wofi
     ./zathura
     ./vscode
     ./ranger
     ./imageview
-    ./kooha 
-    ./mpv
+#    ./kooha 
+#    ./mpv
     ./music
     ./obs-studio
-    ./resource_monitor
-    ./search
-    ./youtube-tui
-    ./yt-dlp
+#    ./resource_monitor
+#    ./search
+#    ./youtube-tui
+#    ./yt-dlp
     ./nvim
     ./kitty
-    ./emacs
+#    ./emacs
     ./nix-direnv
   ];
 }
