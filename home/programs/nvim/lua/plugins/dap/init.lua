@@ -1,19 +1,20 @@
 return {
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      defaults = {
-        ["<leader>d"] = { name = "+DAP" },
-      },
-    },
-  },
-  {
-    "mfussenegger/nvim-dap",
-    dependencies = {
-      { "rcarriga/nvim-dap-ui" },
-      { "theHamsta/nvim-dap-virtual-text" },
-    },
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		opts = {
+			defaults = {
+				["<leader>d"] = { name = "+DAP" },
+			},
+		},
+	},
+	{
+		"mfussenegger/nvim-dap",
+		dependencies = {
+			{ "rcarriga/nvim-dap-ui" },
+			{ "theHamsta/nvim-dap-virtual-text" },
+			{ "nvim-neotest/nvim-nio" },
+		},
     -- stylua: ignore
     keys = {
       { "<leader>dR", function() require("dap").run_to_cursor() end, desc = "Run to Cursor", },
@@ -91,29 +92,29 @@ return {
       { "<leader>dx", function() require("dap").terminate() end, desc = "Terminate", },
       { "<leader>du", function() require("dap").step_out() end,  desc = "Step Out", },
     },
-    opts = {},
-    config = function(plugin, opts)
-      require("nvim-dap-virtual-text").setup {
-        commented = true,
-      }
+		opts = {},
+		config = function(plugin, opts)
+			require("nvim-dap-virtual-text").setup({
+				commented = true,
+			})
 
-      local dap, dapui = require "dap", require "dapui"
-      dapui.setup {}
+			local dap, dapui = require("dap"), require("dapui")
+			dapui.setup({})
 
-      dap.listeners.after.event_initialized["dapui_config"] = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated["dapui_config"] = function()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited["dapui_config"] = function()
-        dapui.close()
-      end
+			dap.listeners.after.event_initialized["dapui_config"] = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_terminated["dapui_config"] = function()
+				dapui.close()
+			end
+			dap.listeners.before.event_exited["dapui_config"] = function()
+				dapui.close()
+			end
 
-      -- set up debugger
-      for k, _ in pairs(opts.setup) do
-        opts.setup[k](plugin, opts)
-      end
-    end,
-  },
+			-- set up debugger
+			for k, _ in pairs(opts.setup) do
+				opts.setup[k](plugin, opts)
+			end
+		end,
+	},
 }
