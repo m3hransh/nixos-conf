@@ -145,6 +145,14 @@
     ];
   };
 
+  programs.git.enable = true;
+  programs.git.userName = userSettings.name;
+  programs.git.userEmail = userSettings.email;
+  programs.git.extraConfig = {
+    init.defaultBranch = "main";
+    # safe.directory = "/home/" + userSettings.username + "/.dotfiles";
+  };
+
   home.sessionVariables = {
     EDITOR = "nvim";
   };
@@ -188,18 +196,17 @@
       name = userSettings.font;
       size = 12;
     };
-    gtk3.extraConfig = {
-      gtk-xft-antialias = 1;
-      gtk-xft-hinting = 1;
-      gtk-xft-hintstyle = "hintslight";
-      gtk-xft-rgba = "rgb";
-    };
-    gtk2.extraConfig = ''
-      gtk-xft-antialias=1
-      gtk-xft-hinting=1
-      gtk-xft-hintstyle="hintslight"
-      gtk-xft-rgba="rgb"
-    '';
+    # gtk3.extraConfig = {
+    #   gtk-xft-antialias = 1;
+    #   gtk-xft-hinting = 1;
+    #   gtk-xft-hintstyle = "hintslight";
+    #   gtk-xft-rgba = "rgb";
+    # };
+    # gtk2.extraConfig = ''
+    #   gtk-xft-antialias=1
+    #   gtk-xft-hinting=1
+    #   gtk-xft-hintstyle="hintslight"
+
   };
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
