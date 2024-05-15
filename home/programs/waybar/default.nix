@@ -1,102 +1,101 @@
 { config, lib, pkgs, ... }:
 
 {
-    home.file.".config/waybar/custom_modules" ={
-      source =  ./custom_modules;
-      recursive = true;
-    };
+  home.file.".config/waybar/custom_modules" = {
+    source = ./custom_modules;
+    recursive = true;
+  };
 
-    programs = {
-      bash = {
-        initExtra = ''
-          if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-             exec  Hyprland
-          fi
-        '';
-      };
-      fish = {
-        loginShellInit = ''
-          set TTY1 (tty)
-          [ "$TTY1" = "/dev/tty1" ] && exec Hyprland
-        '';
-      };
+  programs = {
+    bash = {
+      initExtra = ''
+        if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+           exec  Hyprland
+        fi
+      '';
     };
-    systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
-    programs.waybar = {
-      enable = true;
-      systemd = {
-        enable = false;
-        target = "graphical-session.target";
-      };
-      style = builtins.readFile ./style.css;
-      settings = [{
+    fish = {
+      loginShellInit = ''
+        set TTY1 (tty)
+        [ "$TTY1" = "/dev/tty1" ] && exec Hyprland
+      '';
+    };
+  };
+  systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
+  programs.waybar = {
+    enable = true;
+    systemd = {
+      enable = false;
+      target = "graphical-session.target";
+    };
+    style = builtins.readFile ./style.css;
+    settings = [{
 
 
       "layer" = "top";
-      "modules-left"= ["hyprland/workspaces" "hyprland/window"];
+      "modules-left" = [ "hyprland/workspaces" "hyprland/window" ];
 
 
-      "hyprland/workspaces"= {
-         "on-scroll-up" = "hyprctl dispatch workspace e+1";
-         "on-scroll-down" = "hyprctl dispatch workspace e-1";
-         "format"= "{icon}";
-         "format-icons"= {
-           "1"= "";
-           "2"= "";
-           "3"= "";
-           "4"= "";
-           "5"= "";
-           "6"= "";
-           "7"= "";
-           "8"= "";
-           "9"= "";
-           "10"= "";
-           "urgent"= "";
-           "focused"= "";
-           "default"= "";
-         };
-       };
-       "hyprland/window" = {
-         format = "{title}";
-       };
-     
+      "hyprland/workspaces" = {
+        "on-scroll-up" = "hyprctl dispatch workspace e+1";
+        "on-scroll-down" = "hyprctl dispatch workspace e-1";
+        "format" = "{icon}";
+        "format-icons" = {
+          "1" = "";
+          "2" = "";
+          "3" = "";
+          "4" = "";
+          "5" = "";
+          "6" = "";
+          "7" = "";
+          "8" = "";
+          "9" = "";
+          "urgent" = "";
+          "focused" = "";
+          "default" = "";
+        };
+      };
+      "hyprland/window" = {
+        format = "{title}";
+      };
 
 
-    "custom/media"= {
-        "format"= "<span color='#9ece6a'> </span>{icon} {}";
-        "escape"= true;
-        "return-type"= "json";
-        "max-length"= 30;
-        "on-click"= "playerctl -p spotify play-pause";
-        "on-click-right"= "killall spotify";
+
+      "custom/media" = {
+        "format" = "<span color='#9ece6a'> </span>{icon} {}";
+        "escape" = true;
+        "return-type" = "json";
+        "max-length" = 30;
+        "on-click" = "playerctl -p spotify play-pause";
+        "on-click-right" = "killall spotify";
         # This value was tested using a trackpad; it should be lowered if using a mouse.
-        "smooth-scrolling-threshold"= 2; 
-        "on-scroll-up"= "playerctl -p spotify next";
-        "on-scroll-down"= "playerctl -p spotify previous";
+        "smooth-scrolling-threshold" = 2;
+        "on-scroll-up" = "playerctl -p spotify next";
+        "on-scroll-down" = "playerctl -p spotify previous";
         # Script in resources/custom_modules folder
-        "exec"= "$HOME/.scripts/mediaplayer.py --player spotify 2> /dev/null"; 
-        "exec-if"= "pgrep spotify";
-    };
+        "exec" = "$HOME/.scripts/mediaplayer.py --player spotify 2> /dev/null";
+        "exec-if" = "pgrep spotify";
+      };
 
 
-      "modules-center"= ["custom/github"  "cpu" "custom/memory" "custom/disk_root" "temperature" "clock" "hyprland/language" "idle_inhibitor"  "custom/notification"];
+      "modules-center" = [ "custom/github" "cpu" "custom/memory" "custom/disk_root" "temperature" "clock" "hyprland/language" "idle_inhibitor" "custom/notification" ];
 
-    "custom/github"= {
+      "custom/github" = {
         "format" = "{} ";
         "return-type" = "json";
         "interval" = 60;
         "exec" = "$HOME/.config/waybar/custom_modules/github.sh";
         "on-click" = "xdg-open https://github.com/notifications";
-    };
+      };
 
-    #   "custom/scratchpad-indicator" = {
-    #     "interval" = 3;
-    #     "return-type" = "json";
-    #     "exec" = "swaymsg -t get_tree | jq --unbuffered --compact-output '(recurse(.nodes[]) | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | if ($scratch_nodes|length) > 0 then { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") } else empty end'";
-    #     "format" = "{} <span color='#2ac3de'></span> ";
-    #     "on-click" = "exec swaymsg 'scratchpad show'";
-    #     "on-click-right" = "exec swaymsg 'move scratchpad'";
-    # };
+      #   "custom/scratchpad-indicator" = {
+      #     "interval" = 3;
+      #     "return-type" = "json";
+      #     "exec" = "swaymsg -t get_tree | jq --unbuffered --compact-output '(recurse(.nodes[]) | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | if ($scratch_nodes|length) > 0 then { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") } else empty end'";
+      #     "format" = "{} <span color='#2ac3de'></span> ";
+      #     "on-click" = "exec swaymsg 'scratchpad show'";
+      #     "on-click-right" = "exec swaymsg 'move scratchpad'";
+      # };
 
 
       "cpu" = {
@@ -126,10 +125,10 @@
         "format" = " {icon}";
         "format-alt" = " {temperatureC}°C {icon}";
         "format-alt-click" = "click-left";
-        "format-icons" = [""];
+        "format-icons" = [ "" ];
       };
 
-      "clock"= {
+      "clock" = {
         "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
         "format-alt" = "{:%Y-%m-%d}";
         "format-alt-click" = "click-left";
@@ -157,42 +156,42 @@
       };
 
       "hyprland/language" = {
-          "format"= "{shortDescription}";
-          };
+        "format" = "{shortDescription}";
+      };
 
 
       "idle_inhibitor" = {
-          "format" = "{icon}";
-          "on-click" = "/home/m3d/.scripts/sunset";
-          "format-icons" = {
-            "activated" = "";
-            "deactivated" = "";
-          };
+        "format" = "{icon}";
+        "on-click" = "/home/m3d/.scripts/sunset";
+        "format-icons" = {
+          "activated" = "";
+          "deactivated" = "";
         };
+      };
 
-      "modules-right" = [ "tray" "network#wifi"  "pulseaudio" "backlight"  "battery"  "custom/power"];
-        "tray" = {
-            "icon-size" = 15;
-            "spacing" = 10;
-        };
+      "modules-right" = [ "tray" "network#wifi" "pulseaudio" "backlight" "battery" "custom/power" ];
+      "tray" = {
+        "icon-size" = 15;
+        "spacing" = 10;
+      };
 
-    "network#wifi"= {
-        "interval"= 30 ;
-        "interface"= "wlp*" ;
-        "format"= "{ifname}" ;
-        "format-wifi"= "<span color='#9ece6a'> </span>{bandwidthDownBits} <span color='#73daca'> </span>{bandwidthUpBits}" ;
-        "format-ethernet"= "<span color='#9ece6a'> </span>{bandwidthDownBits} <span color='#73daca'> </span>{bandwidthUpBits}" ;
-        "format-disconnected"= "{ifname}" ; 
-        "tooltip-format"= "{ifname} via {gwaddr} " ;
-        "tooltip-format-wifi"= "{essid} ({signalStrength}%) " ;
-        "tooltip-format-ethernet"= "{ifname} " ;
-        "tooltip-format-disconnected"= "Disconnected" ;
-        "max-length"= 50;
-        "on-click"="exec kitty 'nmtui'";
-    };
+      "network#wifi" = {
+        "interval" = 30;
+        "interface" = "wlp*";
+        "format" = "{ifname}";
+        "format-wifi" = "<span color='#9ece6a'> </span>{bandwidthDownBits} <span color='#73daca'> </span>{bandwidthUpBits}";
+        "format-ethernet" = "<span color='#9ece6a'> </span>{bandwidthDownBits} <span color='#73daca'> </span>{bandwidthUpBits}";
+        "format-disconnected" = "{ifname}";
+        "tooltip-format" = "{ifname} via {gwaddr} ";
+        "tooltip-format-wifi" = "{essid} ({signalStrength}%) ";
+        "tooltip-format-ethernet" = "{ifname} ";
+        "tooltip-format-disconnected" = "Disconnected";
+        "max-length" = 50;
+        "on-click" = "exec kitty 'nmtui'";
+      };
 
       "pulseaudio" = {
-        "scroll-step" = 5; 
+        "scroll-step" = 5;
         "format" = "{volume}% <span color='#f7768e'>{icon}</span> {format_source}";
         "format-bluetooth" = "{volume}% {icon} {format_source}";
         "format-bluetooth-muted" = " {icon} {format_source}";
@@ -200,18 +199,18 @@
         "format-source" = "{volume}% <span color='#f7768e'></span>";
         "format-source-muted" = "";
         "states" = {
-        "high" = 70;
-        "medium" = 50;
-        "low" = 25;
-        "mute" = 0;
+          "high" = 70;
+          "medium" = 50;
+          "low" = 25;
+          "mute" = 0;
         };
         "format-icons" = {
-          "hands-free" = "" ;
-          "headset" = "" ;
-          "phone" = "" ;
-          "portable" = "" ;
-          "car" = "" ;
-          "default" = ["" "" ""];
+          "hands-free" = "";
+          "headset" = "";
+          "phone" = "";
+          "portable" = "";
+          "car" = "";
+          "default" = [ "" "" "" ];
         };
         "on-click-right" = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
         "on-click-middle" = "pactl set-source-mute @DEFAULT_SOURCE@ toggle";
@@ -227,9 +226,9 @@
         "format-alt-click" = "click-left";
         "on-scroll-up" = "light -A 5";
         "on-scroll-down" = "light -U 5";
-        "format-icons" = ["" ""];
+        "format-icons" = [ "" "" ];
       };
-      
+
 
 
       "custom/power" = {
@@ -251,10 +250,10 @@
         "format-charging" = "{capacity}% ";
         "format-plugged" = "{capacity}% ";
         "format-full" = "{icon}";
-        "format-icons" = ["" "" "" "" ""];
+        "format-icons" = [ "" "" "" "" "" ];
       };
 
-      }];
-    };
+    }];
+  };
 
 }

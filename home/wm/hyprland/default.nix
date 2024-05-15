@@ -3,6 +3,9 @@
 {
   imports = [
     ./hyprland-environment.nix
+    ../../programs/waybar
+    ../../programs/wofi
+    ../../programs/mako
   ];
 
   home.packages = with pkgs; [
@@ -15,9 +18,9 @@
     wl-clipboard
     wlr-randr
     pavucontrol
-    dunst
     # file manager for hyprland
     xfce.thunar
+    swww
   ];
   # systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
   #test later systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
@@ -26,7 +29,13 @@
     enable = true;
     # enableNvidiaPatches = true;
     xwayland.enable = true;
-    systemdIntegration = true;
+    # systemdIntegration = true;
+    systemd.enable = true;
     extraConfig = builtins.readFile ./hyprland.conf;
+  };
+
+  home.file.".scripts" = {
+    source = ./scripts;
+    recursive = true;
   };
 }

@@ -10,10 +10,10 @@
     ./programs/ranger
     ./programs/imageview
     #    ./kooha 
-    #    ./mpv
+    ./programs/mpv
     ./programs/music
     ./programs/obs-studio
-    #    ./resource_monitor
+    ./programs/resource_monitor
     #    ./search
     #    ./youtube-tui
     #    ./yt-dlp
@@ -46,6 +46,10 @@
     discord
     thunderbird
     signal-desktop
+    spotify
+    anki-bin
+    calibre
+    xournalpp
 
     lazygit
     lazydocker
@@ -68,6 +72,11 @@
     mkcert
     nssTools
 
+    imv
+    watson
+    networkmanagerapplet
+    brightnessctl
+    libnotify
     wireguard-tools
     # wlr-randr
     atool
@@ -80,6 +89,9 @@
     scrcpy
     emote
     presenterm
+    chezmoi
+    fd
+    tmux
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -124,7 +136,15 @@
   # or
   #
   #  /etc/profiles/per-user/mehran/etc/profile.d/hm-session-vars.sh
-  #
+
+
+  home.sessionPath = [
+    "/home/${userSettings.user}/.local/bin"
+    "/home/${userSettings.user}/.cargo/bin"
+    "/home/${userSettings.user}/.go/bin"
+  ];
+
+
   programs.starship = {
     enable = true;
   };

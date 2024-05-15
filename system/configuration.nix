@@ -41,8 +41,32 @@
     grc
     openssl
     home-manager
-  ];
+    virt-manager
+  ] ++
+  (if (systemSettings.system == "ASUS") then [
+    pkgs.asusctl
+  ] else [ ]);
 
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+  programs.fish.enable = true;
+  programs.light.enable = true;
+
+  programs.git = {
+    enable = true;
+    package = pkgs.gitFull;
+  };
+
+  programs.dconf.enable = true;
+  programs.droidcam.enable = true;
+  programs.firefox.enable = true;
+  programs.adb.enable = true;
+
+  # If asus laptop install asusctl package
+  # if systemSettings.system == "ASUS" then
   #Garbage colector
   nix.gc = {
     automatic = true;
@@ -64,6 +88,25 @@
     driSupport32Bit = true;
   };
 
+  services.supergfxd.enable = true;
+  services = {
+    asusd = {
+      enable = true;
+      enableUserService = true;
+    };
+  };
+  # fixes mic mute button
+  # services.udev.extraHwdb = ''
+  #   evdev:name:*:dmi:bvn*:bvr*:bd*:svnASUS*:pn*:*
+  #    KEYBOARD_KEY_ff31007c=f20
+  # '';
+
+  # CPU optimization for amd ryzen
+  boot.kernelParams = [ "processor.max_cstate=1" ];
+  powerManagement.cpuFreqGovernor = "performance";
+  # Update the CPU microcode for AMD processors.
+  # Don't know if it's applied
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -79,11 +122,6 @@
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
-  };
-
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
   };
 
   # Bluetooth
@@ -104,21 +142,10 @@
   users.users.${userSettings.user} = {
     isNormalUser = true;
     description = userSettings.user;
-    extraGroups = [ "networkmanager" "wheel" "docker" "video" "kvm" "audio" "fuse" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "video" "kvm" "audio" "fuse" "adbusers" "libvirtd" ];
   };
 
 
-  programs.fish.enable = true;
-  programs.light.enable = true;
-
-  programs.git = {
-    enable = true;
-    package = pkgs.gitFull;
-  };
-
-  programs.dconf.enable = true;
-  programs.droidcam.enable = true;
-  programs.firefox.enable = true;
   users.defaultUserShell = pkgs.fish;
 
   # Enable docker
@@ -126,6 +153,7 @@
 
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ userSettings.user ];
+  virtualisation.libvirtd.enable = true;
 
   # Networking
   networking.hostName = systemSettings.hostName; # Define your hostname.
@@ -168,6 +196,8 @@
     (nerdfonts.override { fonts = [ "FiraCode" "CascadiaCode" "Iosevka" "IosevkaTerm" "JetBrainsMono" ]; })
   ];
 
+  # Whether to enable all firmware regardless of license status.
+  hardware.enableAllFirmware = true;
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

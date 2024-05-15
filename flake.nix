@@ -1,12 +1,13 @@
 {
   description = "My NixOS configuration";
 
-  outputs = inputs @ { self, nixpkgs, home-manager, nixpkgs-stable }:
+  outputs = inputs @ { self, nixpkgs, home-manager, nixpkgs-stable, hyprland, ... }:
     let
       systemSettings = {
         system = "x86_64-linux";
         hostName = "mehran-rog";
         gnome = "enabled";
+        machine = "ASUS";
       };
 
       userSettings = {
@@ -14,7 +15,7 @@
         name = "Mehran";
         email = "";
         nixDir = "/home/mehran/.nixconf";
-        wm = "gnome";
+        wm = "hyprland";
         font = "Intel One Mono";
         fontPkg = pkgs.intel-one-mono;
         editor = "nvim";
@@ -72,6 +73,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland = {
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    };
+
+    hyprpicker.url = "github:hyprwm/hyprpicker";
+    hypr-contrib.url = "github:hyprwm/contrib";
   };
 
 }
