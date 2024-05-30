@@ -1,0 +1,88 @@
+[systemS]
+system = "x86_64-linux"
+hostName = "mehran-rog"
+gnome = "enabled"
+machine = "ASUS"
+packages= [
+  "neofetch",
+  "vim",
+  "wget",
+  "unzip",
+  "kitty",
+  "starship",
+  "fishPlugins.done",
+  "fishPlugins.fzf-fish",
+  "fishPlugins.forgit",
+  "fzf",
+  "fishPlugins.grc",
+  "grc",
+  "openssl",
+  "home-manager",
+  "virt-manager",
+  ]
+[userS]
+user = "mehran"
+name = "Mehran"
+email = ""
+nixDir = "/home/mehran/.nixconf"
+wm = "hyprland"
+font = "Intel One Mono"
+editor = "nvim"
+packages = [
+  "brave",
+  "google-chrome",
+  "vlc",
+  "obsidian",
+  "telegram-desktop",
+  "scrcpy",
+  "discord",
+  "thunderbird",
+  "signal-desktop",
+  "spotify",
+  "anki-bin",
+  "calibre",
+  "xournalpp",
+
+  "lazygit",
+  "lazydocker",
+  "android-tools",
+
+  "glab",
+  "rustc",
+  "cargo",
+  "exercism",
+  "go",
+  "gcc",
+  "nodejs",
+  "nodePackages.npm",
+  "nodePackages.yarn",
+  "nodePackages.pnpm",
+  "nodePackages.typescript",
+  "jq",
+
+# Local cert
+  "mkcert",
+  "nssTools",
+
+  "imv",
+  "watson",
+  "networkmanagerapplet",
+  "brightnessctl",
+  "libnotify",
+  "wireguard-tools",
+  "wlr-randr",
+  "atool",
+  "httpie",
+  "lazygit",
+  "lazydocker",
+  #"xflux",
+  "android-tools",
+  "jmtpfs",
+  "scrcpy",
+  "emote",
+  "presenterm",
+  "chezmoi",
+  "fd",
+  "tmux",
+]
+

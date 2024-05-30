@@ -3,53 +3,46 @@
 
   outputs = inputs @ { self, nixpkgs, home-manager, nixpkgs-stable, hyprland, ... }:
     let
-      systemSettings = {
-        system = "x86_64-linux";
-        hostName = "mehran-rog";
-        gnome = "enabled";
-        machine = "ASUS";
-      };
-
-      userSettings = {
-        user = "mehran";
-        name = "Mehran";
-        email = "";
-        nixDir = "/home/mehran/.nixconf";
-        wm = "hyprland";
-        font = "Intel One Mono";
-        fontPkg = pkgs.intel-one-mono;
-        editor = "nvim";
-      };
 
       pkgs = import nixpkgs {
-        system = systemSettings.system;
+        system = settings.systemS.system;
         config = {
           allowUnfree = true;
           allowUnfreePredicate = (_: true);
         };
       };
+      settings = {
+        inherit (builtins.fromTOML (builtins.readFile ./settings.toml)) systemS userS;
+        # helper function to get package from nixpkgs
+        # this help with cases like package = pkg.subpkg
+        getPack = p: pkgs: 
+        ( 
+          let
+            splited = inputs.nixpkgs.lib.strings.splitString "." p;
+          in
+            inputs.nixpkgs.lib.attrsets.getAttrFromPath splited pkgs 
+        );
+      };
 
       lib = inputs.nixpkgs.lib;
     in
     {
-
       nixosConfigurations = {
         system = lib.nixosSystem {
-          system = systemSettings.system;
+          system = settings.systemS.system;
           modules = [
             ./system/configuration.nix
           ]; # load configuration.nix from selected PROFILE
           specialArgs = {
             # pass config variables from above
             # inherit pkgs-stable;
-            inherit systemSettings;
-            inherit userSettings;
+            inherit settings;
             inherit inputs;
           };
         };
       };
 
-      homeConfigurations.${userSettings.user} = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.${settings.userS.user} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         # Specify your home configuration modules here, for example,
@@ -57,7 +50,7 @@
         modules = [ ./home/home.nix ];
 
         # Optionally use extraSpecialArgs
-        extraSpecialArgs = { inherit userSettings systemSettings inputs; };
+        extraSpecialArgs = { inherit settings inputs; };
         # to pass through arguments to home.nix
       };
     };

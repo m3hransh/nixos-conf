@@ -1,6 +1,6 @@
-{ config, pkgs, user, hostName, ... }:
+{ config, pkgs, settings, ... }:
 
-{
+with settings;{
   # Wayland with mutter is the default
   services.xserver = {
     enable = true;

@@ -2,14 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, systemSettings, userSettings, lib, ... }:
+{ config, pkgs, settings, lib, ... }:
 
-{
+with settings;{
   imports =
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      (./. + "/wm" + ("/" + userSettings.wm)) # My window manager
+      (./. + "/wm" + ("/" + userS.wm)) # My window manager
     ];
 
   # Bootloader.
@@ -24,29 +24,10 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    neofetch
-    vim
-    wget
-    unzip
-
-    # terminal
-    kitty
-    starship
-    fishPlugins.done
-    fishPlugins.fzf-fish
-    fishPlugins.forgit
-    fzf
-    fishPlugins.grc
-    grc
-    openssl
-    home-manager
-    virt-manager
-    libsecret
-  ] ++
-  (if (systemSettings.system == "ASUS") then [
-    pkgs.asusctl
-  ] else [ ]);
+  environment.systemPackages = (builtins.map (pkg: getPack pkg pkgs) systemS.packages) ++
+    (if (systemS.system == "ASUS") then [
+      pkgs.asusctl
+    ] else [ ]);
 
   programs.gnupg.agent = {
     enable = true;
@@ -67,7 +48,7 @@
   programs.adb.enable = true;
 
   # If asus laptop install asusctl package
-  # if systemSettings.system == "ASUS" then
+  # if systemS.system == "ASUS" then
   #Garbage colector
   nix.gc = {
     automatic = true;
@@ -137,12 +118,12 @@
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
-  nix.settings.trusted-users = [ "root" userSettings.user ];
+  nix.settings.trusted-users = [ "root" userS.user ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${userSettings.user} = {
+  users.users.${userS.user} = {
     isNormalUser = true;
-    description = userSettings.user;
+    description = userS.user;
     extraGroups = [ "networkmanager" "wheel" "docker" "video" "kvm" "audio" "fuse" "adbusers" "libvirtd" ];
   };
 
@@ -153,11 +134,11 @@
   virtualisation.docker.enable = true;
 
   # virtualisation.virtualbox.host.enable = true;
-  # users.extraGroups.vboxusers.members = [ userSettings.user ];
+  # users.extraGroups.vboxusers.members = [ userS.user ];
   virtualisation.libvirtd.enable = true;
 
   # Networking
-  networking.hostName = systemSettings.hostName; # Define your hostname.
+  networking.hostName = systemS.hostName; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
