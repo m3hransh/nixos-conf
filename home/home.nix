@@ -9,11 +9,12 @@
     ./programs/vscode
     ./programs/ranger
     ./programs/imageview
-    #    ./kooha 
+    ./programs/kooha
     ./programs/mpv
     ./programs/music
     ./programs/obs-studio
     ./programs/resource_monitor
+    ./programs/tmux
     #    ./search
     #    ./youtube-tui
     #    ./yt-dlp
@@ -50,6 +51,7 @@
     anki-bin
     calibre
     xournalpp
+    zotero
 
     lazygit
     lazydocker
@@ -91,7 +93,6 @@
     presenterm
     chezmoi
     fd
-    tmux
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of

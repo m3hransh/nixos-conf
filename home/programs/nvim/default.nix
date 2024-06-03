@@ -35,7 +35,7 @@
       zk
       rust-analyzer
       clang-tools
-      haskell-language-server
+      # haskell-language-server
       ripgrep
       #-- tree-sitter --#
       tree-sitter
@@ -53,6 +53,6 @@
     ];
   };
 
-  home.file.".config/nvim/init.lua".source = ./init.lua;
-  home.file.".config/nvim/lua".source = ./lua;
+  # home.file.".config/nvim/init.lua".source = ./init.lua;
+  # home.file.".config/nvim/lua".source = ./lua;
 }

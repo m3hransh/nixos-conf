@@ -114,35 +114,35 @@ return {
 		version = "^3", -- Recommended
 		lazy = false, -- This plugin is already lazy
 	},
-	-- {
-	-- 	"elixir-tools/elixir-tools.nvim",
-	-- 	version = "*",
-	-- 	event = { "BufReadPre", "BufNewFile" },
-	-- 	config = function()
-	-- 		local elixir = require("elixir")
-	-- 		local elixirls = require("elixir.elixirls")
+	{
+		"elixir-tools/elixir-tools.nvim",
+		version = "*",
+		-- event = "BufReadPre",
+		keys = {
+			{ "<leader>fp", "<cmd>ElixirFromPipe<cr>", desc = "From Pipe" },
+			{ "<leader>tp", "<cmd>ElixirToPipe<cr>", desc = "To Pipe" },
+			{ "<leader>em", "<cmd>ElixirExpandMacro<cr>", desc = "Expand Macro" },
+		},
+		config = function()
+			local elixir = require("elixir")
+			local elixirls = require("elixir.elixirls")
 
-	-- 		elixir.setup({
-	-- 			nextls = { enable = true },
-	-- 			credo = {},
-	-- 			elixirls = {
-	-- 				enable = true,
-	-- 				settings = elixirls.settings({
-	-- 					dialyzerEnabled = true,
-	-- 					enableTestLenses = false,
-	-- 				}),
-	-- 				on_attach = function(client, bufnr)
-	-- 					vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-	-- 					vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-	-- 					vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
-	-- 				end,
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim",
-	-- 	},
-	-- },
+			elixir.setup({
+				nextls = { enable = true },
+				credo = {},
+				elixirls = {
+					enable = true,
+					settings = elixirls.settings({
+						dialyzerEnabled = true,
+						enableTestLenses = false,
+					}),
+				},
+			})
+		end,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+	},
 	-- {
 	--   "ray-x/lsp_signature.nvim",
 	--   event = "VeryLazy",

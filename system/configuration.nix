@@ -42,6 +42,7 @@
     openssl
     home-manager
     virt-manager
+    libsecret
   ] ++
   (if (systemSettings.system == "ASUS") then [
     pkgs.asusctl
@@ -61,8 +62,8 @@
   };
 
   programs.dconf.enable = true;
-  programs.droidcam.enable = true;
-  programs.firefox.enable = true;
+  # programs.droidcam.enable = true;
+  # programs.firefox.enable = true;
   programs.adb.enable = true;
 
   # If asus laptop install asusctl package
@@ -130,7 +131,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-
+  security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" /etc/ssl/certs/localhost.crt ];
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -151,8 +152,8 @@
   # Enable docker
   virtualisation.docker.enable = true;
 
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ userSettings.user ];
+  # virtualisation.virtualbox.host.enable = true;
+  # users.extraGroups.vboxusers.members = [ userSettings.user ];
   virtualisation.libvirtd.enable = true;
 
   # Networking
