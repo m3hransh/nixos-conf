@@ -1,6 +1,6 @@
-{ config, pkgs, userS, ... }:
+{ config, pkgs, settings, ... }:
 
-{
+with settings;{
 
   imports = [
     # hyprland.homeManagerModules.default
@@ -37,7 +37,7 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = builtins.map (p: getPack p pkgs) (userS.packages ++ [ userS.font ]);
+  home.packages = builtins.map (p: getPack p pkgs) (userS.packages);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

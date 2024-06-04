@@ -15,13 +15,13 @@
         inherit (builtins.fromTOML (builtins.readFile ./settings.toml)) systemS userS;
         # helper function to get package from nixpkgs
         # this help with cases like package = pkg.subpkg
-        getPack = p: pkgs: 
-        ( 
-          let
-            splited = inputs.nixpkgs.lib.strings.splitString "." p;
-          in
-            inputs.nixpkgs.lib.attrsets.getAttrFromPath splited pkgs 
-        );
+        getPack = p: pkgs:
+          (
+            let
+              splited = inputs.nixpkgs.lib.strings.splitString "." p;
+            in
+            inputs.nixpkgs.lib.attrsets.getAttrFromPath splited pkgs
+          );
       };
 
       lib = inputs.nixpkgs.lib;
