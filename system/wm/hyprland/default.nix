@@ -1,6 +1,6 @@
-{ config, pkgs, userSettings, hostName, inputs, ... }:
+{ config, pkgs, settings, inputs, ... }:
 
-{
+with settings;{
 
   programs.hyprland = {
     enable = true;
@@ -12,7 +12,7 @@
   #   settings = rec {
   #     initial_session = {
   #       command = "${pkgs.hyprland}/bin/Hyprland";
-  #       user = userSettings.user;
+  #       user = userS.user;
   #     };
   #     default_session = initial_session;
   #   };

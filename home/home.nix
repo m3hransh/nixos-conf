@@ -1,6 +1,6 @@
-{ config, pkgs, userSettings, ... }:
+{ config, pkgs, settings, ... }:
 
-{
+with settings;{
 
   imports = [
     # hyprland.homeManagerModules.default
@@ -22,13 +22,13 @@
     ./programs/kitty
     #    ./emacs
     ./programs/nix-direnv
-    (./. + "/wm" + ("/" + userSettings.wm)) # My window manager
+    (./. + "/wm" + ("/" + userS.wm)) # My window manager
   ];
 
   home = {
-    username = userSettings.user;
+    username = userS.user;
     # paths it should manage.
-    homeDirectory = "/home/" + userSettings.user;
+    homeDirectory = "/home/" + userS.user;
     # You can update Home Manager without changing this value. See
     # the Home Manager release notes for a list of state version
     stateVersion = "23.11";
@@ -37,75 +37,7 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs; [
-    brave
-    google-chrome
-    vlc
-    obsidian
-    telegram-desktop
-    scrcpy
-    discord
-    thunderbird
-    signal-desktop
-    spotify
-    anki-bin
-    calibre
-    xournalpp
-    zotero
-
-    lazygit
-    lazydocker
-    android-tools
-
-    glab
-    rustc
-    cargo
-    exercism
-    go
-    gcc
-    nodejs
-    nodePackages.npm
-    nodePackages.yarn
-    nodePackages.pnpm
-    nodePackages.typescript
-    jq
-
-    # Local cert
-    mkcert
-    nssTools
-
-    imv
-    watson
-    networkmanagerapplet
-    brightnessctl
-    libnotify
-    wireguard-tools
-    # wlr-randr
-    atool
-    httpie
-    lazygit
-    lazydocker
-    #xflux
-    android-tools
-    jmtpfs
-    scrcpy
-    emote
-    presenterm
-    chezmoi
-    fd
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-  ] ++ [ userSettings.fontPkg ];
+  home.packages = builtins.map (p: getPack p pkgs) (userS.packages);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -140,9 +72,9 @@
 
 
   home.sessionPath = [
-    "/home/${userSettings.user}/.local/bin"
-    "/home/${userSettings.user}/.cargo/bin"
-    "/home/${userSettings.user}/.go/bin"
+    "/home/${userS.user}/.local/bin"
+    "/home/${userS.user}/.cargo/bin"
+    "/home/${userS.user}/.go/bin"
   ];
 
 
@@ -167,11 +99,11 @@
   };
 
   programs.git.enable = true;
-  programs.git.userName = userSettings.name;
-  programs.git.userEmail = userSettings.email;
+  programs.git.userName = userS.name;
+  programs.git.userEmail = userS.email;
   programs.git.extraConfig = {
     init.defaultBranch = "main";
-    # safe.directory = "/home/" + userSettings.username + "/.dotfiles";
+    # safe.directory = "/home/" + userS.username + "/.dotfiles";
   };
 
   home.sessionVariables = {
@@ -214,7 +146,7 @@
     };
 
     font = {
-      name = userSettings.font;
+      name = userS.font;
       size = 12;
     };
     # gtk3.extraConfig = {
