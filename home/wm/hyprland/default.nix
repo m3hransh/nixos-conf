@@ -15,6 +15,7 @@
     pamixer
     waybar
     wofi
+    wofi-emoji
     wl-clipboard
     wlr-randr
     pavucontrol
