@@ -1,4 +1,4 @@
-{ config, pkgs, settings, ... }:
+{ pkgs, settings, ... }:
 
 with settings;{
 
@@ -15,7 +15,7 @@ with settings;{
     ./programs/obs-studio
     ./programs/resource_monitor
     ./programs/tmux
-    #    ./search
+    ./programs/zoxide
     #    ./youtube-tui
     #    ./yt-dlp
     ./programs/nvim

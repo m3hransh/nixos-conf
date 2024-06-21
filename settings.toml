@@ -83,5 +83,8 @@ packages = [
   "presenterm",
   "chezmoi",
   "fd",
+  "bat",
+  "davinci-resolve",
+  "showmethekey"
 ]
 
