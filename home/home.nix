@@ -20,7 +20,8 @@ with settings;{
     #    ./yt-dlp
     ./programs/nvim
     ./programs/kitty
-    #    ./emacs
+    ./programs/emacs
+    ./style.nix
     ./programs/nix-direnv
     (./. + "/wm" + ("/" + userS.wm)) # My window manager
   ];
@@ -119,36 +120,32 @@ with settings;{
 
   # GTK
 
-  home.sessionVariables = {
-    GTK_THEME = "Nordic";
-  };
+  # home.sessionVariables = {
+  #   GTK_THEME = "Nordic";
+  # };
 
-  home.pointerCursor = {
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Ice";
-    size = 22;
-  };
+  # home.pointerCursor = {
+  #   package = pkgs.bibata-cursors;
+  #   name = "Bibata-Modern-Ice";
+  #   size = 22;
+  # };
 
-  home.pointerCursor.gtk.enable = true;
-
+  qt.enable = true;
   gtk = {
     enable = true;
-    theme = {
-      name = "Nordic";
-      package = pkgs.nordic;
-    };
-    cursorTheme = {
-      name = "Catppuccin-Frappe-Dark";
-    };
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
+    # theme = {
+    #   name = "Nordic";
+    #   package = pkgs.nordic;
+    # };
+    # iconTheme = {
+    #   name = "Papirus-Dark";
+    #   package = pkgs.papirus-icon-theme;
+    # };
 
-    font = {
-      name = userS.font;
-      size = 12;
-    };
+    # font = {
+    #   name = userS.font;
+    #   size = 12;
+    # };
     # gtk3.extraConfig = {
     #   gtk-xft-antialias = 1;
     #   gtk-xft-hinting = 1;

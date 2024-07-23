@@ -22,11 +22,12 @@ packages= [
   ]
 [userS]
 user = "mehran"
-name = "Mehran"
-email = ""
+name = "Mehran Shahidi"
+email = "m.mehrashahidi@gmail.com"
 nixDir = "/home/mehran/.nixconf"
 wm = "hyprland"
 font = "Intel One Mono"
+fontPkg = "intel-one-mono"
 editor = "nvim"
 packages = [
   "brave",
@@ -46,6 +47,8 @@ packages = [
   "lazygit",
   "lazydocker",
   "android-tools",
+  "tlaplusToolbox",
+  "tlaplus",
 
   "glab",
   "rustc",
@@ -85,6 +88,7 @@ packages = [
   "fd",
   "bat",
   "davinci-resolve",
-  "showmethekey"
+  "showmethekey",
+  "love",
 ]
 

@@ -73,6 +73,7 @@
 
     hyprpicker.url = "github:hyprwm/hyprpicker";
     hypr-contrib.url = "github:hyprwm/contrib";
+    stylix.url = "github:danth/stylix";
   };
 
 }
