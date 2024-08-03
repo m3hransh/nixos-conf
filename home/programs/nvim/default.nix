@@ -26,6 +26,7 @@
       nodePackages_latest.typescript-language-server
       nodePackages_latest.vscode-langservers-extracted
       nodePackages_latest.bash-language-server
+      # (haskell-language-server.override { supportedGhcVersions = [ "92" ]; })
       # rnix-lsp
       # nil
       nixd

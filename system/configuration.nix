@@ -8,6 +8,7 @@ with settings;{
   imports =
     [
       # Include the results of the hardware scan.
+      ./style.nix
       ./hardware-configuration.nix
       (./. + "/wm" + ("/" + userS.wm)) # My window manager
     ];
@@ -65,10 +66,9 @@ with settings;{
     powerManagement.enable = true;
   };
   #NvidiaConfig
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   services.supergfxd.enable = true;
@@ -113,9 +113,7 @@ with settings;{
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" /etc/ssl/certs/localhost.crt ];
-  # Enable sound with pipewire.
-  sound.enable = true;
+  # security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" /etc/ssl/certs/localhost.crt ];
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
