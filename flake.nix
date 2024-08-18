@@ -12,7 +12,10 @@
         };
       };
       settings = {
+        # these attrs contains all user's ans system's settings
+        # it will passed to all modules
         inherit (builtins.fromTOML (builtins.readFile ./settings.toml)) systemS userS;
+
         # helper function to get package from nixpkgs
         # this help with cases like package = pkg.subpkg
         getPack = p: pkgs:

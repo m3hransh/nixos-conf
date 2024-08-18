@@ -132,11 +132,26 @@ with settings;{
   # Enable docker
   virtualisation.docker.enable = true;
 
+
   # virtualisation.virtualbox.host.enable = true;
   # users.extraGroups.vboxusers.members = [ userS.user ];
-  virtualisation.libvirtd.enable = true;
-
-  # Networking
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+      ovmf = {
+        enable = true;
+        packages = [
+          (pkgs.OVMF.override {
+            secureBoot = true;
+            tpmSupport = true;
+          }).fd
+        ];
+      };
+    };
+  }; # Networking
   networking.hostName = systemS.hostName; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
