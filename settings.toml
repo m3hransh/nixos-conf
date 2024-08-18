@@ -92,3 +92,30 @@ packages = [
   "love",
 ]
 
+[ubuntu]
+packages = [
+  "lazygit",
+  "lazydocker",
+
+  "glab",
+  "rustc",
+  "cargo",
+  "exercism",
+  "go",
+  "gcc",
+  "nodejs",
+  "nodePackages.pnpm",
+  "nodePackages.typescript",
+  "jq",
+  "nssTools",
+
+  "wireguard-tools",
+  "atool",
+  "httpie",
+  "lazygit",
+  "lazydocker",
+  #"xflux",
+  "fd",
+  "bat",
+]
+
