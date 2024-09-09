@@ -7,12 +7,12 @@ with settings;{
     #  ./scripts
     ../home/programs/ranger
     ../home/programs/resource_monitor
-    ../home/prog.rams/tmux
+    ../home/programs/tmux
     ../home/programs/zoxide
     ../home/programs/nvim
     ../home/programs/kitty
     ../home/programs/nix-direnv
-    (./. + "/wm" + ("/" + userS.wm)) # My window manager
+    #(./. + "/wm" + ("/" + userS.wm)) # My window manager
   ];
 
   home = {
@@ -27,7 +27,15 @@ with settings;{
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = builtins.map (p: getPack p pkgs) (ubuntu.packages);
+  fonts.fontconfig.enable = true;
+  home.packages = (builtins.map (p: getPack p pkgs) (ubuntu.packages)) ++  
+  (with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    inconsolata
+    (nerdfonts.override { fonts = [ "FiraCode" "CascadiaCode" "Iosevka" "IosevkaTerm" "JetBrainsMono" ]; })
+  ]);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -36,10 +44,6 @@ with settings;{
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
-    ".config/nvim".source = builtins.fetchGit {
-      url = "https://github.com/m3hransh/nvim-config";
-      rev = "";
-    };
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
@@ -102,6 +106,7 @@ with settings;{
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    TERM= "xterm-256color";
   };
 
   nixpkgs = {

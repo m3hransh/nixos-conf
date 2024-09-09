@@ -96,6 +96,7 @@ packages = [
 packages = [
   "lazygit",
   "lazydocker",
+  "neofetch",
 
   "glab",
   "rustc",
@@ -109,10 +110,16 @@ packages = [
   "jq",
   "nssTools",
 
+  "fishPlugins.done",
+  "fishPlugins.fzf-fish",
+  "fishPlugins.forgit",
+  "fzf",
+  "fishPlugins.grc",
   "wireguard-tools",
   "atool",
   "httpie",
   "lazygit",
+  "grc",
   "lazydocker",
   #"xflux",
   "fd",
