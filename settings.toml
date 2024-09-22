@@ -110,11 +110,7 @@ packages = [
   "jq",
   "nssTools",
 
-  "fishPlugins.done",
-  "fishPlugins.fzf-fish",
-  "fishPlugins.forgit",
   "fzf",
-  "fishPlugins.grc",
   "wireguard-tools",
   "atool",
   "httpie",

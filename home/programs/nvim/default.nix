@@ -48,6 +48,8 @@
       beautysh
       nodePackages.prettier
       stylish-haskell
+      xclip # for Xrog
+      wl-clipboard
       marksman
       #-- Debug --#
       lldb

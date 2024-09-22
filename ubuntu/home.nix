@@ -4,7 +4,7 @@ with settings;{
 
   imports = [
     # hyprland.homeManagerModules.default
-    #  ./scripts
+     ./scripts.nix
     ../home/programs/ranger
     ../home/programs/resource_monitor
     ../home/programs/tmux
@@ -84,17 +84,17 @@ with settings;{
     enable = true;
   };
 
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set fish_greeting # Disable greeting
-      direnv hook fish | source
-    '';
-    plugins = [
-      # Enable a plugin (here grc for colorized command output)
-      { name = "grc"; src = pkgs.fishPlugins.grc.src; }
-    ];
-  };
+  # programs.fish = {
+  #   enable = true;
+  #   interactiveShellInit = ''
+  #     set fish_greeting # Disable greeting
+  #     direnv hook fish | source
+  #   '';
+  #   plugins = [
+  #     # Enable a plugin (here grc for colorized command output)
+  #     { name = "grc"; src = pkgs.fishPlugins.grc.src; }
+  #   ];
+  # };
 
   programs.git.enable = true;
   programs.git.userName = userS.name;
@@ -106,7 +106,6 @@ with settings;{
 
   home.sessionVariables = {
     EDITOR = "nvim";
-    TERM= "xterm-256color";
   };
 
   nixpkgs = {

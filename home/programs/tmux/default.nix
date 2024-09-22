@@ -32,6 +32,7 @@
 
       # Use vim-like copy mode (assuming you have a plugin like 'tmux-yank')
       bind-key -T copy-mode v send-keys "v"
+      set -g default-terminal "tmux-256color"
     '';
   };
 }
