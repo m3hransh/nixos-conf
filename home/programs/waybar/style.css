@@ -2,7 +2,7 @@
  */
 
 /* => Define Tokyo Night {{{*/
-@define-color Background rgba(30, 20, 39, 0.9);
+@define-color Background rgba(39, 42, 56, 0.9);
 @define-color CurrentLine #6f7bb6;
 @define-color Selection #414868;
 @define-color Foreground #a9b1d6;
@@ -28,6 +28,9 @@
 
 window#waybar {
     background: rgba(0, 0, 0, 0);
+    padding-left: 10px;
+    padding-right: 10px;
+    color: @Purple
 }
 
 /* }}} */

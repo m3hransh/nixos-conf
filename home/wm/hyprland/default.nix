@@ -21,20 +21,23 @@
     pavucontrol
     # file manager for hyprland
     xfce.thunar
-    swww
+    # swww
   ];
   # systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
   #test later systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
 
   wayland.windowManager.hyprland = {
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     enable = true;
     # enableNvidiaPatches = true;
     xwayland.enable = true;
     # systemdIntegration = true;
     systemd.enable = true;
+
     extraConfig = builtins.readFile ./hyprland.conf;
   };
 
+  services.hyprpaper.enable = true;
   home.file.".scripts" = {
     source = ./scripts;
     recursive = true;

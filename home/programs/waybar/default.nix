@@ -55,8 +55,11 @@
           "default" = "";
         };
       };
+
       "hyprland/window" = {
-        format = "{title}";
+        format = "<span color='#ff9e64'>{}</span>";
+        icon = true;
+        separate-outputs = true;
       };
 
 
@@ -78,7 +81,7 @@
       };
 
 
-      "modules-center" = [ "custom/github" "cpu" "custom/memory" "custom/disk_root" "temperature" "clock" "hyprland/language" "idle_inhibitor" "custom/notification" ];
+      "modules-center" = [ "custom/github" "cpu" "custom/memory" "custom/disk_root" "temperature" "clock" "hyprland/language" "idle_inhibitor" ];
 
       "custom/github" = {
         "format" = "{} ";
@@ -133,7 +136,7 @@
         "format-alt" = "{:%Y-%m-%d}";
         "format-alt-click" = "click-left";
         "interval" = 60;
-        "format" = "{:%H:%M} <span color='#bb9af7'></span>";
+        "format" = "{:%H:%M} <span color='#bb9af7'> </span>";
         "max-length" = 25;
         "on-click" = "gnome-calendar";
       };
