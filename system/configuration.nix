@@ -16,6 +16,7 @@ with settings;{
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.supportedFilesystems = [ "ext4" "vfat" "ntfs" ];
 
   # Activating nix-command and flake
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -64,6 +65,7 @@ with settings;{
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
+    open = true;
   };
   #NvidiaConfig
   hardware.graphics = {
@@ -186,10 +188,14 @@ with settings;{
 
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
     inconsolata
-    (nerdfonts.override { fonts = [ "FiraCode" "CascadiaCode" "Iosevka" "IosevkaTerm" "JetBrainsMono" ]; })
+    nerd-fonts.fira-code
+    nerd-fonts.caskaydia-mono
+    nerd-fonts.iosevka
+    nerd-fonts.iosevka-term
+    nerd-fonts.jetbrains-mono
   ];
 
   # Whether to enable all firmware regardless of license status.

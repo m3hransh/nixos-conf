@@ -1,6 +1,7 @@
 [systemS]
 system = "x86_64-linux"
 hostName = "mehran-rog"
+model = "asus-zephyrus-ga503"
 gnome = "enabled"
 machine = "ASUS"
 packages= [
@@ -13,7 +14,11 @@ packages= [
   "fishPlugins.done",
   "fishPlugins.fzf-fish",
   "fishPlugins.forgit",
+  "ffmpeg",
   "fzf",
+  "libva",
+  "libva-vdpau-driver",
+  "libva-utils",
   "fishPlugins.grc",
   "grc",
   "openssl",
@@ -42,6 +47,7 @@ packages = [
   "spotify",
   "anki-bin",
   "calibre",
+  "zotero",
   "xournalpp",
 
   "lazygit",
@@ -90,6 +96,7 @@ packages = [
   "davinci-resolve",
   "showmethekey",
   "love",
+  "audacity",
 ]
 
 [ubuntu]

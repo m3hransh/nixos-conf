@@ -27,7 +27,7 @@
         # markdown-mode
         # nix-mode
         # slime
-        smartparens
+        # smartparens
         # yaml-mode
       ]) ++
       (with epkgs.melpaPackages; [
