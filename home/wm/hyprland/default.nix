@@ -19,6 +19,9 @@
     wl-clipboard
     wlr-randr
     pavucontrol
+    hyprpaper
+    hyprsunset
+    nwg-displays
     # file manager for hyprland
     xfce.thunar
     # swww
@@ -37,7 +40,6 @@
     extraConfig = builtins.readFile ./hyprland.conf;
   };
 
-  services.hyprpaper.enable = true;
   home.file.".scripts" = {
     source = ./scripts;
     recursive = true;

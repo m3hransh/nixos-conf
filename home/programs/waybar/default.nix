@@ -60,6 +60,7 @@
         format = "<span color='#ff9e64'>{}</span>";
         icon = true;
         separate-outputs = true;
+        icon-size = 15;
       };
 
 
@@ -81,7 +82,7 @@
       };
 
 
-      "modules-center" = [ "custom/github" "cpu" "custom/memory" "custom/disk_root" "temperature" "clock" "hyprland/language" "idle_inhibitor" ];
+      "modules-center" = [ "custom/github" "cpu" "custom/memory" "custom/disk_root" "temperature" "clock" "hyprland/language" "custom/sunset" ];
 
       "custom/github" = {
         "format" = "{} ";
@@ -163,13 +164,12 @@
       };
 
 
-      "idle_inhibitor" = {
-        "format" = "{icon}";
-        "on-click" = "/home/m3d/.scripts/sunset";
-        "format-icons" = {
-          "activated" = "";
-          "deactivated" = "";
-        };
+      "custom/sunset" = {
+        "format" = "<span color='#f7768e'>{}</span>";
+        "exec" = "$HOME/.config/waybar/custom_modules/sunset.sh";
+        "on-click" = "$HOME/.config/waybar/custom_modules/sunset-toggle.sh";
+        "return-type" = "json";
+        "restart-interval" = 1;
       };
 
       "modules-right" = [ "tray" "network#wifi" "pulseaudio" "backlight" "battery" "custom/power" ];

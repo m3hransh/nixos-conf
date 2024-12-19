@@ -14,6 +14,6 @@ with settings;{
     xclip
   ];
 
-  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+  services.udev.packages = with pkgs; [ gnome-settings-daemon ];
   services.gnome.gnome-keyring.enable = true;
 }

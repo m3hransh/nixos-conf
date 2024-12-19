@@ -67,10 +67,15 @@ with settings;{
     powerManagement.enable = true;
     open = true;
   };
+
   #NvidiaConfig
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = with pkgs; [
+      # Accelerated video Playback
+      libvdpau-va-gl
+    ];
   };
 
   services.supergfxd.enable = true;
@@ -134,7 +139,12 @@ with settings;{
   # Enable docker
   virtualisation.docker.enable = true;
 
-
+  networking.firewall = {
+    allowedUDPPorts = [ 51820 ]; # Clients and peers can use the same port, see listenport
+  };
+  # Enable WireGuard
+  networking.wireguard.enable = true;
+  networking.wg-quick.interfaces.wg0 = { configFile = "/etc/wireguard/wind.conf"; autostart = false; };
   # virtualisation.virtualbox.host.enable = true;
   # users.extraGroups.vboxusers.members = [ userS.user ];
   virtualisation.libvirtd = {
