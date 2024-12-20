@@ -82,7 +82,7 @@
       };
 
 
-      "modules-center" = [ "custom/github" "cpu" "custom/memory" "custom/disk_root" "temperature" "clock" "hyprland/language" "custom/sunset" ];
+      "modules-center" = [ "custom/github" "cpu" "custom/memory" "custom/nvidia" "custom/disk_root" "temperature" "clock" "hyprland/language" "custom/sunset" ];
 
       "custom/github" = {
         "format" = "{} ";
@@ -116,6 +116,12 @@
         "tooltip" = "used";
       };
 
+      "custom/nvidia" = {
+        "exec" = "nvidia-smi --query-gpu=utilization.gpu,temperature.gpu --format=csv,nounits,noheader | sed 's/\\([0-9]\\+\\), \\([0-9]\\+\\)/\\1% 🌡️\\2°C/g'";
+        "format" = "{} 🖥️";
+        "interval" = 2;
+      };
+
       "custom/disk_root" = {
         "format" = " {}<span color='#e0af68'>  </span>";
         "interval" = 3600;
@@ -141,6 +147,7 @@
         "max-length" = 25;
         "on-click" = "gnome-calendar";
       };
+
 
       "custom/notification" = {
         "tooltip" = false;

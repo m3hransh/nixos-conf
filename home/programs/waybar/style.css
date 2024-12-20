@@ -44,6 +44,8 @@ window#waybar {
 #battery,
 #cpu,
 #memory,
+#custom-memory,
+#custom-nvidia,
 #custom-disk_root,
 #temperature,
 #network,

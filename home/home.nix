@@ -93,6 +93,10 @@ with settings;{
       set fish_greeting # Disable greeting
       direnv hook fish | source
     '';
+    shellAliases = {
+      nb = "sudo nixos-rebuild switch --flake ${userS.nixDir}/#system";
+      hb = "home-manager switch --flake ${userS.nixDir}/#${userS.user}";
+    };
     plugins = [
       # Enable a plugin (here grc for colorized command output)
       { name = "grc"; src = pkgs.fishPlugins.grc.src; }
