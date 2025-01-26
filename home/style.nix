@@ -43,6 +43,12 @@ with settings;{
       desktop = 12;
     };
   };
+
+  stylix.iconTheme = {
+    enable = true;
+    package = pkgs.papirus-icon-theme;
+    dark = "Papirus-Dark";
+  };
   #
   # font.size = config.stylix.fonts.sizes.terminal;
   # font.normal.family = userS.font;
