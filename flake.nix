@@ -1,7 +1,7 @@
 {
   description = "My NixOS configuration";
 
-  outputs = inputs @ { self, nixpkgs, home-manager, nixpkgs-stable, hyprland, nixos-hardware, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, nixpkgs-stable, hyprland, ... }:
     let
 
       pkgs = import nixpkgs {
@@ -35,7 +35,6 @@
           system = settings.systemS.system;
           modules = [
             ./system/configuration.nix
-            nixos-hardware.nixosModules.${settings.systemS.model}
           ]; # load configuration.nix from selected PROFILE
           specialArgs = {
             # pass config variables from above
@@ -73,10 +72,9 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-23.11";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     #home-manager.url = "github:nix-community/home-manager/master"; 
     #home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
+    nix-gaming.url = "github:fufexan/nix-gaming";
     # Specify the source of Home Manager and Nixpkgs.
     home-manager = {
       url = "github:nix-community/home-manager";

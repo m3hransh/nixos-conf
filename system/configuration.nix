@@ -65,7 +65,13 @@ with settings;{
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
-    open = true;
+    # model = "asus-zephyrus-ga503"
+    prime = {
+      offload.enable = true;
+      # Check     lspci | grep -i "VGA\|3D\|NVIDIA"
+      amdgpuBusId = "PCI:6:0:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
   };
 
   #NvidiaConfig
@@ -78,7 +84,9 @@ with settings;{
     ];
   };
 
-  services.supergfxd.enable = true;
+
+  # Use prime instead 
+  # services.supergfxd.enable = true;
   services = {
     asusd = {
       enable = true;
@@ -116,10 +124,19 @@ with settings;{
 
   # Bluetooth
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
+
+  # Gnome 40 introduced a new way of managing power, without tlp.
+  # However, these 2 services clash when enabled simultaneously.
+  # https://github.com/NixOS/nixos-hardware/issues/260
+  services.tlp.enable = lib.mkDefault ((lib.versionOlder (lib.versions.majorMinor lib.version) "21.05")
+    || !config.services.power-profiles-daemon.enable);
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  # SSD
+  services.fstrim.enable = lib.mkDefault true;
   # security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" /etc/ssl/certs/localhost.crt ];
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
