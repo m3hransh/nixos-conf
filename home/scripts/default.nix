@@ -22,9 +22,24 @@ let
     #   remove the other pictures
         # rm $HOME/Pictures/src.png $HOME/Pictures/output.png
   '';
+  nix_opts = pkgs.writeShellScriptBin "nix_opts" ''
+    NIX_DIR=$1  # Your flake directory
+    CONFIG_PATH="$2"  # Get first argument
+
+    if [[ -z "$CONFIG_PATH" ]]; then
+      echo "Error: Please specify a config path (e.g., hardware.nvidia)"
+      exit 1
+    fi
+
+    sudo nix eval \
+      --extra-experimental-features 'nix-command flakes' \
+      "$NIX_DIR#nixosConfigurations.$CONFIG_PATH" \
+      || { echo "Failed to evaluate path: $CONFIG_PATH"; exit 1; }
+  '';
 in
 {
   home.packages = with pkgs; [
     grimblast_watermark
-    ];
+    nix_opts
+  ];
 }

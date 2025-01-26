@@ -1,7 +1,6 @@
 [systemS]
 system = "x86_64-linux"
 hostName = "mehran-rog"
-model = "asus-zephyrus-ga503"
 gnome = "enabled"
 machine = "ASUS"
 packages= [
@@ -49,6 +48,7 @@ packages = [
   "calibre",
   "zotero",
   "xournalpp",
+  "yazi",
 
   "lazygit",
   "lazydocker",

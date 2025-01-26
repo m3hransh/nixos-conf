@@ -1,10 +1,10 @@
-{ pkgs, settings, ... }:
+{ pkgs, settings, inputs, ... }:
 
 with settings;{
 
   imports = [
     # hyprland.homeManagerModules.default
-    #  ./scripts
+    ./scripts
     ./programs/zathura
     ./programs/vscode
     ./programs/ranger
@@ -38,7 +38,7 @@ with settings;{
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = builtins.map (p: getPack p pkgs) (userS.packages);
+  home.packages = (builtins.map (p: getPack p pkgs) (userS.packages)) ++ [ inputs.nix-gaming.packages.${pkgs.system}.osu-lazer-bin ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -96,6 +96,7 @@ with settings;{
     shellAliases = {
       nb = "sudo nixos-rebuild switch --flake ${userS.nixDir}/#system";
       hb = "home-manager switch --flake ${userS.nixDir}/#${userS.user}";
+      nop = "nix_opts ${userS.nixDir} ";
     };
     plugins = [
       # Enable a plugin (here grc for colorized command output)
