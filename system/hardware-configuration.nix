@@ -27,6 +27,17 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
+  fileSystems."/mnt/windows" = {
+    device = "/dev/nvme0n1p3"; # Replace with your partition ID
+    fsType = "ntfs3"; # Use "ntfs3" or "ntfs-3g" if needed
+    options = [
+      "rw" # Read-write access
+      "uid=1000" # Replace with your user's UID (run `id -u`)
+      "gid=100" # Replace with your group's GID (run `id -g`)
+      "nofail" # Prevent boot failure if partition is missing
+    ];
+  };
+
   swapDevices = [{
     device = "/var/lib/swapfile";
     size = 16 * 1024;

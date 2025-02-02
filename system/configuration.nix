@@ -104,7 +104,7 @@ with settings;{
   powerManagement.cpuFreqGovernor = "performance";
   # Update the CPU microcode for AMD processors.
   # Don't know if it's applied
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.enableRedistributableFirmware = true; # In configuration.nix
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -122,10 +122,37 @@ with settings;{
     #media-session.enable = true;
   };
 
+  # # Note : if service didn't start
+  # # sudo chown -R ollama:ollama /mnt/windows/ollama
+  # # sudo chown -R ollama:ollama /mnt/windows/ollama/models
+  # services.ollama = {
+  #   enable = true;
+  #   home = "/mnt/windows/ollama";
+  #   models = "/mnt/windows/ollama/models";
+  #   user = "ollama";
+  #   group = "ollama";
+  #   acceleration = "cuda";
+  # };
+  #
+  # services.open-webui = {
+  #   enable = true;
+  #   port = 8080;
+  # };
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true;
+      };
+    };
+    # Bluetooth enhancements
+  };
   # Bluetooth
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
+  services.udev.packages = [ pkgs.bluez ];
 
   # Gnome 40 introduced a new way of managing power, without tlp.
   # However, these 2 services clash when enabled simultaneously.
@@ -138,7 +165,7 @@ with settings;{
   # SSD
   services.fstrim.enable = lib.mkDefault true;
   # security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" /etc/ssl/certs/localhost.crt ];
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
   nix.settings.trusted-users = [ "root" userS.user ];
@@ -162,25 +189,26 @@ with settings;{
   # Enable WireGuard
   networking.wireguard.enable = true;
   networking.wg-quick.interfaces.wg0 = { configFile = "/etc/wireguard/wind.conf"; autostart = false; };
+  networking.wg-quick.interfaces.wg1 = { configFile = "/etc/wireguard/rptu.conf"; autostart = false; };
   # virtualisation.virtualbox.host.enable = true;
   # users.extraGroups.vboxusers.members = [ userS.user ];
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu = {
-      package = pkgs.qemu_kvm;
-      runAsRoot = true;
-      swtpm.enable = true;
-      ovmf = {
-        enable = true;
-        packages = [
-          (pkgs.OVMF.override {
-            secureBoot = true;
-            tpmSupport = true;
-          }).fd
-        ];
-      };
-    };
-  }; # Networking
+  # virtualisation.libvirtd = {
+  #   enable = true;
+  #   qemu = {
+  #     package = pkgs.qemu_kvm;
+  #     runAsRoot = true;
+  #     swtpm.enable = true;
+  #     ovmf = {
+  #       enable = true;
+  #       packages = [
+  #         (pkgs.OVMF.override {
+  #           secureBoot = true;
+  #           tpmSupport = true;
+  #         }).fd
+  #       ];
+  #     };
+  #   };
+  # }; # Networking
   networking.hostName = systemS.hostName; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 

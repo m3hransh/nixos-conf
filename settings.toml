@@ -22,7 +22,9 @@ packages= [
   "grc",
   "openssl",
   "home-manager",
-  "virt-manager",
+  # "virt-manager",
+  "pipewire",
+  "wireplumber",
   ]
 [userS]
 user = "mehran"
@@ -97,6 +99,8 @@ packages = [
   "showmethekey",
   "love",
   "audacity",
+  "nix-du",
+  "trash-cli",
 ]
 
 [ubuntu]
