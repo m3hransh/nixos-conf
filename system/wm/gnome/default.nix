@@ -12,6 +12,7 @@ with settings;{
     gnomeExtensions.appindicator
     gnomeExtensions.forge
     xclip
+    xsel
   ];
 
   services.udev.packages = with pkgs; [ gnome-settings-daemon ];
