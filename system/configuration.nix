@@ -66,6 +66,7 @@ with settings;{
     modesetting.enable = true;
     powerManagement.enable = true;
     # model = "asus-zephyrus-ga503"
+    open = false;
     prime = {
       offload.enable = true;
       # Check     lspci | grep -i "VGA\|3D\|NVIDIA"
@@ -165,7 +166,7 @@ with settings;{
   # SSD
   services.fstrim.enable = lib.mkDefault true;
   # security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" /etc/ssl/certs/localhost.crt ];
-  services.pulseaudio.enable = false;
+  # services.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
   nix.settings.trusted-users = [ "root" userS.user ];
@@ -246,11 +247,8 @@ with settings;{
     noto-fonts-cjk-sans
     noto-fonts-emoji
     inconsolata
-    nerd-fonts.fira-code
-    nerd-fonts.caskaydia-mono
-    nerd-fonts.iosevka
-    nerd-fonts.iosevka-term
-    nerd-fonts.jetbrains-mono
+
+    (nerdfonts.override { fonts = [ "FiraCode" "CascadiaCode" "Iosevka" "IosevkaTerm" "JetBrainsMono" ]; })
   ];
 
   # Whether to enable all firmware regardless of license status.

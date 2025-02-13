@@ -1,7 +1,6 @@
 [systemS]
 system = "x86_64-linux"
 hostName = "mehran-rog"
-gnome = "enabled"
 machine = "ASUS"
 packages= [
   "neofetch",
@@ -31,7 +30,7 @@ user = "mehran"
 name = "Mehran Shahidi"
 email = "m.mehrashahidi@gmail.com"
 nixDir = "/home/mehran/.nixconf"
-wm = "gnome"
+wm = "hyprland"
 font = "Intel One Mono"
 fontPkg = "intel-one-mono"
 editor = "nvim"

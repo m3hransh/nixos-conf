@@ -27,8 +27,7 @@
       nodePackages_latest.vscode-langservers-extracted
       nodePackages_latest.bash-language-server
       # (haskell-language-server.override { supportedGhcVersions = [ "92" ]; })
-      # rnix-lsp
-      # nil
+      nil
       nixd
       lua-language-server
       gopls
@@ -47,12 +46,12 @@
       rustfmt
       beautysh
       nodePackages.prettier
-      stylish-haskell
+      # stylish-haskell
       xclip # for Xrog
       wl-clipboard
       marksman
       #-- Debug --#
-      lldb
+      # lldb
     ];
   };
 

@@ -4,9 +4,8 @@ with settings;{
 
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  };
-
+    withUWSM = true;
+   }; 
   # services.greetd = {
   #   enable = true;
   #   settings = rec {
@@ -35,6 +34,8 @@ with settings;{
     theme = "chili";
     package = pkgs.sddm;
   };
+
+  services.hypridle.enable = true;
 
   security.pam.services.swaylock = { };
 

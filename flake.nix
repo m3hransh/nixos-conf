@@ -1,7 +1,7 @@
 {
   description = "My NixOS configuration";
 
-  outputs = inputs @ { self, nixpkgs, home-manager, nixpkgs-stable, hyprland, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, ... }:
     let
 
       pkgs = import nixpkgs {
@@ -66,28 +66,30 @@
         # Optionally use extraSpecialArgs
         extraSpecialArgs = { inherit settings inputs; };
         # to pass through arguments to home.nix
+        # Explicitly set to use system's nixpkgs
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
       };
     };
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "nixpkgs/nixos-23.11";
+    nixpkgs.url = "nixpkgs/nixos-24.11";
+    # nixpkgs.url = "nixpkgs/nixos-unstable";
     #home-manager.url = "github:nix-community/home-manager/master"; 
-    #home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-gaming.url = "github:fufexan/nix-gaming";
     # Specify the source of Home Manager and Nixpkgs.
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    };
+    # hyprland = {
+    #   url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    # };
 
     hyprpicker.url = "github:hyprwm/hyprpicker";
     hypr-contrib.url = "github:hyprwm/contrib";
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:danth/stylix/release-24.11";
   };
 
 }

@@ -30,12 +30,11 @@
   #test later systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
 
   wayland.windowManager.hyprland = {
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     enable = true;
     # enableNvidiaPatches = true;
     xwayland.enable = true;
     # systemdIntegration = true;
-    systemd.enable = true;
+    # systemd.enable = true;
 
     extraConfig = builtins.readFile ./hyprland.conf;
   };

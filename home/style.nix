@@ -63,7 +63,7 @@ with settings;{
   stylix.targets.gtk.enable = true;
   stylix.targets.hyprland.enable = true;
   stylix.targets.hyprlock.enable = true;
-  stylix.targets.hyprland.hyprpaper.enable = true;
+  # stylix.targets.hyprland.hyprpaper.enable = true;
   # stylix.targets.rofi.enable = if (userSettings.wmType == "x11") then true else false;
   # stylix.targets.feh.enable = if (userSettings.wmType == "x11") then true else false;
   # programs.feh.enable = true;
