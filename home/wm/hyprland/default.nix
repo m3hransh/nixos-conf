@@ -35,6 +35,7 @@
     xwayland.enable = true;
     # systemdIntegration = true;
     # systemd.enable = true;
+    systemd.variables = ["--all"];
 
     extraConfig = builtins.readFile ./hyprland.conf;
   };

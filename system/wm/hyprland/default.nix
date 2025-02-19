@@ -1,7 +1,6 @@
 { config, pkgs, settings, inputs, ... }:
 
-with settings;{
-
+with settings; {
   programs.hyprland = {
     enable = true;
     withUWSM = true;
@@ -9,8 +8,8 @@ with settings;{
   # services.greetd = {
   #   enable = true;
   #   settings = rec {
-  #     initial_session = {
-  #       command = "${pkgs.hyprland}/bin/Hyprland";
+  #     default_session = {
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd Hyprland"; # Use TUI login
   #       user = userS.user;
   #     };
   #     default_session = initial_session;
@@ -35,8 +34,6 @@ with settings;{
     package = pkgs.sddm;
   };
 
-  services.hypridle.enable = true;
-
   security.pam.services.swaylock = { };
 
   xdg.portal = {
@@ -46,30 +43,26 @@ with settings;{
     wlr.enable = true;
   };
 
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
     };
   };
 
   environment.sessionVariables = {
-    # if your cursor becomes invisible
-    WLR_NO_HARDWARE_CURSORS = "1";
-    # Hint electron apps to use wayland
-    NIXOS_OZONE_WL = "1";
+    WLR_NO_HARDWARE_CURSORS = "1"; # Fix invisible cursor
+    NIXOS_OZONE_WL = "1"; # Enable Wayland for Electron apps
   };
 
-  # security.polkit.enable = true;
+  security.polkit.enable = true;
   services.gnome.gnome-keyring.enable = true;
-  programs.seahorse.enable = true; # enable the graphical frontend
+  programs.seahorse.enable = true;
 }
