@@ -16,8 +16,8 @@ with settings;{
     ./programs/resource_monitor
     ./programs/tmux
     ./programs/zoxide
-    #    ./youtube-tui
-    #    ./yt-dlp
+    ./programs/youtube-tui
+    ./programs/yt-dlp
     ./programs/nvim
     ./programs/kitty
     ./programs/emacs

@@ -240,8 +240,9 @@ with settings;{
     LC_TIME = "de_DE.UTF-8";
   };
 
+  # allows nix execute libraries outside nixstore
+  programs.nix-ld.enable = true;
   # Fonts
-
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
