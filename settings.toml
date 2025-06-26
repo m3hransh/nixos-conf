@@ -50,6 +50,7 @@ packages = [
   "zotero",
   "xournalpp",
   "yazi",
+  "gimp",
 
   "lazygit",
   "lazydocker",
@@ -100,6 +101,8 @@ packages = [
   "audacity",
   "nix-du",
   "trash-cli",
+  "vulkan-tools",
+  "bino3d",
 ]
 
 [ubuntu]
