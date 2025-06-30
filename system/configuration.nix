@@ -248,7 +248,6 @@ with settings;{
     noto-fonts-cjk-sans
     noto-fonts-emoji
     inconsolata
-
     nerd-fonts.fira-code
     nerd-fonts.caskaydia-cove
     nerd-fonts.iosevka

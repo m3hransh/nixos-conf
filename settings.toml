@@ -106,6 +106,13 @@ packages = [
 ]
 
 [ubuntu]
+user = "mehranshahidi"
+name = "Mehran Shahidi"
+email = "mehran.shahidi@checkmk.com"
+nixDir = "/home/mehranshahidi/Projects/nixos-conf"
+font = "Intel One Mono"
+fontPkg = "intel-one-mono"
+editor = "nvim"
 packages = [
   "lazygit",
   "lazydocker",
@@ -126,6 +133,7 @@ packages = [
   "fzf",
   "wireguard-tools",
   "atool",
+  "grpcurl",
   "httpie",
   "lazygit",
   "grc",

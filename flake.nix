@@ -65,10 +65,6 @@
 
         # Optionally use extraSpecialArgs
         extraSpecialArgs = { inherit settings inputs; };
-        # to pass through arguments to home.nix
-        # Explicitly set to use system's nixpkgs
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
       };
     };
 

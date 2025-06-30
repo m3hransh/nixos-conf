@@ -16,9 +16,9 @@ with settings;{
   ];
 
   home = {
-    username = userS.user;
+    username = ubuntu.user;
     # paths it should manage.
-    homeDirectory = "/home/" + userS.user;
+    homeDirectory = "/home/" + ubuntu.user;
     # You can update Home Manager without changing this value. See
     # the Home Manager release notes for a list of state version
     stateVersion = "23.11";
@@ -31,10 +31,14 @@ with settings;{
   home.packages = (builtins.map (p: getPack p pkgs) (ubuntu.packages)) ++  
   (with pkgs; [
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
     inconsolata
-    (nerdfonts.override { fonts = [ "FiraCode" "CascadiaCode" "Iosevka" "IosevkaTerm" "JetBrainsMono" ]; })
+    nerd-fonts.iosevka-term
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.iosevka
+    nerd-fonts.caskaydia-cove
+    nerd-fonts.fira-code
   ]);
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -70,9 +74,9 @@ with settings;{
 
 
   home.sessionPath = [
-    "/home/${userS.user}/.local/bin"
-    "/home/${userS.user}/.cargo/bin"
-    "/home/${userS.user}/.go/bin"
+    "/home/${ubuntu.user}/.local/bin"
+    "/home/${ubuntu.user}/.cargo/bin"
+    "/home/${ubuntu.user}/.go/bin"
   ];
 
 
@@ -97,8 +101,8 @@ with settings;{
   # };
 
   programs.git.enable = true;
-  programs.git.userName = userS.name;
-  programs.git.userEmail = userS.email;
+  programs.git.userName = ubuntu.name;
+  programs.git.userEmail = ubuntu.email;
   programs.git.extraConfig = {
     init.defaultBranch = "main";
     # safe.directory = "/home/" + userS.username + "/.dotfiles";
