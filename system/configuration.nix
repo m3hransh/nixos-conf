@@ -249,7 +249,11 @@ with settings;{
     noto-fonts-emoji
     inconsolata
 
-    (nerdfonts.override { fonts = [ "FiraCode" "CascadiaCode" "Iosevka" "IosevkaTerm" "JetBrainsMono" ]; })
+    nerd-fonts.fira-code
+    nerd-fonts.caskaydia-cove
+    nerd-fonts.iosevka
+    nerd-fonts.iosevka-term
+    nerd-fonts.jetbrains-mono
   ];
 
   # Whether to enable all firmware regardless of license status.

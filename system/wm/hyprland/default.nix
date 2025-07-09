@@ -31,7 +31,7 @@ with settings; {
     enable = true;
     wayland.enable = true;
     theme = "chili";
-    package = pkgs.sddm;
+    package = pkgs.kdePackages.sddm;
   };
 
   security.pam.services.swaylock = { };
