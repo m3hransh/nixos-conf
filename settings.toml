@@ -40,12 +40,9 @@ packages = [
   "vlc",
   "obsidian",
   "telegram-desktop",
-  "scrcpy",
   "discord",
   "thunderbird",
-  "signal-desktop",
   "spotify",
-  "anki-bin",
   "calibre",
   "zotero",
   "xournalpp",
@@ -65,10 +62,6 @@ packages = [
   "go",
   "gcc",
   "nodejs",
-  "nodePackages.npm",
-  "nodePackages.yarn",
-  "nodePackages.pnpm",
-  "nodePackages.typescript",
   "jq",
 
 # Local cert
@@ -95,14 +88,11 @@ packages = [
   "chezmoi",
   "fd",
   "bat",
-  "davinci-resolve",
   "showmethekey",
-  "love",
   "audacity",
   "nix-du",
   "trash-cli",
   "vulkan-tools",
-  "bino3d",
 ]
 
 [ubuntu]
