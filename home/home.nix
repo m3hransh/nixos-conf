@@ -38,7 +38,7 @@ with settings;{
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = (builtins.map (p: getPack p pkgs) (userS.packages)) ++ [ inputs.nix-gaming.packages.${pkgs.system}.osu-lazer-bin ];
+  home.packages = (builtins.map (p: getPack p pkgs) (userS.packages));
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
