@@ -1,4 +1,9 @@
-{  pkgs, inputs, settings, ... }:
+{
+  pkgs,
+  inputs,
+  settings,
+  ...
+}:
 
 let
   # themePath = "../../../themes"+("/"+userSettings.theme+"/"+userSettings.theme)+".yaml";
@@ -6,8 +11,9 @@ let
   # backgroundUrl = builtins.readFile (./. + "../../../themes"+("/"+userSettings.theme)+"/backgroundurl.txt");
   # backgroundSha256 = builtins.readFile (./. + "../../../themes/"+("/"+userSettings.theme)+"/backgroundsha256.txt");
 in
-with settings;{
-  imports = [ inputs.stylix.homeModules.stylix ];
+with settings;
+{
+  # imports = [ inputs.stylix.homeModules.stylix ];
 
   home.packages = with pkgs; [ base16-schemes ];
   stylix.enable = true;

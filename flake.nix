@@ -1,7 +1,14 @@
 {
   description = "My NixOS configuration";
 
-  outputs = inputs @ { self, nixpkgs, home-manager, stylix, ... }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      stylix,
+      ...
+    }:
     let
 
       pkgs = import nixpkgs {
@@ -18,7 +25,8 @@
 
         # helper function to get package from nixpkgs
         # this help with cases like package = pkg.subpkg
-        getPack = p: pkgs:
+        getPack =
+          p: pkgs:
           (
             let
               splited = inputs.nixpkgs.lib.strings.splitString "." p;
@@ -34,6 +42,7 @@
         system = lib.nixosSystem {
           system = settings.systemS.system;
           modules = [
+            stylix.nixosModules.stylix
             ./system/configuration.nix
           ]; # load configuration.nix from selected PROFILE
           specialArgs = {
@@ -50,8 +59,10 @@
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ 
-        ./home/home.nix ];
+        modules = [
+          stylix.homeModules.stylix
+          ./home/home.nix
+        ];
 
         # Optionally use extraSpecialArgs
         extraSpecialArgs = { inherit settings inputs; };
@@ -72,7 +83,7 @@
   inputs = {
     # nixpkgs.url = "nixpkgs/nixos-25.05";
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    #home-manager.url = "github:nix-community/home-manager/master"; 
+    #home-manager.url = "github:nix-community/home-manager/master";
     nix-gaming.url = "github:fufexan/nix-gaming";
     # Specify the source of Home Manager and Nixpkgs.
     home-manager = {

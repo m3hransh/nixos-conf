@@ -1,4 +1,9 @@
-{  pkgs, inputs, settings, ... }:
+{
+  pkgs,
+  inputs,
+  settings,
+  ...
+}:
 
 let
   # themePath = "../../../themes/" + userSettings.theme + "/" + userSettings.theme + ".yaml";
@@ -7,14 +12,15 @@ let
   # backgroundUrl = builtins.readFile (./. + "../../../themes" + ("/" + userSettings.theme) + "/backgroundurl.txt");
   # backgroundSha256 = builtins.readFile (./. + "../../../themes/" + ("/" + userSettings.theme) + "/backgroundsha256.txt");
 in
-with settings;{
-  imports = [ inputs.stylix.nixosModules.stylix ];
+with settings;
+{
+  # imports = [ inputs.stylix.nixosModules.stylix ];
   stylix.enable = true;
   stylix.autoEnable = false;
   stylix.polarity = "dark";
   stylix.image = pkgs.fetchurl {
-    url = "https://r4.wallpaperflare.com/wallpaper/642/695/642/anime-demon-slayer-kimetsu-no-yaiba-giyuu-tomioka-hd-wallpaper-3d168c86bf53609f96e6ec093ffdb04e.jpg";
-    sha256 = "035sgg5ay3carbqvlns5vxqpqlh2i2xfn1399yzk2wlc4vf4bvl7";
+    url = "https://r4.wallpaperflare.com/wallpaper/643/872/938/astronaut-relaxing-black-background-floater-space-hd-wallpaper-58a65d781020dc68109c91ee5842b45a.jpg";
+    sha256 = "f12b95cecfbca53656d61702f951f6c6b1318b8bd6e5d2a2390c063647128baa";
   };
   # stylix.base16Scheme = ./. + themePath;
   stylix.fonts = {

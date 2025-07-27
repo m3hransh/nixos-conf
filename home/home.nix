@@ -1,9 +1,16 @@
-{ pkgs, settings, inputs, ... }:
+{
+  pkgs,
+  settings,
+  inputs,
+  ...
+}:
 
-with settings;{
+with settings;
+{
 
   imports = [
     # hyprland.homeManagerModules.default
+    ./style.nix
     ./scripts
     ./programs/zathura
     ./programs/vscode
@@ -21,7 +28,6 @@ with settings;{
     ./programs/nvim
     ./programs/kitty
     ./programs/emacs
-    ./style.nix
     ./programs/nix-direnv
     (./. + "/wm" + ("/" + userS.wm)) # My window manager
   ];
@@ -34,7 +40,6 @@ with settings;{
     # the Home Manager release notes for a list of state version
     stateVersion = "23.11";
   };
-
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -71,13 +76,11 @@ with settings;{
   #
   #  /etc/profiles/per-user/mehran/etc/profile.d/hm-session-vars.sh
 
-
   home.sessionPath = [
     "/home/${userS.user}/.local/bin"
     "/home/${userS.user}/.cargo/bin"
     "/home/${userS.user}/.go/bin"
   ];
-
 
   programs.starship = {
     enable = true;
@@ -100,7 +103,10 @@ with settings;{
     };
     plugins = [
       # Enable a plugin (here grc for colorized command output)
-      { name = "grc"; src = pkgs.fishPlugins.grc.src; }
+      {
+        name = "grc";
+        src = pkgs.fishPlugins.grc.src;
+      }
     ];
   };
 

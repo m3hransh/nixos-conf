@@ -28,6 +28,7 @@ packages= [
 [userS]
 user = "mehran"
 name = "Mehran Shahidi"
+userIcon = "assets/mehran.png"
 email = "m.mehrashahidi@gmail.com"
 nixDir = "/home/mehran/.nixconf"
 wm = "hyprland"
