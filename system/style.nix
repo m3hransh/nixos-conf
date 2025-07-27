@@ -1,4 +1,4 @@
-{ lib, pkgs, inputs, settings, ... }:
+{  pkgs, inputs, settings, ... }:
 
 let
   # themePath = "../../../themes/" + userSettings.theme + "/" + userSettings.theme + ".yaml";

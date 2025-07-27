@@ -93,6 +93,7 @@ packages = [
   "nix-du",
   "trash-cli",
   "vulkan-tools",
+  "unrar"
 ]
 
 [ubuntu]

@@ -1,7 +1,7 @@
 {
   description = "My NixOS configuration";
 
-  outputs = inputs @ { self, nixpkgs, home-manager, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, stylix, ... }:
     let
 
       pkgs = import nixpkgs {
@@ -50,7 +50,8 @@
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./home/home.nix ];
+        modules = [ 
+        ./home/home.nix ];
 
         # Optionally use extraSpecialArgs
         extraSpecialArgs = { inherit settings inputs; };
@@ -69,23 +70,25 @@
     };
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-25.05";
-    # nixpkgs.url = "nixpkgs/nixos-unstable";
+    # nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     #home-manager.url = "github:nix-community/home-manager/master"; 
     nix-gaming.url = "github:fufexan/nix-gaming";
     # Specify the source of Home Manager and Nixpkgs.
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # hyprland = {
     #   url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     # };
-
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hyprpicker.url = "github:hyprwm/hyprpicker";
     hypr-contrib.url = "github:hyprwm/contrib";
-    stylix.url = "github:danth/stylix/release-25.05";
   };
 
 }
