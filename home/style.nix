@@ -22,8 +22,8 @@ with settings;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyodark.yaml";
   stylix.polarity = "dark";
   stylix.image = pkgs.fetchurl {
-    url = "https://r4.wallpaperflare.com/wallpaper/643/872/938/astronaut-relaxing-black-background-floater-space-hd-wallpaper-58a65d781020dc68109c91ee5842b45a.jpg";
-    sha256 = "f12b95cecfbca53656d61702f951f6c6b1318b8bd6e5d2a2390c063647128baa";
+    url = "https://res.cloudinary.com/m3hransh/image/upload/v1753973950/mehran/mehran_anime_wallpaper_extended.png";
+    sha256 = "sha256-8pT9Qvc2tfv1EJ2xbgPhwRCEJZmJHNquO86A0aMt+ZM=";
   };
   stylix.fonts = {
     monospace = {
@@ -69,7 +69,7 @@ with settings;
   stylix.targets.gtk.enable = true;
   stylix.targets.hyprland.enable = true;
   stylix.targets.hyprlock.enable = true;
-  # stylix.targets.hyprland.hyprpaper.enable = true;
+  stylix.targets.hyprland.hyprpaper.enable = true;
   # stylix.targets.rofi.enable = if (userSettings.wmType == "x11") then true else false;
   # stylix.targets.feh.enable = if (userSettings.wmType == "x11") then true else false;
   # programs.feh.enable = true;
