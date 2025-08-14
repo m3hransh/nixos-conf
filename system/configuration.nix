@@ -2,34 +2,53 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, settings, lib, ... }:
+{
+  config,
+  pkgs,
+  settings,
+  lib,
+  ...
+}:
 
-with settings;{
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./style.nix
-      ./hardware-configuration.nix
-      (./. + "/wm" + ("/" + userS.wm)) # My window manager
-    ];
+with settings;
+{
+  imports = [
+    # Include the results of the hardware scan.
+    ./style.nix
+    ./hardware-configuration.nix
+    (./. + "/wm" + ("/" + userS.wm)) # My window manager
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = [ "ext4" "vfat" "ntfs" ];
+  boot.supportedFilesystems = [
+    "ext4"
+    "vfat"
+    "ntfs"
+  ];
 
   # Activating nix-command and flake
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = (builtins.map (pkg: getPack pkg pkgs) systemS.packages) ++
-    (if (systemS.system == "ASUS") then [
-      pkgs.asusctl
-    ] else [ ]);
+  environment.systemPackages =
+    (builtins.map (pkg: getPack pkg pkgs) systemS.packages)
+    ++ (
+      if (systemS.system == "ASUS") then
+        [
+          pkgs.asusctl
+        ]
+      else
+        [ ]
+    );
 
   programs.gnupg.agent = {
     enable = true;
@@ -85,8 +104,7 @@ with settings;{
     ];
   };
 
-
-  # Use prime instead 
+  # Use prime instead
   # services.supergfxd.enable = true;
   services = {
     asusd = {
@@ -158,8 +176,10 @@ with settings;{
   # Gnome 40 introduced a new way of managing power, without tlp.
   # However, these 2 services clash when enabled simultaneously.
   # https://github.com/NixOS/nixos-hardware/issues/260
-  services.tlp.enable = lib.mkDefault ((lib.versionOlder (lib.versions.majorMinor lib.version) "21.05")
-    || !config.services.power-profiles-daemon.enable);
+  services.tlp.enable = lib.mkDefault (
+    (lib.versionOlder (lib.versions.majorMinor lib.version) "21.05")
+    || !config.services.power-profiles-daemon.enable
+  );
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -169,15 +189,27 @@ with settings;{
   # services.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
-  nix.settings.trusted-users = [ "root" userS.user ];
+  nix.settings.trusted-users = [
+    "root"
+    userS.user
+  ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${userS.user} = {
     isNormalUser = true;
     description = userS.user;
-    extraGroups = [ "networkmanager" "wheel" "docker" "video" "kvm" "audio" "fuse" "adbusers" "libvirtd" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "video"
+      "kvm"
+      "audio"
+      "fuse"
+      "adbusers"
+      "libvirtd"
+    ];
   };
-
 
   users.defaultUserShell = pkgs.fish;
 
@@ -189,8 +221,14 @@ with settings;{
   };
   # Enable WireGuard
   networking.wireguard.enable = true;
-  networking.wg-quick.interfaces.wg0 = { configFile = "/etc/wireguard/wind.conf"; autostart = false; };
-  networking.wg-quick.interfaces.wg1 = { configFile = "/etc/wireguard/rptu.conf"; autostart = false; };
+  networking.wg-quick.interfaces.wg0 = {
+    configFile = "/etc/wireguard/wind.conf";
+    autostart = false;
+  };
+  networking.wg-quick.interfaces.wg1 = {
+    configFile = "/etc/wireguard/rptu.conf";
+    autostart = false;
+  };
   # virtualisation.virtualbox.host.enable = true;
   # users.extraGroups.vboxusers.members = [ userS.user ];
   # virtualisation.libvirtd = {
