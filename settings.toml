@@ -70,6 +70,7 @@ packages = [
   "nssTools",
 
   "imv",
+  "qimgv",
   "watson",
   "networkmanagerapplet",
   "brightnessctl",
@@ -94,7 +95,8 @@ packages = [
   "nix-du",
   "trash-cli",
   "vulkan-tools",
-  "unrar"
+  "unrar",
+  "vectorcode"
 ]
 
 [ubuntu]
