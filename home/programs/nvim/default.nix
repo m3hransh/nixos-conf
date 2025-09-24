@@ -1,4 +1,10 @@
-{ config, lib, inputs, pkgs, ... }:
+{
+  config,
+  lib,
+  inputs,
+  pkgs,
+  ...
+}:
 
 {
   nixpkgs.config = {
@@ -15,7 +21,7 @@
       extraPackages = [
       ];
       #-- Plugins --#
-      plugins = with pkgs.vimPlugins;[ ];
+      plugins = with pkgs.vimPlugins; [ ];
       #-- --#
     };
   };
@@ -50,6 +56,7 @@
       xclip # for Xrog
       wl-clipboard
       marksman
+      uv
       #-- Debug --#
       # lldb
     ];

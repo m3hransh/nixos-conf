@@ -27,15 +27,28 @@ with settings;
     "vfat"
     "ntfs"
   ];
+  nix.settings = {
+    # Activating nix-command and flake
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
 
-  # Activating nix-command and flake
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+    # Activating cachix
+    substituters = [
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  # Tell the package set to enable CUDA support
+  nixpkgs.config.cudaSupport = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -45,6 +58,8 @@ with settings;
       if (systemS.system == "ASUS") then
         [
           pkgs.asusctl
+          (pkgs.cudaPackages.cudatoolkit.override { cudaSupport = true; })
+          (pkgs.openai-whisper.override { cudaSupport = true; })
         ]
       else
         [ ]

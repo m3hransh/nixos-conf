@@ -22,8 +22,8 @@ with settings;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyodark.yaml";
   stylix.polarity = "dark";
   stylix.image = pkgs.fetchurl {
-    url = "https://res.cloudinary.com/m3hransh/image/upload/v1753973950/mehran/mehran_anime_wallpaper_extended.png";
-    sha256 = "sha256-8pT9Qvc2tfv1EJ2xbgPhwRCEJZmJHNquO86A0aMt+ZM=";
+    url = "https://res.cloudinary.com/m3hransh/image/upload/v1758705263/mehran/workspace_neon.png";
+    sha256 = "sha256-UqwZQxcZ7oVv/SOFheSb4C50FtuRhNOpfu6UOWNDX1M=";
   };
   stylix.fonts = {
     monospace = {

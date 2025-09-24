@@ -12,6 +12,7 @@ packages= [
   "fishPlugins.done",
   "fishPlugins.fzf-fish",
   "fishPlugins.forgit",
+  "fishPlugins.nvm",
   "ffmpeg",
   "fzf",
   "libva",
@@ -24,6 +25,7 @@ packages= [
   # "virt-manager",
   "pipewire",
   "wireplumber",
+  "cachix"
   ]
 [userS]
 user = "mehran"
@@ -96,7 +98,7 @@ packages = [
   "trash-cli",
   "vulkan-tools",
   "unrar",
-  "vectorcode"
+  "vectorcode",
 ]
 
 [ubuntu]
