@@ -15,6 +15,7 @@ with settings;
     ./programs/zathura
     ./programs/vscode
     ./programs/ranger
+    ./programs/yazi
     ./programs/imageview
     ./programs/kooha
     ./programs/mpv
@@ -95,6 +96,15 @@ with settings;
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
       direnv hook fish | source
+
+      function y
+      	set tmp (mktemp -t "yazi-cwd.XXXXXX")
+      	yazi $argv --cwd-file="$tmp"
+      	if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+      		builtin cd -- "$cwd"
+      	end
+      	rm -f -- "$tmp"
+      end
     '';
     shellAliases = {
       nb = "sudo nixos-rebuild switch --flake ${userS.nixDir}/#system";
