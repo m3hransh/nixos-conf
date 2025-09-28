@@ -50,7 +50,7 @@ packages = [
   "zotero",
   "xournalpp",
   "yazi",
-  "gimp",
+  "gimp3-with-plugins",
 
   "lazygit",
   "lazydocker",

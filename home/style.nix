@@ -21,10 +21,7 @@ with settings;
   stylix.autoEnable = false;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyodark.yaml";
   stylix.polarity = "dark";
-  stylix.image = pkgs.fetchurl {
-    url = "https://res.cloudinary.com/m3hransh/image/upload/v1758791985/mehran/workspace_neon_improved.png";
-    sha256 = "sha256-aVSkRN/X3VR1IyUCF3yUlXrE6GwXUMK27cJwQWyN0t8=";
-  };
+  stylix.image = ../assets/workspace_neon.png;
   stylix.fonts = {
     monospace = {
       name = userS.font;
