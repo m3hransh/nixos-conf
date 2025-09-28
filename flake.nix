@@ -38,21 +38,40 @@
       lib = inputs.nixpkgs.lib;
     in
     {
-      nixosConfigurations = {
-        system = lib.nixosSystem {
-          system = settings.systemS.system;
-          modules = [
-            stylix.nixosModules.stylix
-            ./system/configuration.nix
-          ]; # load configuration.nix from selected PROFILE
-          specialArgs = {
-            # pass config variables from above
-            # inherit pkgs-stable;
-            inherit settings;
-            inherit inputs;
+      nixosConfigurations =
+        let
+          configurations = {
+            nvidia = lib.nixosSystem {
+              system = settings.systemS.system;
+              modules = [
+                stylix.nixosModules.stylix
+                ./system/nvidia/configuration.nix
+              ]; # load configuration.nix from selected PROFILE
+              specialArgs = {
+                # pass config variables from above
+                # inherit pkgs-stable;
+                inherit settings;
+                inherit inputs;
+              };
+            };
+            amd = lib.nixosSystem {
+              system = settings.systemS.system;
+              modules = [
+                stylix.nixosModules.stylix
+                ./system/amd/configuration.nix
+              ]; # load configuration.nix from selected PROFILE
+              specialArgs = {
+                # pass config variables from above
+                # inherit pkgs-stable;
+                inherit settings;
+                inherit inputs;
+              };
+            };
           };
+        in
+        {
+          system = if settings.systemS.machine == "ASUS" then configurations.nvidia else configurations.amd;
         };
-      };
 
       homeConfigurations.${settings.userS.user} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;

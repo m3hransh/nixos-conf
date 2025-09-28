@@ -14,9 +14,9 @@ with settings;
 {
   imports = [
     # Include the results of the hardware scan.
-    ./style.nix
-    ./hardware-configuration.nix
-    (./. + "/wm" + ("/" + userS.wm)) # My window manager
+    ../style.nix
+    ../hardware-configuration.nix
+    (../. + "/wm" + ("/" + userS.wm)) # My window manager
   ];
 
   # Bootloader.
