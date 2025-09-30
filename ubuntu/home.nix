@@ -21,7 +21,7 @@ with settings;{
     homeDirectory = "/home/" + ubuntu.user;
     # You can update Home Manager without changing this value. See
     # the Home Manager release notes for a list of state version
-    stateVersion = "23.11";
+    stateVersion = systemS.stateVersion;
   };
 
 

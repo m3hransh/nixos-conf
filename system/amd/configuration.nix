@@ -15,7 +15,7 @@ with settings;
   imports = [
     # Include the results of the hardware scan.
     ../style.nix
-    ../hardware-configuration.nix
+    ./hardware-configuration.nix
     (../. + "/wm" + ("/" + userS.wm)) # My window manager
   ];
 
@@ -62,7 +62,6 @@ with settings;
         [ ]
     ) ++ [
       pkgs.amdvlk
-      pkgs.libva-amdgpu-driver
     ];
 
   programs.gnupg.agent = {
@@ -96,31 +95,6 @@ with settings;
   services.xserver.videoDrivers = [ "amdgpu" ];
   services.gvfs.enable = true;
 
-
-
-
-
-  # Use prime instead
-  # services.supergfxd.enable = true;
-  services = {
-    asusd = {
-      enable = true;
-      enableUserService = true;
-    };
-  };
-  # fixes mic mute button
-  # services.udev.extraHwdb = ''
-  #   evdev:name:*:dmi:bvn*:bvr*:bd*:svnASUS*:pn*:*
-  #    KEYBOARD_KEY_ff31007c=f20
-  # '';
-
-  # CPU optimization for amd ryzen
-  boot.kernelParams = [ "processor.max_cstate=1" ];
-  powerManagement.cpuFreqGovernor = "performance";
-  # Update the CPU microcode for AMD processors.
-  # Don't know if it's applied
-  hardware.enableRedistributableFirmware = true; # In configuration.nix
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -139,31 +113,24 @@ with settings;
 
 
 
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    settings = {
-      General = {
-        Enable = "Source,Sink,Media,Socket";
-        Experimental = true;
-      };
-    };
-    # Bluetooth enhancements
-  };
-  # Bluetooth
-  services.blueman.enable = true;
-  services.udev.packages = [ pkgs.bluez ];
-
-  # Gnome 40 introduced a new way of managing power, without tlp.
-  # However, these 2 services clash when enabled simultaneously.
-  # https://github.com/NixOS/nixos-hardware/issues/260
-  services.tlp.enable = lib.mkDefault (
-    (lib.versionOlder (lib.versions.majorMinor lib.version) "21.05")
-    || !config.services.power-profiles-daemon.enable
-  );
+  # hardware.bluetooth = {
+  #   enable = true;
+  #   powerOnBoot = true;
+  #   settings = {
+  #     General = {
+  #       Enable = "Source,Sink,Media,Socket";
+  #       Experimental = true;
+  #     };
+  #   };
+  #   # Bluetooth enhancements
+  # };
+  # # Bluetooth
+  # services.blueman.enable = true;
+  # services.udev.packages = [ pkgs.bluez ];
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
   # SSD
   services.fstrim.enable = lib.mkDefault true;
   # security.pki.certificateFiles = [ "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" /etc/ssl/certs/localhost.crt ];
@@ -275,13 +242,13 @@ with settings;
   ];
 
   # Whether to enable all firmware regardless of license status.
-  hardware.enableAllFirmware = true;
+  # hardware.enableAllFirmware = true;
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = systemS.stateVersion; # Did you read the comment?
 
 }

@@ -6,7 +6,7 @@
       if settings.systemS.machine == "ASUS"
       then {
         EDITOR = "nvim";
-        BROWSER = "google-chrome-stable";
+        BROWSER = "brave";
         TERMINAL = "kitty";
         GBM_BACKEND = "nvidia-drm";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
@@ -23,7 +23,7 @@
       }
       else {
         EDITOR = "nvim";
-        BROWSER = "google-chrome-stable";
+        BROWSER = "brave";
         TERMINAL = "kitty";
         LIBVA_DRIVER_NAME = "radeonsi"; # hardware acceleration
         __GL_VRR_ALLOWED = "1";

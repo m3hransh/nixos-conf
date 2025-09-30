@@ -12,46 +12,14 @@ with settings;
     enable = true;
     withUWSM = true;
   };
-  # services.greetd = {
-  #   enable = true;
-  #   settings = rec {
-  #     default_session = {
-  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd Hyprland"; # Use TUI login
-  #       user = userS.user;
-  #     };
-  #     default_session = initial_session;
-  #   };
-  # };
-  # Ensure AccountsService is running (used by SDDM to get user info)
-  services.accounts-daemon.enable = true;
-
-  # Install the avatar to the expected path
-  environment.etc."AccountsService/icons/${userS.user}".source = ../../../${userS.userIcon};
-  # Generate the user metadata file
-  environment.etc."AccountsService/users/${userS.user}".text = ''
-    [User]
-    Icon=/var/lib/AccountsService/icons/${userS.user}
-  '';
-
-  systemd.tmpfiles.rules = [
-    "L /var/lib/AccountsService/icons/${userS.user} - - - - /etc/AccountsService/icons/${userS.user}"
-    "L /var/lib/AccountsService/users/${userS.user} - - - - /etc/AccountsService/users/${userS.user}"
-  ];
-  environment.systemPackages = with pkgs; [
-    (sddm-chili-theme.override {
-      themeConfig = {
-        background = config.stylix.image;
-        blur = true;
-        recursiveBlurLoops = 3;
-        recursiveBlurRadius = 5;
-      };
-    })
-  ];
-
-  services.displayManager.sddm = {
+  services.greetd = {
     enable = true;
-    wayland.enable = true;
-    theme = "chili";
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd Hyprland"; # Use TUI login
+        user = userS.user;
+      };
+    };
   };
 
   security.pam.services.swaylock = { };
