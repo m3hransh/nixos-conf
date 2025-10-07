@@ -5,12 +5,11 @@ with settings;{
   imports = [
     # hyprland.homeManagerModules.default
      ./scripts.nix
-    ../home/programs/ranger
+    ../home/programs/yazi
     ../home/programs/resource_monitor
     ../home/programs/tmux
     ../home/programs/zoxide
     ../home/programs/nvim
-    ../home/programs/kitty
     ../home/programs/nix-direnv
     #(./. + "/wm" + ("/" + userS.wm)) # My window manager
   ];
@@ -100,13 +99,6 @@ with settings;{
   #   ];
   # };
 
-  programs.git.enable = true;
-  programs.git.userName = ubuntu.name;
-  programs.git.userEmail = ubuntu.email;
-  programs.git.extraConfig = {
-    init.defaultBranch = "main";
-    # safe.directory = "/home/" + userS.username + "/.dotfiles";
-  };
 
   home.sessionVariables = {
     EDITOR = "nvim";

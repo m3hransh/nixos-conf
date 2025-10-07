@@ -40,7 +40,6 @@
       pyright
       zk
       rust-analyzer
-      clang-tools
       # haskell-language-server
       ripgrep
       #-- tree-sitter --#
@@ -56,7 +55,6 @@
       xclip # for Xrog
       wl-clipboard
       marksman
-      uv
       #-- Debug --#
       # lldb
     ];
