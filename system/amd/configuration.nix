@@ -59,11 +59,29 @@ with settings;
           pkgs.asusctl
         ]
       else
-        [ ]
+        [
+          pkgs.clinfo
+          pkgs.rocmPackages.rocminfo
+        ]
     ) ++ [
       pkgs.amdvlk
     ];
 
+  environment.etc."v2ray/geosite.dat".source = pkgs.fetchurl {
+    url = "https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat";
+    sha256 = "1w6a4f1cp289gkgbk8z44fq3lliz5zgn38s2dz70f47q9ymgkxl5";
+  };
+  hardware.graphics = {
+    enable = true;
+    # Optional: try AMDVLK; RADV (Mesa) is default and great.
+    # extraPackages = [ pkgs.amdvlk ];
+  };
+
+# 2) OpenCL for Resolve (PRIMARY: ROCm OpenCL on RDNA4)
+  # ROCm 6.4+ adds official RDNA4 / RX 9000-series support.
+  hardware.graphics.extraPackages = with pkgs; [
+    rocmPackages.clr.icd      # OpenCL ICD
+  ];
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -109,25 +127,33 @@ with settings;
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
+   jack.enable = true; # optional, but helps apps expecting JACK
+
+    # Enable extra Bluetooth codecs
+    wireplumber.enable = true; # (newer session manager replacing media-session)
   };
 
 
 
-  # hardware.bluetooth = {
-  #   enable = true;
-  #   powerOnBoot = true;
-  #   settings = {
-  #     General = {
-  #       Enable = "Source,Sink,Media,Socket";
-  #       Experimental = true;
-  #     };
-  #   };
-  #   # Bluetooth enhancements
-  # };
-  # # Bluetooth
-  # services.blueman.enable = true;
-  # services.udev.packages = [ pkgs.bluez ];
-
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true;
+      };
+    };
+    # Bluetooth enhancements
+  };
+  # Bluetooth
+  services.blueman.enable = true;
+ # --- Enable all modern Bluetooth audio codecs in PipeWire ---
+  nixpkgs.config.pipewire = {
+    enableCodecAac = true;
+    enableCodecAptx = true;
+    enableCodecLdac = true;
+  };
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 

@@ -24,6 +24,18 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  fileSystems."/mnt/windows" = {
+    device = "/dev/disk/by-uuid/A80C51500C511AA0"; # Replace with your partition ID
+    fsType = "ntfs"; # Use "ntfs3" or "ntfs-3g" if needed
+    options = [
+      "uid=1000" # your user id (id -u)
+      "gid=100" # usually the 'users' group (id -g)
+      "umask=022" # rwx for owner, rx for group/others
+      "windows_names" # forbid characters illegal on Windows
+      # "ro"            # uncomment for read-only
+      # "ignore_case"   # if you want case-insensitive lookups
+    ];
+  };
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
