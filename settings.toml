@@ -26,7 +26,10 @@ packages= [
   "pipewire",
   "wireplumber",
   "cachix",
-  "python3Minimal"
+  "python3Minimal",
+  "bluez",
+  "bluez-tools",
+  "pavucontrol",
   ]
 [userS]
 user = "mehran"
@@ -83,6 +86,7 @@ packages = [
   "atool",
   "httpie",
   "lazygit",
+  "neovide",
   "lazydocker",
   "android-tools",
   "jmtpfs",
@@ -99,6 +103,9 @@ packages = [
   "vulkan-tools",
   "unrar",
   "vectorcode",
+  "openai-whisper",
+  "davinci-resolve",
+  "v2ray"
 ]
 
 [ubuntu]
