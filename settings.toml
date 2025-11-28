@@ -105,7 +105,8 @@ packages = [
   "vectorcode",
   "openai-whisper",
   "davinci-resolve",
-  "v2ray"
+  "v2ray",
+  "gparted",
 ]
 
 [ubuntu]

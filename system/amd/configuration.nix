@@ -75,12 +75,15 @@ with settings;
     enable = true;
     # Optional: try AMDVLK; RADV (Mesa) is default and great.
     # extraPackages = [ pkgs.amdvlk ];
+    enable32Bit = true;
   };
 
 # 2) OpenCL for Resolve (PRIMARY: ROCm OpenCL on RDNA4)
   # ROCm 6.4+ adds official RDNA4 / RX 9000-series support.
   hardware.graphics.extraPackages = with pkgs; [
     rocmPackages.clr.icd      # OpenCL ICD
+    rocmPackages.clr
+    rocmPackages.rocm-runtime
   ];
   programs.gnupg.agent = {
     enable = true;

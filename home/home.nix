@@ -110,6 +110,7 @@ with settings;
       nb = "sudo nixos-rebuild switch --flake ${userS.nixDir}/#system";
       hb = "home-manager switch --flake ${userS.nixDir}/#${userS.user}";
       nop = "nix_opts ${userS.nixDir} ";
+      nn = "neovide & disown";
     };
     plugins = [
       # Enable a plugin (here grc for colorized command output)
