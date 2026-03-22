@@ -3,7 +3,7 @@
   home = {
     packages = with pkgs; [
       ranger
-      xdragon
+      dragon-drop
     ];
   };
   home.file.".config/ranger" = {

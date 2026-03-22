@@ -4,7 +4,7 @@
   home = {
     packages = with pkgs; [
       cava
-      mpc-cli
+      mpc
       go-musicfox
     ];
   };

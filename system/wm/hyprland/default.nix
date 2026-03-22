@@ -16,7 +16,7 @@ with settings;
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd Hyprland"; # Use TUI login
+        command = "${pkgs.tuigreet}/bin/tuigreet --cmd Hyprland"; # Use TUI login
         user = userS.user;
       };
     };

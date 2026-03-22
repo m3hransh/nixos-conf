@@ -46,7 +46,7 @@ let
   '';
 in
 {
-  home.packages = with pkgs; [
+  home.packages = [
     grimblast_watermark
     nix_opts
     nvidia-offload

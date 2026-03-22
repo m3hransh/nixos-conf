@@ -81,7 +81,6 @@ with settings;
   programs.dconf.enable = true;
   # programs.droidcam.enable = true;
   # programs.firefox.enable = true;
-  programs.adb.enable = true;
 
   # If asus laptop install asusctl package
   # if systemS.system == "ASUS" then
@@ -299,7 +298,7 @@ with settings;
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     inconsolata
     nerd-fonts.fira-code
     nerd-fonts.caskaydia-cove

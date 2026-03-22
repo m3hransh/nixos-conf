@@ -122,9 +122,9 @@ with settings;
   };
 
   programs.git.enable = true;
-  programs.git.userName = userS.name;
-  programs.git.userEmail = userS.email;
-  programs.git.extraConfig = {
+  programs.git.settings.user.name = userS.name;
+  programs.git.settings.user.email = userS.email;
+  programs.git.settings = {
     init.defaultBranch = "main";
     # safe.directory = "/home/" + userS.username + "/.dotfiles";
   };

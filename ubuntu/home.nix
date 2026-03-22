@@ -31,7 +31,7 @@ with settings;{
   (with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     inconsolata
     nerd-fonts.iosevka-term
     nerd-fonts.jetbrains-mono

@@ -63,9 +63,8 @@ with settings;
           pkgs.clinfo
           pkgs.rocmPackages.rocminfo
         ]
-    ) ++ [
-      pkgs.amdvlk
-    ];
+    ) 
+    ;
 
   environment.etc."v2ray/geosite.dat".source = pkgs.fetchurl {
     url = "https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat";
@@ -101,7 +100,6 @@ with settings;
   programs.dconf.enable = true;
   # programs.droidcam.enable = true;
   # programs.firefox.enable = true;
-  programs.adb.enable = true;
 
   # If asus laptop install asusctl package
   # if systemS.system == "ASUS" then
@@ -261,7 +259,7 @@ with settings;
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     inconsolata
     nerd-fonts.fira-code
     nerd-fonts.caskaydia-cove
@@ -269,6 +267,15 @@ with settings;
     nerd-fonts.iosevka-term
     nerd-fonts.jetbrains-mono
   ];
+
+  services.ollama = {
+    enable = true;
+    # Tell NixOS specifically to use the AMD/ROCm compiled version
+    package = pkgs.ollama-rocm; 
+    
+    # Keep your RDNA 4 override! You still need this for the RX 9070.
+    rocmOverrideGfx = "12.0.1";
+  };
 
   # Whether to enable all firmware regardless of license status.
   # hardware.enableAllFirmware = true;
