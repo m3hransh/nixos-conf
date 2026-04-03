@@ -35,7 +35,7 @@ with settings; {
     config.common.default = "*";
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    wlr.enable = true;
+    # wlr portal not needed -- Hyprland ships xdg-desktop-portal-hyprland
   };
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
@@ -54,7 +54,6 @@ with settings; {
   };
 
   environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1"; # Fix invisible cursor
     NIXOS_OZONE_WL = "1"; # Enable Wayland for Electron apps
   };
 
