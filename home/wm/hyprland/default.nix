@@ -35,8 +35,13 @@
     xwayland.enable = true;
     # systemdIntegration = true;
     # systemd.enable = true;
-    systemd.variables = ["--all"];
 
+    systemd.variables = [ "--all" ];
+
+    # If you configure your Hyprland settings via Home Manager,
+    # you must disable Home Manager's built-in systemd integration.
+    # Because UWSM is now handling systemd on the NixOS system level, leaving it enabled in Home Manager will cause conflicts and crashes.
+    systemd.enable = false;
     extraConfig = builtins.readFile ./hyprland.conf;
   };
 

@@ -1,27 +1,34 @@
-{
-  config,
-  pkgs,
-  settings,
-  inputs,
-  ...
-}:
+{ pkgs, settings, ... }:
 
-with settings;
-{
+with settings; {
   programs.hyprland = {
     enable = true;
     withUWSM = true;
+    xwayland.enable = true;
   };
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --cmd Hyprland"; # Use TUI login
+        command =
+          "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --remember-session --cmd 'uwsm start hyprland-uwsm.desktop'";
         user = userS.user;
       };
     };
   };
 
+  # Optional but recommended: Keep the TTY clean so tuigreet looks nice
+  # This prevents systemd boot messages from printing over the login screen
+  systemd.services.greetd.serviceConfig = {
+    Type = "idle";
+    StandardInput = "tty";
+    StandardOutput = "tty";
+    StandardError =
+      "journal"; # Routes errors to journalctl instead of the screen
+    TTYReset = true;
+    TTYVHangup = true;
+    TTYVTDisallocate = true;
+  };
   security.pam.services.swaylock = { };
 
   xdg.portal = {
@@ -38,7 +45,8 @@ with settings;
     after = [ "graphical-session.target" ];
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      ExecStart =
+        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
       Restart = "on-failure";
       RestartSec = 1;
       TimeoutStopSec = 10;
