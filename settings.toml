@@ -108,6 +108,8 @@ packages = [
   "davinci-resolve",
   "v2ray",
   "gparted",
+  "just",
+  "sox"
 ]
 
 [ubuntu]
