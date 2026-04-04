@@ -1,46 +1,24 @@
 # Shared system configuration for all hardware profiles.
-{
-  config,
-  pkgs,
-  settings,
-  lib,
-  ...
-}:
+{ config, pkgs, settings, lib, ... }:
 
-with settings;
-{
-  imports = [
-    ./style.nix
-    (./. + "/wm" + ("/" + userS.wm))
-  ];
+with settings; {
+  imports = [ ./style.nix (./. + "/wm" + ("/" + userS.wm)) ];
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = [
-    "ext4"
-    "vfat"
-    "ntfs"
-  ];
+  boot.supportedFilesystems = [ "ext4" "vfat" "ntfs" ];
 
   # Nix settings
   nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    substituters = [
-      "https://cache.nixos.org"
-      "https://nix-community.cachix.org"
-    ];
+    experimental-features = [ "nix-command" "flakes" ];
+    substituters =
+      [ "https://cache.nixos.org" "https://nix-community.cachix.org" ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
-    trusted-users = [
-      "root"
-      userS.user
-    ];
+    trusted-users = [ "root" userS.user ];
     auto-optimise-store = true;
   };
 
@@ -134,8 +112,12 @@ with settings;
   networking.networkmanager.enable = true;
   networking.firewall = {
     allowedUDPPorts = [ 51820 ];
+    trustedInterfaces = [ "docker0" "br-+" ];
   };
   networking.wireguard.enable = true;
+  networking.extraHosts = ''
+    127.0.0.1 mafia.hackerney.local auth.hackerney.local traefik.hackerney.local
+  '';
   networking.wg-quick.interfaces.wg0 = {
     configFile = "/etc/wireguard/wind.conf";
     autostart = false;
