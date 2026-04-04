@@ -28,10 +28,10 @@
   home = {
     packages = with pkgs; [
       #-- LSP --#
-      nodePackages_latest.typescript
-      nodePackages_latest.typescript-language-server
-      nodePackages_latest.vscode-langservers-extracted
-      nodePackages_latest.bash-language-server
+      typescript
+      typescript-language-server
+      vscode-langservers-extracted
+      bash-language-server
       # (haskell-language-server.override { supportedGhcVersions = [ "92" ]; })
       nil
       nixd
@@ -47,10 +47,10 @@
       #-- format --#
       stylua
       black
-      nixfmt-rfc-style
+      nixfmt
       rustfmt
       beautysh
-      nodePackages.prettier
+      prettier
       # stylish-haskell
       xclip # for Xrog
       wl-clipboard

@@ -107,8 +107,8 @@ with settings;
       end
     '';
     shellAliases = {
-      nb = "sudo nixos-rebuild switch --flake ${userS.nixDir}/#system";
-      hb = "home-manager switch --flake ${userS.nixDir}/#${userS.user}";
+      nb = "nh os switch ${userS.nixDir}";
+      hb = "nh home switch ${userS.nixDir}";
       nop = "nix_opts ${userS.nixDir} ";
       nn = "neovide & disown";
     };
@@ -155,6 +155,7 @@ with settings;
   qt.enable = true;
   gtk = {
     enable = true;
+    gtk4.theme = null;
     # theme = {
     #   name = "Nordic";
     #   package = pkgs.nordic;

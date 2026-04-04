@@ -30,11 +30,12 @@ with settings; {
   environment.systemPackages =
     builtins.map (pkg: getPack pkg pkgs) systemS.packages;
 
-  # Garbage collection
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
+  # nh: better rebuild UX with colored diffs and integrated GC
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 14d --keep 5";
+    flake = "/home/${userS.user}/.nixconf";
   };
 
   # Programs
