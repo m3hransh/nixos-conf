@@ -7,6 +7,7 @@
       nixpkgs,
       home-manager,
       stylix,
+      sops-nix,
       ...
     }:
     let
@@ -45,6 +46,7 @@
               system = settings.systemS.system;
               modules = [
                 stylix.nixosModules.stylix
+                sops-nix.nixosModules.sops
                 ./system/nvidia/configuration.nix
               ]; # load configuration.nix from selected PROFILE
               specialArgs = {
@@ -58,6 +60,7 @@
               system = settings.systemS.system;
               modules = [
                 stylix.nixosModules.stylix
+                sops-nix.nixosModules.sops
                 ./system/amd/configuration.nix
               ]; # load configuration.nix from selected PROFILE
               specialArgs = {
@@ -114,6 +117,10 @@
     # };
     stylix = {
       url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

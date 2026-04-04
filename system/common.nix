@@ -1,5 +1,5 @@
 # Shared system configuration for all hardware profiles.
-{ config, pkgs, settings, lib, ... }:
+{ config, pkgs, settings, inputs, lib, ... }:
 
 with settings; {
   imports = [ ./style.nix (./. + "/wm" + ("/" + userS.wm)) ];
@@ -126,12 +126,19 @@ with settings; {
     127.0.0.1 mafia.hackerney.local auth.hackerney.local traefik.hackerney.local
   '';
   networking.wg-quick.interfaces.wg0 = {
-    configFile = "/etc/wireguard/wind.conf";
+    configFile = config.sops.secrets."wg0-conf".path;
     autostart = false;
   };
-  networking.wg-quick.interfaces.wg1 = {
-    configFile = "/etc/wireguard/rptu.conf";
-    autostart = false;
+
+  # sops-nix: decrypt secrets at activation time
+  sops = {
+    age.keyFile = "/home/${userS.user}/.config/sops/age/keys.txt";
+    secrets."wg0-conf" = {
+      sopsFile = "${inputs.self}/secrets/wg0.conf";
+      format = "binary";
+      owner = "root";
+      mode = "0600";
+    };
   };
 
   # Locale
