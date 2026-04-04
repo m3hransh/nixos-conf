@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 
-op=$(echo -e " Poweroff\n Reboot\n Suspend\n Lock" | wofi -i --width 250 --height 210 --dmenu --cache-file /dev/null | awk '{print tolower($2)}')
+options=" Poweroff\n Reboot\n Suspend\n Lock"
 
-case $op in
+raw=$(echo -e "$options" | rofi -dmenu -i -p "Power" \
+    -theme-str 'window {width: 280px;} listview {lines: 4;}' \
+    -hover-select false)
+chosen=$(echo "$raw" | sed 's/.*[[:space:]]//' | tr '[:upper:]' '[:lower:]')
+case $chosen in
 poweroff) ;&
 reboot) ;&
 suspend)
-	systemctl $op
+	systemctl $chosen
 	;;
 lock)
 	exec hyprlock

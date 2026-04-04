@@ -73,7 +73,7 @@
           };
         in
         {
-          system = if settings.systemS.machine == "ASUS" then configurations.nvidia else configurations.amd;
+          ${settings.systemS.hostName} = if settings.systemS.machine == "ASUS" then configurations.nvidia else configurations.amd;
         };
 
       homeConfigurations.${settings.userS.user} = home-manager.lib.homeManagerConfiguration {

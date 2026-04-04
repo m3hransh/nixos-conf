@@ -1,0 +1,98 @@
+* {
+    font: "JetBrainsMono Nerd Font 13";
+
+    bg:           rgba(17, 18, 29, 0.75);
+    bg-entry:     rgba(41, 42, 55, 0.65);
+    bg-selected:  rgba(51, 204, 255, 0.18);
+    fg:           #d9e0ee;
+    fg-dim:       #9699b7;
+    accent:       #33ccff;
+    urgent:       #f7768e;
+    transparent:  transparent;
+
+    background-color: @transparent;
+    text-color:       @fg;
+}
+
+window {
+    width:            650px;
+    padding:          0;
+    border-radius:    16px;
+    border:           2px solid;
+    border-color:     rgba(68, 70, 92, 0.5);
+    background-color: @bg;
+    transparency:     "real";
+}
+
+mainbox {
+    padding:          16px;
+    background-color: @transparent;
+}
+
+inputbar {
+    background-color: @bg-entry;
+    border-radius:    12px;
+    padding:          10px 16px;
+    spacing:          10px;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    background-color: @transparent;
+    text-color:       @accent;
+}
+
+entry {
+    placeholder:       "Type to search...";
+    placeholder-color: @fg-dim;
+    background-color:  @transparent;
+}
+
+listview {
+    background-color: @transparent;
+    margin:           14px 0 0;
+    lines:            7;
+    columns:          1;
+    fixed-height:     false;
+    scrollbar:        false;
+}
+
+element {
+    padding:          10px 14px;
+    spacing:          10px;
+    border-radius:    10px;
+    background-color: @transparent;
+}
+
+element selected normal,
+element selected active {
+    background-color: @bg-selected;
+    text-color:       @accent;
+}
+
+element normal urgent,
+element alternate urgent {
+    text-color: @urgent;
+}
+
+element-icon {
+    size:             26px;
+    background-color: @transparent;
+}
+
+element-text {
+    background-color: @transparent;
+    text-color:       inherit;
+    highlight:        bold;
+}
+
+message {
+    margin:           12px 0 0;
+    border-radius:    12px;
+    background-color: @bg-entry;
+    padding:          10px;
+}
+
+textbox {
+    background-color: @transparent;
+}

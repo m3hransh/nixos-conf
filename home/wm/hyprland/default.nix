@@ -4,7 +4,7 @@
   imports = [
     ./hyprland-environment.nix
     ../../programs/waybar
-    ../../programs/wofi
+    ../../programs/rofi
     ../../programs/mako
   ];
 
@@ -12,10 +12,10 @@
     grimblast
     hyprpicker
     hyprlock
+    hypridle
     pamixer
     waybar
-    wofi
-    wofi-emoji
+    rofimoji
     wl-clipboard
     wlr-randr
     pavucontrol
@@ -43,6 +43,32 @@
     # Because UWSM is now handling systemd on the NixOS system level, leaving it enabled in Home Manager will cause conflicts and crashes.
     systemd.enable = false;
     extraConfig = builtins.readFile ./hyprland.conf;
+  };
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        lock_cmd = "pidof hyprlock || hyprlock";
+        before_sleep_cmd = "loginctl lock-session";
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+      };
+      listener = [
+        {
+          timeout = 300; # 5 min
+          on-timeout = "loginctl lock-session";
+        }
+        {
+          timeout = 600; # 10 min
+          on-timeout = "hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on";
+        }
+        {
+          timeout = 900; # 15 min
+          on-timeout = "systemctl suspend";
+        }
+      ];
+    };
   };
 
   home.file.".scripts" = {
