@@ -40,7 +40,8 @@ A fully declarative, flake-based NixOS configuration for a Hyprland desktop envi
 - **Stylix theming** -- consistent Tokyo Dark theme across all applications
 - **Home Manager** -- declarative dotfile management for 20+ programs
 - **Data-driven config** -- `settings.toml` centralizes user/system variables
-- **WireGuard VPN** -- dual-interface VPN configuration
+- **Secret management** -- sops-nix with age encryption for WireGuard keys and other secrets
+- **`nh` rebuild tool** -- colored diffs, integrated garbage collection
 - **Development environment** -- Neovim with 30+ language LSPs, Emacs, VS Code
 - **Multimedia stack** -- PipeWire audio, MPD/ncmpcpp, OBS Studio, DaVinci Resolve
 - **Multi-keyboard layouts** -- US, German, Iranian with Alt+Shift toggle
@@ -55,6 +56,7 @@ A fully declarative, flake-based NixOS configuration for a Hyprland desktop envi
 ├── flake.nix                    # Entry point: inputs, outputs, host definitions
 ├── flake.lock                   # Pinned dependency versions
 ├── settings.toml                # Centralized configuration variables
+├── .sops.yaml                   # sops-nix age key configuration
 ├── install.sh                   # Fresh install script
 │
 ├── system/                      # System-level NixOS modules
@@ -104,6 +106,9 @@ A fully declarative, flake-based NixOS configuration for a Hyprland desktop envi
 │   ├── tokyodark.yaml           # Primary theme
 │   ├── tokyo-night-dark.yaml
 │   └── tokyodark-terminal.yaml
+│
+├── secrets/                     # Encrypted secrets (sops-nix / age)
+│   └── wg0.conf                 #   WireGuard config (encrypted)
 │
 ├── ubuntu/                      # Ubuntu-specific Home Manager profile
 │   ├── home.nix                 # Minimal config (terminal tools only)
@@ -156,7 +161,7 @@ A fully declarative, flake-based NixOS configuration for a Hyprland desktop envi
 | Compute | Ollama with ROCm GPU acceleration |
 | Audio | PipeWire + WirePlumber + Bluetooth (AAC, APTX, LDAC) |
 | Boot | systemd-boot (EFI) |
-| VPN | WireGuard (wg0, wg1) |
+| VPN | WireGuard (wg0, encrypted via sops-nix) |
 | Virtualization | Docker |
 
 ### NVIDIA Laptop (`system/nvidia/configuration.nix`)
@@ -170,7 +175,7 @@ A fully declarative, flake-based NixOS configuration for a Hyprland desktop envi
 | Audio | PipeWire + WirePlumber + Bluetooth |
 | Boot | systemd-boot (EFI) |
 
-Both profiles share: Fish shell, networking (NetworkManager), locale (en_US.UTF-8 / de_DE.UTF-8), timezone (Europe/Berlin), SSH, printing (CUPS), Nix flakes, and weekly garbage collection.
+Both profiles share: Fish shell, networking (NetworkManager), locale (en_US.UTF-8 / de_DE.UTF-8), timezone (Europe/Berlin), SSH (hardened), printing (CUPS), Nix flakes, and automatic garbage collection via `nh`.
 
 ---
 
@@ -182,7 +187,7 @@ The Hyprland setup uses the modern **UWSM** (Universal Wayland Session Manager) 
 - **Status bar**: Waybar with custom modules (GitHub notifications, CPU/RAM/disk, media player, sunset tracker, power menu)
 - **Launcher**: Wofi
 - **Notifications**: Mako
-- **Lock screen**: swaylock-effects
+- **Lock screen**: hyprlock
 - **Screenshots**: grimblast (area capture, watermark support)
 - **Wallpaper**: hyprpaper
 - **Blue light filter**: hyprsunset
@@ -341,18 +346,18 @@ The included `install.sh` automates detection of boot mode (UEFI/BIOS), hardware
 
 ```bash
 # Full system rebuild
-sudo nixos-rebuild switch --flake ~/.nixconf#system
+nh os switch ~/.nixconf
 
 # Home Manager rebuild
-home-manager switch --flake ~/.nixconf#mehran
+nh home switch ~/.nixconf
 ```
 
 ### Shell Aliases (Fish)
 
 | Alias | Command |
 |-------|---------|
-| `nb` | `sudo nixos-rebuild switch --flake ~/.nixconf#system` |
-| `hb` | `home-manager switch --flake ~/.nixconf#mehran` |
+| `nb` | `nh os switch ~/.nixconf` |
+| `hb` | `nh home switch ~/.nixconf` |
 | `nn` | `neovide` |
 | `nop <path>` | Evaluate and print NixOS option values |
 
@@ -412,66 +417,11 @@ Includes: Neovim, tmux, yazi, zoxide, btop, nix-direnv, and custom dev scripts (
 
 ## Suggested Improvements
 
-Based on current NixOS best practices, the following improvements could enhance this configuration:
+Remaining improvements that could enhance this configuration:
 
-### High Priority
+1. **Integrate Home Manager as a NixOS module** -- single `nixos-rebuild switch` rebuilds everything atomically, with unified rollbacks.
 
-1. **Extract shared system config** -- `nvidia/configuration.nix` and `amd/configuration.nix` share ~70% of their content. Extract common settings into `system/common.nix` to eliminate duplication.
-
-2. **Enable `auto-optimise-store`** -- hard-links identical files in `/nix/store`, typically saving 20-40% disk space:
-   ```nix
-   nix.settings.auto-optimise-store = true;
-   ```
-
-3. **Remove deprecated `WLR_*` environment variables** -- Hyprland moved from wlroots to aquamarine. Replace `WLR_NO_HARDWARE_CURSORS` and `WLR_RENDERER_ALLOW_SOFTWARE` with native Hyprland config options.
-
-4. **Remove redundant `XDG_*` session variables** -- UWSM sets `XDG_CURRENT_DESKTOP`, `XDG_SESSION_TYPE`, and `XDG_SESSION_DESKTOP` automatically.
-
-5. **Replace `swaylock-effects` with `hyprlock`** -- swaylock-effects is unmaintained; hyprlock is the Hyprland-native lock screen.
-
-6. **Replace `neofetch` with `fastfetch`** -- neofetch upstream is archived/abandoned.
-
-7. **Replace `nixpkgs-fmt` with `nixfmt`** (`nixfmt-rfc-style`) -- nixpkgs-fmt is deprecated in favor of the official Nix formatter.
-
-### Medium Priority
-
-8. **Remove `hyprpicker` and `hypr-contrib` flake inputs** -- both are now available directly in nixpkgs (`pkgs.hyprpicker`, `pkgs.grimblast`). Fewer inputs = faster `flake update`.
-
-9. **Remove `programs.light.enable`** -- deprecated; use `brightnessctl` (already in your packages).
-
-10. **Harden systemd-boot**:
-    ```nix
-    boot.loader.systemd-boot.configurationLimit = 10;
-    boot.loader.systemd-boot.editor = false;  # Prevent kernel cmdline editing at boot
-    ```
-
-11. **Harden OpenSSH**:
-    ```nix
-    services.openssh.settings = {
-      PasswordAuthentication = false;
-      PermitRootLogin = "no";
-    };
-    ```
-
-12. **Integrate Home Manager as a NixOS module** -- single `nixos-rebuild switch` rebuilds everything atomically, with unified rollbacks.
-
-### Nice to Have
-
-13. **Adopt `sops-nix`** for secret management -- encrypt WireGuard keys and other secrets instead of storing them as plain files.
-
-14. **Adopt `nh`** as the rebuild tool -- colored diffs, integrated garbage collection, better UX:
-    ```nix
-    programs.nh = {
-      enable = true;
-      clean.enable = true;
-      clean.extraArgs = "--keep-since 14d --keep 5";
-      flake = "/home/mehran/.nixconf";
-    };
-    ```
-
-15. **Consider `disko`** for declarative disk partitioning on reinstalls.
-
-16. **Remove unused `nix-gaming` input** -- referenced in `flake.nix` inputs but not imported in any module.
+2. **Consider `disko`** for declarative disk partitioning on reinstalls.
 
 ---
 
