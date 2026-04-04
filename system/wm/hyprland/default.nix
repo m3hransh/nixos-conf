@@ -29,7 +29,7 @@ with settings; {
     TTYVHangup = true;
     TTYVTDisallocate = true;
   };
-  security.pam.services.swaylock = { };
+  security.pam.services.hyprlock = { };
 
   xdg.portal = {
     config.common.default = "*";

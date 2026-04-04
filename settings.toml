@@ -4,7 +4,7 @@ hostName = "mehran-beast"
 stateVersion = "25.05"
 machine = "AMD"
 packages= [
-  "neofetch",
+  "fastfetch",
   "vim",
   "wget",
   "unzip",
@@ -123,7 +123,7 @@ editor = "nvim"
 packages = [
   "lazygit",
   "lazydocker",
-  "neofetch",
+  "fastfetch",
 
   "jq",
   "nssTools",

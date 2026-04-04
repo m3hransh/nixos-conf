@@ -47,7 +47,7 @@
       #-- format --#
       stylua
       black
-      nixpkgs-fmt
+      nixfmt-rfc-style
       rustfmt
       beautysh
       nodePackages.prettier

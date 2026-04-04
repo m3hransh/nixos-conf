@@ -6,6 +6,8 @@ with settings; {
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 10;
+  boot.loader.systemd-boot.editor = false;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ext4" "vfat" "ntfs" ];
 
@@ -41,7 +43,6 @@ with settings; {
     enableSSHSupport = true;
   };
   programs.fish.enable = true;
-  programs.light.enable = true;
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
@@ -58,7 +59,13 @@ with settings; {
   # Services
   services.gvfs.enable = true;
   services.printing.enable = true;
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+    };
+  };
   services.fstrim.enable = lib.mkDefault true;
 
   # PipeWire audio
