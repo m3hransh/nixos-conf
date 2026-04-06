@@ -106,7 +106,8 @@ packages = [
   "v2ray",
   "gparted",
   "just",
-  "sox"
+  "sox",
+  "sops"
 ]
 
 [ubuntu]

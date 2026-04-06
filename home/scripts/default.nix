@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, settings, ... }:
 
 let
   grimblast_watermark = pkgs.writeShellScriptBin "grimblast_watermark" ''
@@ -36,6 +36,33 @@ let
       "$NIX_DIR#nixosConfigurations.$CONFIG_PATH" \
       || { echo "Failed to evaluate path: $CONFIG_PATH"; exit 1; }
   '';
+  sops-update = pkgs.writeShellScriptBin "sops-update" ''
+    SECRET="$1"
+    NEWFILE="$2"
+
+    if [[ -z "$SECRET" || -z "$NEWFILE" ]]; then
+      echo "Usage: sops-update <secret-name> <new-plaintext-file>"
+      echo "Example: sops-update wg0.conf /tmp/wg0.conf"
+      exit 1
+    fi
+
+    NEWFILE=$(realpath "$NEWFILE")
+    if [[ ! -f "$NEWFILE" ]]; then
+      echo "Error: $NEWFILE does not exist"
+      exit 1
+    fi
+
+    cd ${settings.userS.nixDir}
+    TARGET="secrets/$SECRET"
+    if [[ ! -f "$TARGET" ]]; then
+      echo "Error: $TARGET does not exist in ${settings.userS.nixDir}"
+      exit 1
+    fi
+
+    cp "$NEWFILE" "$TARGET"
+    ${pkgs.sops}/bin/sops encrypt -i --input-type binary --output-type binary "$TARGET"
+    echo "Updated $TARGET from $NEWFILE"
+  '';
   # Add this to your Home Manager or system configuration
   nvidia-offload =  pkgs.writeShellScriptBin "nvidia-offload" ''
     export __NV_PRIME_RENDER_OFFLOAD=1
@@ -50,5 +77,6 @@ in
     grimblast_watermark
     nix_opts
     nvidia-offload
+    sops-update
   ];
 }

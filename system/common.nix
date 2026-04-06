@@ -123,9 +123,8 @@ with settings; {
     trustedInterfaces = [ "docker0" "br-+" ];
   };
   networking.wireguard.enable = true;
-  networking.extraHosts = ''
-    127.0.0.1 mafia.hackerney.local auth.hackerney.local traefik.hackerney.local
-  '';
+  networking.extraHosts =
+    "127.0.0.1 mafia.hackerney.local spy.hackerney.local auth.hackerney.local";
   networking.wg-quick.interfaces.wg0 = {
     configFile = config.sops.secrets."wg0-conf".path;
     autostart = false;
