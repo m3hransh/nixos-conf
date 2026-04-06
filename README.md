@@ -20,6 +20,7 @@ A fully declarative, flake-based NixOS configuration for a Hyprland desktop envi
 - [Programs & Tools](#programs--tools)
 - [Theming](#theming)
 - [Settings](#settings)
+- [Secret Management (sops-nix)](#secret-management-sops-nix)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -299,6 +300,84 @@ packages = [ ... ]       # Minimal terminal tools
 ```
 
 The `machine` field in `[systemS]` determines which hardware profile is built: `"ASUS"` selects the NVIDIA config, anything else selects AMD.
+
+---
+
+## Secret Management (sops-nix)
+
+This configuration uses [sops-nix](https://github.com/Mic92/sops-nix) with **age** encryption to manage secrets (e.g., WireGuard config).
+
+### How it works
+
+- Secrets are stored encrypted in `secrets/` (e.g., `secrets/wg0.conf`)
+- `.sops.yaml` defines which age key can decrypt them
+- At system activation, sops-nix decrypts secrets using the age private key at `~/.config/sops/age/keys.txt`
+
+### Setting up sops on a new machine
+
+1. **Copy the age private key** from your existing machine:
+
+   ```bash
+   # On existing machine
+   cat ~/.config/sops/age/keys.txt
+   ```
+
+   ```bash
+   # On new machine
+   mkdir -p ~/.config/sops/age
+   # Paste the key into this file:
+   nano ~/.config/sops/age/keys.txt
+   chmod 600 ~/.config/sops/age/keys.txt
+   ```
+
+   > **Important:** Without this key, `nixos-rebuild` will fail because sops-nix cannot decrypt the secrets.
+
+2. **Verify** decryption works:
+
+   ```bash
+   cd ~/.nixconf
+   nix-shell -p sops --run "sops -d secrets/wg0.conf"
+   ```
+
+   If this prints the decrypted content, you're good to go.
+
+3. **Rebuild** the system:
+
+   ```bash
+   nh os switch ~/.nixconf
+   ```
+
+### Adding a new machine's key (optional)
+
+If you want the new machine to have its own age key:
+
+1. Generate a new key: `age-keygen -o ~/.config/sops/age/keys.txt`
+2. Add the public key to `.sops.yaml` under `keys`
+3. Re-encrypt all secrets: `sops updatekeys secrets/wg0.conf`
+
+### Adding a new secret
+
+Use the included `sops-update` helper script:
+
+```bash
+sops-update <secret-name> <plaintext-file>
+# Example: sops-update wg0.conf /tmp/wg0.conf
+```
+
+Or manually:
+
+```bash
+sops encrypt -i --input-type binary --output-type binary secrets/my-secret.conf
+```
+
+Then reference it in your NixOS config:
+
+```nix
+sops.secrets."my-secret" = {
+  sopsFile = "${inputs.self}/secrets/my-secret.conf";
+  format = "binary";
+};
+```
 
 ---
 
