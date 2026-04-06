@@ -2,7 +2,7 @@
  */
 
 /* => Define Tokyo Night {{{*/
-@define-color Background rgba(39, 42, 56, 0.9);
+@define-color Background rgba(39, 42, 56, 0.6);
 @define-color CurrentLine #6f7bb6;
 @define-color Selection #414868;
 @define-color Foreground #a9b1d6;
@@ -45,7 +45,7 @@ window#waybar {
 #cpu,
 #memory,
 #custom-memory,
-#custom-nvidia,
+#custom-gpu,
 #custom-disk_root,
 #temperature,
 #network,

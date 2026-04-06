@@ -82,7 +82,7 @@
       };
 
 
-      "modules-center" = [ "custom/github" "cpu" "custom/memory" "custom/nvidia" "custom/disk_root" "temperature" "clock" "hyprland/language" "custom/sunset" ];
+      "modules-center" = [ "custom/github" "cpu" "custom/memory" "custom/gpu" "custom/disk_root" "temperature" "clock" "hyprland/language" "custom/sunset" ];
 
       "custom/github" = {
         "format" = "{} ";
@@ -116,9 +116,9 @@
         "tooltip" = "used";
       };
 
-      "custom/nvidia" = {
-        "exec" = "nvidia-smi --query-gpu=utilization.gpu,temperature.gpu --format=csv,nounits,noheader | sed 's/\\([0-9]\\+\\), \\([0-9]\\+\\)/\\1% 🌡️\\2°C/g'";
-        "format" = "{} 🖥️";
+      "custom/gpu" = {
+        "exec" = "echo \"$(cat /sys/class/drm/card1/device/gpu_busy_percent)% $(( $(cat /sys/class/drm/card1/device/hwmon/hwmon*/temp1_input) / 1000 ))°C\"";
+        "format" = "{} <span color='#9ece6a'>󰢮</span>";
         "interval" = 2;
       };
 
