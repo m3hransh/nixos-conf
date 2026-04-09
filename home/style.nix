@@ -21,7 +21,7 @@ with settings;
   stylix.autoEnable = false;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyodark.yaml";
   stylix.polarity = "dark";
-  stylix.image = ../assets/me_galaxy.png;
+  stylix.image = ../assets/mehran_wallpaper.png;
   stylix.fonts = {
     monospace = {
       name = userS.font;
