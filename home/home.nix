@@ -28,6 +28,7 @@ with settings;
     ./programs/yt-dlp
     ./programs/nvim
     ./programs/kitty
+    ./programs/ghostty
     ./programs/emacs
     ./programs/nix-direnv
     (./. + "/wm" + ("/" + userS.wm)) # My window manager

@@ -1,0 +1,23 @@
+font-family = Iosevka Nerd Font
+font-family-bold = Iosevka Nerd Font
+font-family-italic = Iosevka Nerd Font Mono
+font-family-bold-italic = Iosevka Nerd Font
+font-size = 14
+
+background-opacity = 0.70
+background-blur-radius = 20
+
+window-decoration = false
+window-padding-x = 4
+window-padding-y = 4
+
+shell-integration = fish
+
+cursor-style = block
+mouse-hide-while-typing = true
+
+custom-shader = shaders/cursor_smear.glsl
+custom-shader-animation = true
+
+copy-on-select = clipboard
+confirm-close-surface = false
