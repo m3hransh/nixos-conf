@@ -22,7 +22,7 @@
       settings = {
         # these attrs contains all user's ans system's settings
         # it will passed to all modules
-        inherit (builtins.fromTOML (builtins.readFile ./settings.toml)) systemS userS ubuntu;
+        inherit (builtins.fromTOML (builtins.readFile ./settings.toml)) systemS userS ubuntu vps;
 
         # helper function to get package from nixpkgs
         # this help with cases like package = pkg.subpkg
@@ -98,6 +98,13 @@
         modules = [ ./ubuntu/home.nix ];
 
         # Optionally use extraSpecialArgs
+        extraSpecialArgs = { inherit settings inputs; };
+      };
+      homeConfigurations.vps = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+
+        modules = [ ./vps/home.nix ];
+
         extraSpecialArgs = { inherit settings inputs; };
       };
     };

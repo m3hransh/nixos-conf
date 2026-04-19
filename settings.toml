@@ -135,3 +135,51 @@ packages = [
   "bat",
 ]
 
+[vps]
+user = "mehran"
+name = "Mehran Shahidi"
+email = "m.mehrashahidi@gmail.com"
+nixDir = "/home/mehran/.nixconf"
+editor = "nvim"
+packages = [
+  "git",
+  "gh",
+  "lazygit",
+  "lazydocker",
+  "fastfetch",
+  "tmux",
+
+  "fzf",
+  "ripgrep",
+  "fd",
+  "bat",
+  "eza",
+  "zoxide",
+  "starship",
+  "direnv",
+  "nix-direnv",
+
+  "jq",
+  "yq-go",
+  "httpie",
+  "curl",
+  "wget",
+  "openssl",
+  "rsync",
+
+  "htop",
+  "btop",
+  "ncdu",
+  "tree",
+  "unzip",
+  "atool",
+  "just",
+
+  "nodejs",
+  "go",
+  "rustc",
+  "cargo",
+  "gcc",
+  "python3",
+]
+
