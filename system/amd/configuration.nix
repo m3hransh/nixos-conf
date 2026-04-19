@@ -35,9 +35,12 @@ with settings; {
   # Ollama with ROCm GPU acceleration (RDNA4)
   services.ollama = {
     enable = true;
+    host = "0.0.0.0";
+    port = 11434;
     environmentVariables = {
       HIP_VISIBLE_DEVICES = "0";
       HSA_OVERRIDE_GFX_VERSION = "12.0.1";
+      OLLAMA_KEEP_ALIVE = "24h";
     };
     package = pkgs.ollama-rocm;
     rocmOverrideGfx = "12.0.1";

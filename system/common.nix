@@ -50,6 +50,13 @@ with settings; {
   };
   programs.dconf.enable = true;
   programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    zstd
+    stdenv.cc.cc
+    zlib
+    libglvnd
+    glib
+  ];
 
   # Graphics (base)
   hardware.graphics = {
@@ -119,22 +126,37 @@ with settings; {
   networking.hostName = systemS.hostName;
   networking.networkmanager.enable = true;
   networking.firewall = {
+    allowedTCPPorts = [ 11434 ];
     allowedUDPPorts = [ 51820 ];
     trustedInterfaces = [ "docker0" "br-+" ];
   };
   networking.wireguard.enable = true;
   networking.extraHosts =
     "127.0.0.1 mafia.hackerney.local spy.hackerney.local auth.hackerney.local";
-  networking.wg-quick.interfaces.wg0 = {
-    configFile = config.sops.secrets."wg0-conf".path;
-    autostart = false;
+  networking.wg-quick.interfaces = {
+    wg0 = {
+      configFile = config.sops.secrets."wg0-conf".path;
+      autostart = false;
+    };
+    wg1 = {
+      configFile = config.sops.secrets."wg1-conf".path;
+      autostart = false;
+    };
   };
+  networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
 
   # sops-nix: decrypt secrets at activation time
   sops = {
     age.keyFile = "/home/${userS.user}/.config/sops/age/keys.txt";
     secrets."wg0-conf" = {
       sopsFile = "${inputs.self}/secrets/wg0.conf";
+      format = "binary";
+      owner = "root";
+      mode = "0600";
+    };
+
+    secrets."wg1-conf" = {
+      sopsFile = "${inputs.self}/secrets/wg1.conf";
       format = "binary";
       owner = "root";
       mode = "0600";
