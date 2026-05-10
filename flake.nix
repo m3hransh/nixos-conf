@@ -8,6 +8,7 @@
       home-manager,
       stylix,
       sops-nix,
+      hermes-agent,
       ...
     }:
     let
@@ -47,6 +48,7 @@
               modules = [
                 stylix.nixosModules.stylix
                 sops-nix.nixosModules.sops
+                hermes-agent.nixosModules.default
                 ./system/nvidia/configuration.nix
               ]; # load configuration.nix from selected PROFILE
               specialArgs = {
@@ -61,6 +63,7 @@
               modules = [
                 stylix.nixosModules.stylix
                 sops-nix.nixosModules.sops
+                hermes-agent.nixosModules.default
                 ./system/amd/configuration.nix
               ]; # load configuration.nix from selected PROFILE
               specialArgs = {
@@ -128,6 +131,11 @@
     };
     sops-nix = {
       url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hermes-agent = {
+      url = "github:NousResearch/hermes-agent";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
