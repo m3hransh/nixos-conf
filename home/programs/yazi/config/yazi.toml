@@ -1,15 +1,15 @@
 [opener]
-zathura = [{ run = 'zathura "$@"', orphan = true, desc = "Open with Zathura" }]
+zathura = [{ run = 'zathura %s', orphan = true, desc = "Open with Zathura" }]
 # image viewer
-imv = [{ run = 'imv "$@" .', desc = "Open with imv" }]
-qimgv = [{ run = 'qimgv -- "$@"', desc = "Open with qimgv" }]
+imv = [{ run = 'imv %s .', desc = "Open with imv" }]
+qimgv = [{ run = 'qimgv -- %s1', desc = "Open with qimgv" }]
 
-mpvvr = [{ run = 'mpv  --vf=lavfi=[crop=iw/2:ih:0:0,lenscorrection=cx=0.5:cy=0.5:k1=-0.3:k2=-0.3] --vo=gpu-next --gpu-context=wayland hwdec=nvdec "$@"', orphan = true, desc = "VR mpv" }]
+mpvvr = [{ run = 'mpv  --vf=lavfi=[crop=iw/2:ih:0:0,lenscorrection=cx=0.5:cy=0.5:k1=-0.3:k2=-0.3] --vo=gpu-next --gpu-context=wayland --hwdec=nvdec %s', orphan = true, desc = "VR mpv" }]
 
-bino = [{ run = 'bino "$@"', orphan = true, desc = "Open with bino" }]
+bino = [{ run = 'bino %s', orphan = true, desc = "Open with bino" }]
 
 extract = [
-	{ run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
+	{ run = 'ouch d -y %s', desc = "Extract here", for = "unix" },
   ]
 
 
@@ -18,7 +18,7 @@ extract = [
 rules = [
     { mime = "application/pdf", use = ["zathura", "open"] },
     # Folder
-    { name = "*/", use = [ "edit", "open", "reveal" ] },
+    { url = "*/", use = [ "edit", "open", "reveal" ] },
     # Text
     { mime = "text/*", use = [ "edit", "reveal" ] },
     # Image
@@ -33,5 +33,5 @@ rules = [
     # Empty file
     { mime = "inode/empty", use = [ "edit", "reveal" ] },
     # Fallback
-    { name = "*", use = [ "open", "reveal" ] },
+    { url = "*", use = [ "open", "reveal" ] },
 ]

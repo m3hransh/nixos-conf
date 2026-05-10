@@ -97,6 +97,15 @@ with settings;
       	end
       	rm -f -- "$tmp"
       end
+
+      function hermes --wraps=hermes
+      	set -l prev (umask)
+      	umask 002
+      	command hermes $argv
+      	set -l rc $status
+      	umask $prev
+      	return $rc
+      end
     '';
     shellAliases = {
       nb = "nh os switch ${userS.nixDir}";

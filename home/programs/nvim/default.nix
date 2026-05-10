@@ -12,21 +12,13 @@
       prefix = ''${HOME}/.npm-global
     '';
   };
-  programs = {
-    neovim = {
-      enable = true;
-      viAlias = true;
-      withPython3 = true;
-      withNodeJs = true;
-      extraPackages = [
-      ];
-      #-- Plugins --#
-      plugins = with pkgs.vimPlugins; [ ];
-      #-- --#
-    };
-  };
   home = {
     packages = with pkgs; [
+      (wrapNeovim neovim-unwrapped {
+        viAlias = true;
+        withPython3 = true;
+        withNodeJs = true;
+      })
       #-- LSP --#
       typescript
       typescript-language-server

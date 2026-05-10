@@ -130,8 +130,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
         float sdfCursor = getSdfRectangle(vu, currentCursor.xy - (currentCursor.zw * offsetFactor), currentCursor.zw * 0.5);
         float sdfTrail = getSdfParallelogram(vu, v0, v1, v2, v3);
 
-        newColor = mix(newColor, TRAIL_COLOR_ACCENT, 1.0 - smoothstep(sdfTrail, -0.01, 0.001));
-        newColor = mix(newColor, TRAIL_COLOR, antialising(sdfTrail));
+        vec4 trailColor = vec4(iCurrentCursorColor.rgb, 1.0);
+        newColor = mix(newColor, trailColor, antialising(sdfTrail) * OPACITY);
         newColor = mix(fragColor, newColor, 1.0 - alphaModifier);
         fragColor = mix(newColor, fragColor, step(sdfCursor, 0));
     }
