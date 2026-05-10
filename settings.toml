@@ -102,12 +102,12 @@ packages = [
   "unrar",
   "vectorcode",
   "openai-whisper",
-  "davinci-resolve",
   "v2ray",
   "gparted",
   "just",
   "sox",
-  "sops"
+  "sops",
+  "ouch",
 ]
 
 [ubuntu]

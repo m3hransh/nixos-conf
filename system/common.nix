@@ -115,6 +115,7 @@ with settings; {
       "fuse"
       "adbusers"
       "libvirtd"
+      "hermes"
     ];
   };
   users.defaultUserShell = pkgs.fish;
@@ -161,6 +162,11 @@ with settings; {
       owner = "root";
       mode = "0600";
     };
+
+    secrets."hermes-env" = { 
+      sopsFile = "${inputs.self}/secrets/hermes.yaml";
+      format = "yaml"; 
+    };
   };
 
   # Locale
@@ -192,4 +198,17 @@ with settings; {
   ];
 
   system.stateVersion = systemS.stateVersion;
+  # Hermes Agent
+  services.hermes-agent = {
+    enable = true;
+    settings = {
+      model = {
+        default = "qwen/qwen3.6-plus";
+        provider = "openrouter";
+      };
+      web.backend = "firecrawl";
+    };
+    environmentFiles = [ config.sops.secrets."hermes-env".path ];
+    addToSystemPackages = true;
+  };
 }
