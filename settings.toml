@@ -125,7 +125,6 @@ packages = [
 
   "jq",
   "nssTools",
-
   "fzf",
   "atool",
   "grpcurl",
@@ -133,6 +132,11 @@ packages = [
   "grc",
   "fd",
   "bat",
+  "gtop",
+  "bottom",
+  "vectorcode",
+  "yazi",
+  "presenterm"
 ]
 
 [vps]
