@@ -11,7 +11,6 @@
     escapeTime = 0;
     plugins = with pkgs; [
       tmuxPlugins.better-mouse-mode
-      tmuxPlugins.yank
       tmuxPlugins.urlview
       {
         plugin = tmuxPlugins.catppuccin;
@@ -25,13 +24,14 @@
       bind -N "Select pane above the active pane" k select-pane -U
       bind -N "Select pane to the right of the active pane" l select-pane -R
 
+      set -g set-clipboard on
       bind -r -N "Resize the pane left by 5" H resize-pane -L 5
       bind -r -N "Resize the pane down by 5" J resize-pane -D 5
       bind -r -N "Resize the pane up by 5" K resize-pane -U 5
       bind -r -N "Resize the pane right by 5" L resize-pane -R 5
 
       # Use vim-like copy mode (assuming you have a plugin like 'tmux-yank')
-      bind-key -T copy-mode v send-keys "v"
+      bind-key -T copy-mode-vi v send-keys -X begin-selection
       set -g default-terminal "tmux-256color"
     '';
   };
