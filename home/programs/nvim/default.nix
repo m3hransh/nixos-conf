@@ -37,7 +37,7 @@
       nixd
       lua-language-server
       gopls
-      pyright
+      # pyright
       zk
       rust-analyzer
       # haskell-language-server
