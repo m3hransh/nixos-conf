@@ -45,6 +45,7 @@ editor = "nvim"
 packages = [
   "brave",
   "google-chrome",
+  "firefox",
   "vlc",
   "obsidian",
   "telegram-desktop",
@@ -57,6 +58,7 @@ packages = [
   "yazi",
   "gimp3-with-plugins",
 
+  "bino3d",
   "lazygit",
   "lazydocker",
   "android-tools",

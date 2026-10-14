@@ -9,7 +9,7 @@ mpvvr = [{ run = 'mpv  --vf=lavfi=[crop=iw/2:ih:0:0,lenscorrection=cx=0.5:cy=0.5
 bino = [{ run = 'bino %s', orphan = true, desc = "Open with bino" }]
 
 extract = [
-	{ run = 'ouch d -y %s', desc = "Extract here", for = "unix" },
+	{ run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
   ]
 
 
